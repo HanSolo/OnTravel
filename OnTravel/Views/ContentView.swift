@@ -86,7 +86,9 @@ struct ContentView: View {
     
     
     private func updateFlag() -> Void {
-        // Avoid update country when on a plane 
+        Helper.getAvailableYears()
+        
+        // Avoid update country when on a plane
         if self.locationManager.location?.altitude ?? 0 > 4000 && self.locationManager.location?.speed ?? 0 > 250 { return }
         locationManager.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else { return }

@@ -26,6 +26,26 @@ public class Helper {
             
     }
     
+    public static func getAvailableYears() -> [Int] {
+        var yearsFound : [Int] = []
+        let documentsUrl : URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        do {
+            let pattern : Regex = try Regex("visits([0-9]{4})\\.json")
+            let items = try FileManager.default.contentsOfDirectory(atPath: documentsUrl.path())
+            for item in items {
+                if item.starts(with: "visits") && item.hasSuffix(".json") {
+                    if let match = item.firstMatch(of: pattern) {
+                        let yearFound : Int = Int(match.output[1].substring!)!
+                        yearsFound.append(yearFound)
+                    }
+                }
+            }
+        } catch {
+            print("Error listing files")
+        }
+        return yearsFound
+    }
+    
     public static func saveJson(json: String) -> Void {
         let filename     : String = "visits\(Calendar.current.component(.year, from: Date.init())).json"
         let data         : Data   = Data(json.utf8)
