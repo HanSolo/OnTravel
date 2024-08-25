@@ -115,7 +115,9 @@ struct ContentView: View {
                             let now        : Date = Date.init()
                             self.model.remainingDays = Calendar.current.daysBetween(from: now, to: lastOfYear)
                         }
-                        Helper.saveJson(json: self.model.toJson())
+                        DispatchQueue.global().async {
+                            Helper.saveJson(json: self.model.toJson())
+                        }
                         self.locationManager.stopLocationUpdates()
                     }
                 }
