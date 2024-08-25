@@ -11,6 +11,27 @@
 		4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D82C79AFF000522ABC /* ContentView.swift */; };
 		4F4F37DB2C79AFF100522ABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F37DA2C79AFF100522ABC /* Assets.xcassets */; };
 		4F4F37DE2C79AFF100522ABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F37DD2C79AFF100522ABC /* Preview Assets.xcassets */; };
+		4F4F37F12C79B1B300522ABC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E62C79B1B300522ABC /* NetworkMonitor.swift */; };
+		4F4F37F22C79B1B300522ABC /* ProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E72C79B1B300522ABC /* ProcessingOperation.swift */; };
+		4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */; };
+		4F4F37F42C79B1B300522ABC /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E92C79B1B300522ABC /* IsoCountryCodes.swift */; };
+		4F4F37F52C79B1B300522ABC /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EA2C79B1B300522ABC /* Country.swift */; };
+		4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EB2C79B1B300522ABC /* CalendarView.swift */; };
+		4F4F37F72C79B1B300522ABC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EC2C79B1B300522ABC /* LocationManager.swift */; };
+		4F4F37F82C79B1B300522ABC /* BackgroundTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */; };
+		4F4F37F92C79B1B300522ABC /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EE2C79B1B300522ABC /* RestController.swift */; };
+		4F4F37FA2C79B1B300522ABC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EF2C79B1B300522ABC /* Constants.swift */; };
+		4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */; };
+		4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37FC2C79B20D00522ABC /* AppDelegate.swift */; };
+		4F4F38052C79B2F100522ABC /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37FF2C79B2F000522ABC /* Properties.swift */; };
+		4F4F38062C79B2F100522ABC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38002C79B2F000522ABC /* UserDefault.swift */; };
+		4F4F38072C79B2F100522ABC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38012C79B2F100522ABC /* Observable.swift */; };
+		4F4F38082C79B2F100522ABC /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38022C79B2F100522ABC /* UserDefaultsObservation.swift */; };
+		4F4F38092C79B2F100522ABC /* ObjectSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38032C79B2F100522ABC /* ObjectSaveable.swift */; };
+		4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38042C79B2F100522ABC /* ObjectSaveableError.swift */; };
+		4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */; };
+		4F4F38112C79B76000522ABC /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38102C79B76000522ABC /* JsonData.swift */; };
+		4F4F38132C79BDE800522ABC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38122C79BDE800522ABC /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +40,29 @@
 		4F4F37D82C79AFF000522ABC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4F4F37DA2C79AFF100522ABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F4F37DD2C79AFF100522ABC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4F4F37E42C79B00500522ABC /* OnTravel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTravel.entitlements; sourceTree = "<group>"; };
+		4F4F37E52C79B01000522ABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4F4F37E62C79B1B300522ABC /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		4F4F37E72C79B1B300522ABC /* ProcessingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessingOperation.swift; sourceTree = "<group>"; };
+		4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTravelModel.swift; sourceTree = "<group>"; };
+		4F4F37E92C79B1B300522ABC /* IsoCountryCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsoCountryCodes.swift; sourceTree = "<group>"; };
+		4F4F37EA2C79B1B300522ABC /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		4F4F37EB2C79B1B300522ABC /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		4F4F37EC2C79B1B300522ABC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimerDelegate.swift; sourceTree = "<group>"; };
+		4F4F37EE2C79B1B300522ABC /* RestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestController.swift; sourceTree = "<group>"; };
+		4F4F37EF2C79B1B300522ABC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsoCountryInfo.swift; sourceTree = "<group>"; };
+		4F4F37FC2C79B20D00522ABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4F4F37FF2C79B2F000522ABC /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		4F4F38002C79B2F000522ABC /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		4F4F38012C79B2F100522ABC /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		4F4F38022C79B2F100522ABC /* UserDefaultsObservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsObservation.swift; sourceTree = "<group>"; };
+		4F4F38032C79B2F100522ABC /* ObjectSaveable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectSaveable.swift; sourceTree = "<group>"; };
+		4F4F38042C79B2F100522ABC /* ObjectSaveableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectSaveableError.swift; sourceTree = "<group>"; };
+		4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+numberOfDays.swift"; sourceTree = "<group>"; };
+		4F4F38102C79B76000522ABC /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
+		4F4F38122C79BDE800522ABC /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +95,23 @@
 		4F4F37D52C79AFF000522ABC /* OnTravel */ = {
 			isa = PBXGroup;
 			children = (
-				4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */,
-				4F4F37D82C79AFF000522ABC /* ContentView.swift */,
-				4F4F37DA2C79AFF100522ABC /* Assets.xcassets */,
 				4F4F37DC2C79AFF100522ABC /* Preview Content */,
+				4F4F380B2C79B2F900522ABC /* Extensions */,
+				4F4F37FE2C79B2D200522ABC /* UserDefaults */,
+				4F4F380E2C79B3A300522ABC /* Views */,
+				4F4F380F2C79B3B900522ABC /* Tools */,
+				4F4F37E42C79B00500522ABC /* OnTravel.entitlements */,
+				4F4F37DA2C79AFF100522ABC /* Assets.xcassets */,
+				4F4F37E52C79B01000522ABC /* Info.plist */,
+				4F4F37FC2C79B20D00522ABC /* AppDelegate.swift */,
+				4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */,
+				4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */,
+				4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */,
+				4F4F37EF2C79B1B300522ABC /* Constants.swift */,
+				4F4F37EA2C79B1B300522ABC /* Country.swift */,
+				4F4F37E92C79B1B300522ABC /* IsoCountryCodes.swift */,
+				4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */,
+				4F4F37E72C79B1B300522ABC /* ProcessingOperation.swift */,
 			);
 			path = OnTravel;
 			sourceTree = "<group>";
@@ -65,6 +122,48 @@
 				4F4F37DD2C79AFF100522ABC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4F4F37FE2C79B2D200522ABC /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				4F4F38032C79B2F100522ABC /* ObjectSaveable.swift */,
+				4F4F38042C79B2F100522ABC /* ObjectSaveableError.swift */,
+				4F4F38012C79B2F100522ABC /* Observable.swift */,
+				4F4F37FF2C79B2F000522ABC /* Properties.swift */,
+				4F4F38002C79B2F000522ABC /* UserDefault.swift */,
+				4F4F38022C79B2F100522ABC /* UserDefaultsObservation.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		4F4F380B2C79B2F900522ABC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4F4F380E2C79B3A300522ABC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F4F37D82C79AFF000522ABC /* ContentView.swift */,
+				4F4F37EB2C79B1B300522ABC /* CalendarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F4F380F2C79B3B900522ABC /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4F4F37EC2C79B1B300522ABC /* LocationManager.swift */,
+				4F4F37E62C79B1B300522ABC /* NetworkMonitor.swift */,
+				4F4F37EE2C79B1B300522ABC /* RestController.swift */,
+				4F4F38102C79B76000522ABC /* JsonData.swift */,
+				4F4F38122C79BDE800522ABC /* Helper.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +236,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4F38062C79B2F100522ABC /* UserDefault.swift in Sources */,
+				4F4F37F92C79B1B300522ABC /* RestController.swift in Sources */,
+				4F4F37F52C79B1B300522ABC /* Country.swift in Sources */,
 				4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */,
+				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
+				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
+				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
+				4F4F37F82C79B1B300522ABC /* BackgroundTimerDelegate.swift in Sources */,
+				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
+				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
+				4F4F37F12C79B1B300522ABC /* NetworkMonitor.swift in Sources */,
+				4F4F37F22C79B1B300522ABC /* ProcessingOperation.swift in Sources */,
+				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
+				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
+				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
 				4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */,
+				4F4F37F42C79B1B300522ABC /* IsoCountryCodes.swift in Sources */,
+				4F4F38112C79B76000522ABC /* JsonData.swift in Sources */,
+				4F4F38082C79B2F100522ABC /* UserDefaultsObservation.swift in Sources */,
+				4F4F37F72C79B1B300522ABC /* LocationManager.swift in Sources */,
+				4F4F38132C79BDE800522ABC /* Helper.swift in Sources */,
+				4F4F37FA2C79B1B300522ABC /* Constants.swift in Sources */,
+				4F4F38092C79B2F100522ABC /* ObjectSaveable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,22 +389,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OnTravel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 17.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -298,22 +426,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OnTravel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 17.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

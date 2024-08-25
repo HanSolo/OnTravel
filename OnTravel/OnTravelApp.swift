@@ -8,10 +8,14 @@
 import SwiftUI
 
 @main
-struct OnTravelApp: App {
+struct CountryCounterApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(appDelegate.model)
+                         .environmentObject(appDelegate.locationManager)
         }
     }
 }
+
