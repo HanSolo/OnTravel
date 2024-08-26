@@ -38,6 +38,7 @@
 		4F7438322C7C899B006DDB8B /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438312C7C899B006DDB8B /* Sender.swift */; };
 		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
 		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
+		4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		4F7438312C7C899B006DDB8B /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		4F7438332C7C8A12006DDB8B /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		4F7438352C7C8B46006DDB8B /* TestEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEvents.swift; sourceTree = "<group>"; };
+		4F7858A02C7CE87900462952 /* AppIconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				4F4F38102C79B76000522ABC /* JsonData.swift */,
 				4F4F38122C79BDE800522ABC /* Helper.swift */,
 				4F74382A2C7C5CFF006DDB8B /* TextFile.swift */,
+				4F7858A02C7CE87900462952 /* AppIconProvider.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				4F4F37F92C79B1B300522ABC /* RestController.swift in Sources */,
 				4F4F37F52C79B1B300522ABC /* Country.swift in Sources */,
 				4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */,
+				4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */,
 				4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */,
 				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,

@@ -16,9 +16,9 @@ class Receiver {
             print("Received evt from sender")
         })
         
-        sender.events.listenTo(Sender.SENDER_EVT, action: self.doSomething)
+        sender.events.listenTo(eventName: Sender.SENDER_EVT, action: self.doSomething)
         
-        sender.events.listenTo(Sender.SENDER_EVT, action: self.doSomethingElse)
+        sender.events.listenTo(eventName: Sender.SENDER_EVT, action: self.doSomethingElse)
     }
                 
     

@@ -20,7 +20,7 @@ struct ContentView: View {
     @State             private var showingExporter     : Bool   = false
     @State             private var selectedYear        : Int    = Calendar.current.component(.year, from: Date.init())
     @State             private var isoInfo             : IsoCountryInfo?
-    
+        
     
     var body: some View {
         VStack(spacing: 5) {
@@ -31,8 +31,17 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
-                Text("On Travel")
-                    .font(.system(size: 36))
+                HStack {
+                    if let image = UIImage(named: AppIconProvider.appIcon()) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .frame(width: 24, height: 24)
+                    }
+                    Text("On Travel")
+                        .font(.system(size: 24))
+                }
                 Spacer()
                 Button(action: {
                     self.showingExporter = true
