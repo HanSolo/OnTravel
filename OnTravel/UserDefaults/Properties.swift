@@ -12,10 +12,10 @@ import os.log
 
 
 extension Key {
-    static let lastLat       : Key = "lastLat"
-    static let lastLon       : Key = "lastLon"
-    static let lastTimestamp : Key = "lastTimestamp"
-    static let country       : Key = "country"
+    static let lastLat   : Key = "lastLat"
+    static let lastLon   : Key = "lastLon"
+    static let timestamp : Key = "timestamp"
+    static let country   : Key = "country"
 }
 
 
@@ -31,8 +31,8 @@ public struct Properties {
     @UserDefault(key: .lastLon, defaultValue: 0.0)
     var lastLon: Double? // last location longitude
     
-    @UserDefault(key: .lastTimestamp, defaultValue: Date().timeIntervalSince1970)
-    var lastTimestamp: Double? // last location timestamp
+    @UserDefault(key: .timestamp, defaultValue: Date().timeIntervalSince1970)
+    var timestamp: Double? // last location timestamp
     
     @UserDefault(key: .country, defaultValue: "")
     var country: String? // country

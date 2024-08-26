@@ -27,7 +27,7 @@ public class Helper {
     }
     
     public static func getAvailableYears() -> [Int] {
-        var yearsFound : [Int] = []
+        var yearsFound : Set<Int> = Set()
         let documentsUrl : URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         do {
             let pattern : Regex = try Regex("visits([0-9]{4})\\.json")
@@ -36,14 +36,14 @@ public class Helper {
                 if item.starts(with: "visits") && item.hasSuffix(".json") {
                     if let match = item.firstMatch(of: pattern) {
                         let yearFound : Int = Int(match.output[1].substring!)!
-                        yearsFound.append(yearFound)
+                        yearsFound.insert(yearFound)
                     }
                 }
             }
         } catch {
             print("Error listing files")
         }
-        return yearsFound
+        return Array(yearsFound)
     }
     
     public static func saveJson(json: String) -> Void {
@@ -73,13 +73,32 @@ public class Helper {
     }
     
     public static func getCountriesFromJson(json: String) -> [Country] {
+        var countries : [Country]  = []
+        if json.isEmpty { return countries }
         let data      : Data?      = json.data(using: .utf8)
         let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: data!)
-        var countries : [Country]  = []
         for jd in jsonData {
             let country : Country? = jd.getCountry()
             if nil != country { countries.append(country!) }
         }
         return countries
+    }
+    
+    public static func countriesToCsv(countries: [Country]) -> String {
+        let dateFormatter : DateFormatter = DateFormatter(dateFormat: "dd/MM/yyyy", calendar: Calendar.current)
+        var csv           : String        = "\"iso\",\"name\",\"date\"\n"
+        for country in countries {
+            for date in country.visits {
+                csv += "\"\(country.isoInfo.alpha2)\",\"\(country.isoInfo.name)\",\"\(dateFormatter.string(from: date))\"\n"
+            }
+        }
+        return csv
+    }
+    
+    public static func createCSV(year: Int) -> String {
+        let json      : String    = readJson(year: year)
+        let countries : [Country] = getCountriesFromJson(json: json)
+        let csv       : String    = countriesToCsv(countries: countries)
+        return csv
     }
 }

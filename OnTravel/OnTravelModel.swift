@@ -19,6 +19,7 @@ public class OnTravelModel : ObservableObject {
     @Published var country            : String         = ""
     @Published var allVisits          : Set<Country>   = Set<Country>()
     @Published var remainingDays      : Int            = 0
+    @Published var availableYears     : [Int]          = Helper.getAvailableYears()
     
     
     
@@ -39,5 +40,16 @@ public class OnTravelModel : ObservableObject {
         json += "]"
         
         return json
+    }
+    
+    public func toCSV() -> String {
+        let dateFormatter : DateFormatter = DateFormatter(dateFormat: "dd/MM/yyyy", calendar: Calendar.current)
+        var csv           : String        = "\"iso\",\"name\",\"date\"\n"
+        for country in self.allVisits {
+            for date in country.visits {
+                csv += "\"\(country.isoInfo.alpha2)\",\"\(country.isoInfo.name)\",\"\(dateFormatter.string(from: date))\"\n"
+            }
+        }
+        return csv
     }
 }

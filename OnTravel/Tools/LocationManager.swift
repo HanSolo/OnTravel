@@ -14,7 +14,7 @@ import AVFoundation
 import MapKit
 
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate { //}, BackgroundTimerDelegate  {
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationStatus : CLAuthorizationStatus?
     @Published var location       : CLLocation? {
         willSet {
@@ -25,20 +25,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate { /
             self.longitude                    = location?.coordinate.longitude ?? 0.0
             Properties.instance.lastLat       = self.latitude
             Properties.instance.lastLon       = self.longitude
-            Properties.instance.lastTimestamp = Date().timeIntervalSince1970
+            Properties.instance.timestamp = Date().timeIntervalSince1970
             self.lastLocation                 = self.location
         }
     }
     @Published var lastLocation   : CLLocation?
-    @Published var latitude       : Double                   = 0.0
-    @Published var longitude      : Double                   = 0.0
     @Published var placemark      : CLPlacemark?
+    @Published var latitude       : Double = 0.0
+    @Published var longitude      : Double = 0.0
         
     private      let locationManager : CLLocationManager = CLLocationManager()
     private      let geocoder        : CLGeocoder        = CLGeocoder()
-    
-    private      var tasks           : [UIBackgroundTaskIdentifier] = []
-    //private lazy var timer           : BackgroundTimer              = BackgroundTimer(delegate: self)
     
     
     override init() {
@@ -51,14 +48,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate { /
         locationManager.activityType                       = CLActivityType.otherNavigation
         locationManager.allowsBackgroundLocationUpdates    = true
         locationManager.showsBackgroundLocationIndicator   = true
-        
-        
-        /*
-        let taskID = timer.executeAfterDelay(delay: TimeInterval(Constants.TIMER_INTERVAL_IN_SECONDS), repeating: true) {
-            self.startLocationUpdates()
-        }
-        tasks += [taskID]
-        */
     }
     
     var statusString: String {
@@ -105,6 +94,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate { /
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
         guard let currentLocation = locations.first else { return }
         self.location = currentLocation
+        
+        self.geocode() { placemark, error in
+            guard let placemark = placemark, error == nil else {
+                print("Error while geocding location")
+                return
+            }
+            if nil != placemark.isoCountryCode {
+                Properties.instance.country   = placemark.isoCountryCode
+                Properties.instance.timestamp = Date.init().timeIntervalSince1970
+                print("Stored country and timestamp to properties")
+                self.stopLocationUpdates()
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -123,22 +125,4 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate { /
         if nil == self.location { return [] }
         return try await geocoder.reverseGeocodeLocation(self.location!)
     }
-    
-    
-    /*
-    func backgroundTimerTaskExecuted(task: UIBackgroundTaskIdentifier, willRepeat: Bool) {
-        guard !willRepeat else {
-            return
-        }
-        
-        guard let row = tasks.firstIndex(of: task) else {
-            return assertionFailure()
-        }
-        
-        tasks.remove(at: row)
-    }
-    
-    func backgroundTimerTaskCanceled(task: UIBackgroundTaskIdentifier) {
-    }
-    */
 }

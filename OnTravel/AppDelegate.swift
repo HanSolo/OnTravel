@@ -87,7 +87,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
             let queue  = OperationQueue()
             queue.maxConcurrentOperationCount = 1
                     
-            let processingOperation = ProcessingOperation(self.locationManager)
+            let processingOperation = ProcessingOperation(locationManager: self.locationManager, model: self.model)
             queue.addOperation(processingOperation)
             /*
             task.expirationHandler = {

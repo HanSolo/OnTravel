@@ -141,6 +141,7 @@ struct CalendarView: View {
         }
     }
     
+    
     func dateHasEvents(date: Date) -> Bool {
         for country in self.model.allVisits {
             for visit in country.visits {
@@ -304,13 +305,5 @@ private extension Calendar {
 private extension Date {
     func startOfMonth(using calendar: Calendar) -> Date {
         calendar.date(from: calendar.dateComponents([.year, .month], from: self)) ?? self
-    }
-}
-
-private extension DateFormatter {
-    convenience init(dateFormat: String, calendar: Calendar) {
-        self.init()
-        self.dateFormat = dateFormat
-        self.calendar = calendar
     }
 }

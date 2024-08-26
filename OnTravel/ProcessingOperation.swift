@@ -11,16 +11,18 @@ import UserNotifications
 
 class ProcessingOperation: Operation {
     let locationManager : LocationManager?
+    let model           : OnTravelModel?
     
-    init(_ locationManager: LocationManager?) {
+    init(locationManager: LocationManager?, model: OnTravelModel?) {
         self.locationManager = locationManager
+        self.model           = model
     }
     
     override func main() {
         if isCancelled {
             return
         }
-        print("main -> update model from background task (processing)")
+        print("main -> start location updates from background task")
         if nil != self.locationManager {
             self.locationManager?.startLocationUpdates()
         }

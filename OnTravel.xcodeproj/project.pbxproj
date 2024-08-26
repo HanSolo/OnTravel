@@ -18,7 +18,6 @@
 		4F4F37F52C79B1B300522ABC /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EA2C79B1B300522ABC /* Country.swift */; };
 		4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EB2C79B1B300522ABC /* CalendarView.swift */; };
 		4F4F37F72C79B1B300522ABC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EC2C79B1B300522ABC /* LocationManager.swift */; };
-		4F4F37F82C79B1B300522ABC /* BackgroundTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */; };
 		4F4F37F92C79B1B300522ABC /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EE2C79B1B300522ABC /* RestController.swift */; };
 		4F4F37FA2C79B1B300522ABC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EF2C79B1B300522ABC /* Constants.swift */; };
 		4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */; };
@@ -32,6 +31,13 @@
 		4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */; };
 		4F4F38112C79B76000522ABC /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38102C79B76000522ABC /* JsonData.swift */; };
 		4F4F38132C79BDE800522ABC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38122C79BDE800522ABC /* Helper.swift */; };
+		4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
+		4F74382B2C7C5CFF006DDB8B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382A2C7C5CFF006DDB8B /* TextFile.swift */; };
+		4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382D2C7C83EE006DDB8B /* EventManager.swift */; };
+		4F7438302C7C840A006DDB8B /* EventListenerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382F2C7C840A006DDB8B /* EventListenerAction.swift */; };
+		4F7438322C7C899B006DDB8B /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438312C7C899B006DDB8B /* Sender.swift */; };
+		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
+		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +55,6 @@
 		4F4F37EA2C79B1B300522ABC /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		4F4F37EB2C79B1B300522ABC /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		4F4F37EC2C79B1B300522ABC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimerDelegate.swift; sourceTree = "<group>"; };
 		4F4F37EE2C79B1B300522ABC /* RestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestController.swift; sourceTree = "<group>"; };
 		4F4F37EF2C79B1B300522ABC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsoCountryInfo.swift; sourceTree = "<group>"; };
@@ -63,6 +68,13 @@
 		4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+numberOfDays.swift"; sourceTree = "<group>"; };
 		4F4F38102C79B76000522ABC /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 		4F4F38122C79BDE800522ABC /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+convenienceInit.swift"; sourceTree = "<group>"; };
+		4F74382A2C7C5CFF006DDB8B /* TextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFile.swift; sourceTree = "<group>"; };
+		4F74382D2C7C83EE006DDB8B /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		4F74382F2C7C840A006DDB8B /* EventListenerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListenerAction.swift; sourceTree = "<group>"; };
+		4F7438312C7C899B006DDB8B /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		4F7438332C7C8A12006DDB8B /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
+		4F7438352C7C8B46006DDB8B /* TestEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEvents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +112,12 @@
 				4F4F37FE2C79B2D200522ABC /* UserDefaults */,
 				4F4F380E2C79B3A300522ABC /* Views */,
 				4F4F380F2C79B3B900522ABC /* Tools */,
+				4F74382C2C7C83DB006DDB8B /* Events */,
 				4F4F37E42C79B00500522ABC /* OnTravel.entitlements */,
 				4F4F37DA2C79AFF100522ABC /* Assets.xcassets */,
 				4F4F37E52C79B01000522ABC /* Info.plist */,
 				4F4F37FC2C79B20D00522ABC /* AppDelegate.swift */,
 				4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */,
-				4F4F37ED2C79B1B300522ABC /* BackgroundTimerDelegate.swift */,
 				4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */,
 				4F4F37EF2C79B1B300522ABC /* Constants.swift */,
 				4F4F37EA2C79B1B300522ABC /* Country.swift */,
@@ -141,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */,
+				4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -162,8 +175,21 @@
 				4F4F37EE2C79B1B300522ABC /* RestController.swift */,
 				4F4F38102C79B76000522ABC /* JsonData.swift */,
 				4F4F38122C79BDE800522ABC /* Helper.swift */,
+				4F74382A2C7C5CFF006DDB8B /* TextFile.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		4F74382C2C7C83DB006DDB8B /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				4F74382D2C7C83EE006DDB8B /* EventManager.swift */,
+				4F74382F2C7C840A006DDB8B /* EventListenerAction.swift */,
+				4F7438312C7C899B006DDB8B /* Sender.swift */,
+				4F7438332C7C8A12006DDB8B /* Receiver.swift */,
+				4F7438352C7C8B46006DDB8B /* TestEvents.swift */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,17 +263,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F4F38062C79B2F100522ABC /* UserDefault.swift in Sources */,
+				4F74382B2C7C5CFF006DDB8B /* TextFile.swift in Sources */,
 				4F4F37F92C79B1B300522ABC /* RestController.swift in Sources */,
 				4F4F37F52C79B1B300522ABC /* Country.swift in Sources */,
 				4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */,
+				4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */,
 				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
-				4F4F37F82C79B1B300522ABC /* BackgroundTimerDelegate.swift in Sources */,
 				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
 				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
 				4F4F37F12C79B1B300522ABC /* NetworkMonitor.swift in Sources */,
+				4F7438302C7C840A006DDB8B /* EventListenerAction.swift in Sources */,
 				4F4F37F22C79B1B300522ABC /* ProcessingOperation.swift in Sources */,
+				4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */,
+				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
 				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
@@ -255,6 +285,8 @@
 				4F4F37F42C79B1B300522ABC /* IsoCountryCodes.swift in Sources */,
 				4F4F38112C79B76000522ABC /* JsonData.swift in Sources */,
 				4F4F38082C79B2F100522ABC /* UserDefaultsObservation.swift in Sources */,
+				4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */,
+				4F7438322C7C899B006DDB8B /* Sender.swift in Sources */,
 				4F4F37F72C79B1B300522ABC /* LocationManager.swift in Sources */,
 				4F4F38132C79BDE800522ABC /* Helper.swift in Sources */,
 				4F4F37FA2C79B1B300522ABC /* Constants.swift in Sources */,
@@ -399,7 +431,8 @@
 				INFOPLIST_FILE = OnTravel/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = 17.0.0;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to detect the country you are currently in";
@@ -436,7 +469,8 @@
 				INFOPLIST_FILE = OnTravel/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = 17.0.0;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to detect the country you are currently in";
