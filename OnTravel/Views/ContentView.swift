@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import CoreLocation
+import SVGView
 
 
 struct ContentView: View {
@@ -21,95 +22,109 @@ struct ContentView: View {
     @State             private var selectedYear        : Int    = Calendar.current.component(.year, from: Date.init())
     @State             private var isoInfo             : IsoCountryInfo?
         
+        
     
     var body: some View {
-        VStack(spacing: 5) {
-            HStack(spacing: 5) {
-                Picker("Year", selection: self.$selectedYear) {
-                    ForEach(self.model.availableYears, id: \.self) { year in
-                        Text("\(year, format: .number.grouping(.never))")
-                    }
-                }
-                Spacer()
-                HStack {
-                    if let image = UIImage(named: AppIconProvider.appIcon()) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                            .frame(width: 24, height: 24)
-                    }
-                    Text("On Travel")
-                        .font(.system(size: 24))
-                }
-                Spacer()
-                Button(action: {
-                    self.showingExporter = true
-                }, label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.system(size: 14))
-                        .foregroundColor(.accentColor)
-                })
-            }
-            .padding()
-            HStack(spacing: 5) {
-                Spacer()
-                Text(self.flag)
-                    .font(.system(size: 36))
-                Text(self.name)
-                    .font(.system(size: 20))
-                Spacer()
-            }
-            Text("\(self.model.remainingDays) remaining days in \(Calendar.current.component(.year, from: Date.init()), format: .number.grouping(.never))")
-                .font(.system(size: 14))
-            List {
-                if !self.model.allVisits.isEmpty {
-                    ForEach(Array(self.model.allVisits)) { country in
+        ViewThatFits {
+            ScrollView {
+                
+                VStack(spacing: 5) {
+                    HStack(spacing: 5) {
+                        Picker("Year", selection: self.$selectedYear) {
+                            ForEach(self.model.availableYears, id: \.self) { year in
+                                Text("\(year, format: .number.grouping(.never))")
+                            }
+                        }
+                        .frame(minWidth: 80)
+                        Spacer()
                         HStack {
-                            Text(country.isoInfo.flag ?? "")
-                                .font(.system(size: 24))
-                            Text(country.isoInfo.name)
-                                .font(.system(size: 13))
-                            Spacer()
-                            Text("\(country.getAllVisits())")
-                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                            if let image = UIImage(named: AppIconProvider.appIcon()) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                                    .frame(width: 20, height: 20)
+                            }
+                            Text("On Travel")
+                                .font(.system(size: 20))
+                        }
+                        Spacer()
+                        Button(action: {
+                            self.showingExporter = true
+                        }, label: {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 14))
+                                .foregroundColor(.accentColor)
+                        })
+                        .frame(minWidth: 80)
+                    }
+                    .padding()
+                    HStack(spacing: 5) {
+                        Spacer()
+                        Text(self.flag)
+                            .font(.system(size: 36))
+                        Text(self.name)
+                            .font(.system(size: 20))
+                        Spacer()
+                    }
+                    Text("\(self.model.remainingDays) remaining days in \(Calendar.current.component(.year, from: Date.init()), format: .number.grouping(.never))")
+                        .font(.system(size: 14))
+                    List {
+                        if !self.model.allVisits.isEmpty {
+                            ForEach(Array(self.model.allVisits)) { country in
+                                HStack {
+                                    Text(country.isoInfo.flag ?? "")
+                                        .font(.system(size: 24))
+                                    Text(country.isoInfo.name)
+                                        .font(.system(size: 13))
+                                    Spacer()
+                                    Text("\(country.getAllVisits())")
+                                        .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                }
+                            }
                         }
                     }
+                    .frame(minHeight: 250)
+                    
+                    CalendarView(calendar: Calendar.current)
+                        .id(self.refreshCalendarView)
+                   
+                    MapView()
+                        .frame(width: 360, height: 237)
                 }
-            }
-            CalendarView(calendar: Calendar.current)
-                .id(self.refreshCalendarView)
-        }
-        .task {
-            updateCountry()
-        }
-        .onChange(of: self.locationManager.location) {
-            updateCountry()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
-            // Update remaining days
-            self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.getLastDayOfYear()).day!
-            
-            // Update model with saved data
-            if self.model.allVisits.isEmpty {
-                let json      : String    = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
-                let countries : [Country] = Helper.getCountriesFromJson(json: json)
-                for country in countries { self.model.allVisits.insert(country) }
-            }            
-            
-            updateCountry()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
-            Properties.instance.lastLat = self.locationManager.latitude
-            Properties.instance.lastLon = self.locationManager.longitude
-            OnTravel.AppDelegate.instance.scheduleAppProcessing()
-        }
-        .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
-            switch result {
-                case .success(let url):
-                    print("Saved to \(url)")
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                .task {
+                    updateCountry()
+                }
+                .onChange(of: self.locationManager.location) {
+                    updateCountry()
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
+                    // Update remaining days
+                    self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.getLastDayOfYear()).day!
+                    
+                    // Update model with saved data
+                    if self.model.allVisits.isEmpty {
+                        let json      : String    = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
+                        let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                        for country in countries { self.model.allVisits.insert(country) }
+                    }
+                    
+                    updateCountry()
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
+                    Properties.instance.lastLat = self.locationManager.latitude
+                    Properties.instance.lastLon = self.locationManager.longitude
+                    OnTravel.AppDelegate.instance.scheduleAppProcessing()
+                }
+                .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
+                    switch result {
+                    case .success(let url):
+                        print("Saved to \(url)")
+                    case .failure(let error):
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+                
             }
         }
     }
