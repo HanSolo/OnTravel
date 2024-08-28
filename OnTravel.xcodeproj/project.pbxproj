@@ -43,6 +43,8 @@
 		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
 		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
 		4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
+		4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
+		4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		4F7438332C7C8A12006DDB8B /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		4F7438352C7C8B46006DDB8B /* TestEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEvents.swift; sourceTree = "<group>"; };
 		4F7858A02C7CE87900462952 /* AppIconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconProvider.swift; sourceTree = "<group>"; };
+		4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
+		4FD755A82C7F2974001AB93C /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 			children = (
 				4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */,
 				4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */,
+				4FD755A82C7F2974001AB93C /* View+onRotate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				4F4F38122C79BDE800522ABC /* Helper.swift */,
 				4F74382A2C7C5CFF006DDB8B /* TextFile.swift */,
 				4F7858A02C7CE87900462952 /* AppIconProvider.swift */,
+				4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
+				4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */,
 				4F6EEFFC2C7DEE8700D4D5B0 /* MapView.swift in Sources */,
 				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
 				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
@@ -307,6 +314,7 @@
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
 				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
+				4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */,
 				4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */,
 				4F4F37F42C79B1B300522ABC /* IsoCountryCodes.swift in Sources */,
 				4F4F38112C79B76000522ABC /* JsonData.swift in Sources */,
@@ -474,9 +482,13 @@
 				MARKETING_VERSION = 17.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -512,9 +524,13 @@
 				MARKETING_VERSION = 17.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

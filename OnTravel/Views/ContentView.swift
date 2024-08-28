@@ -15,19 +15,19 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject private var model               : OnTravelModel
     @EnvironmentObject private var locationManager     : LocationManager
-    @State             private var name                : String = ""
-    @State             private var flag                : String = ""
-    @State             private var refreshCalendarView : Bool   = false
-    @State             private var showingExporter     : Bool   = false
-    @State             private var selectedYear        : Int    = Calendar.current.component(.year, from: Date.init())
+    @State             private var name                : String              = ""
+    @State             private var flag                : String              = ""
+    @State             private var refreshCalendarView : Bool                = false
+    @State             private var showingExporter     : Bool                = false
+    @State             private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
     @State             private var isoInfo             : IsoCountryInfo?
-    @State             private var year                : Int    = Calendar.current.component(.year, from: Date.init())
+    @State             private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State             private var orientation         : UIDeviceOrientation = .unknown
         
     
     var body: some View {
         ViewThatFits {
             ScrollView {
-                
                 VStack(spacing: 5) {
                     HStack(spacing: 5) {
                         Picker("Year", selection: self.$selectedYear) {
@@ -99,68 +99,70 @@ struct ContentView: View {
                     .contentMargins(.leading, 5, for: .scrollContent)
                     .frame(minHeight: 250)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                                        
+                    
                     CalendarView(calendar: Calendar.current)
                         .id(self.refreshCalendarView)
                     
                     MapView()
                         .frame(width: 360, height: 237)
                 }
-                .task {
-                    updateCountryFromProperties()
-                }
-                /*
-                .onChange(of: self.locationManager.location) {
-                    //updateCountry()
-                }
-                */
-                .onChange(of: self.locationManager.storedProperties) {
-                    updateCountryFromProperties()
-                }
-                .onChange(of: self.model.allVisits) {
-                    refreshCalendarView.toggle()
-                }
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
-                    // Update remaining days
-                    self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.getLastDayOfYear()).day!
-                    
-                    // Update model with saved data
-                    if self.model.allVisits.isEmpty {
-                        let json : String = Helper.readJson(year: self.year)
-                        if json.isEmpty {
-                            let isoCode : String = Properties.instance.country!
-                            if !isoCode.isEmpty {
-                                let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
-                                let now     : Date           = Date.init()
-                                let country : Country        = Country(isoInfo: isoInfo)
-                                country.addVisit(date: now)
-                                self.model.allVisits.insert(country)
-                                self.flag = isoInfo.flag ?? ""
-                                self.name = isoInfo.name
-                                DispatchQueue.global().async {
-                                    Helper.saveJson(json: self.model.toJson())
-                                }
+            }
+            .task {
+                updateCountryFromProperties()
+            }
+            /*
+             .onChange(of: self.locationManager.location) {
+             //updateCountry()
+             }
+             */
+            .onChange(of: self.locationManager.storedProperties) {
+                updateCountryFromProperties()
+            }
+            .onChange(of: self.model.allVisits) {
+                refreshCalendarView.toggle()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
+                // Update remaining days
+                self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.getLastDayOfYear()).day!
+                
+                // Update model with saved data
+                if self.model.allVisits.isEmpty {
+                    let json : String = Helper.readJson(year: self.year)
+                    if json.isEmpty {
+                        let isoCode : String = Properties.instance.country!
+                        if !isoCode.isEmpty {
+                            let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
+                            let now     : Date           = Date.init()
+                            let country : Country        = Country(isoInfo: isoInfo)
+                            country.addVisit(date: now)
+                            self.model.allVisits.insert(country)
+                            self.flag = isoInfo.flag ?? ""
+                            self.name = isoInfo.name
+                            DispatchQueue.global().async {
+                                Helper.saveJson(json: self.model.toJson())
                             }
-                        } else {
-                            let countries : [Country] = Helper.getCountriesFromJson(json: json)
-                            for country in countries { self.model.allVisits.insert(country) }                            
                         }
-                    }
-                    
-                    updateCountryFromProperties()
-                }
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
-                    OnTravel.AppDelegate.instance.scheduleAppProcessing()
-                }
-                .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
-                    switch result {
-                    case .success(let url):
-                        print("Saved to \(url)")
-                    case .failure(let error):
-                        print("Error: \(error.localizedDescription)")
+                    } else {
+                        let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                        for country in countries { self.model.allVisits.insert(country) }
                     }
                 }
                 
+                updateCountryFromProperties()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
+                OnTravel.AppDelegate.instance.scheduleAppProcessing()
+            }
+            .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
+                switch result {
+                case .success(let url):
+                    print("Saved to \(url)")
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+            .onRotate { newOrientation in
+                self.orientation = newOrientation
             }
         }
     }
