@@ -16,6 +16,7 @@ extension Key {
     static let lastLon   : Key = "lastLon"
     static let timestamp : Key = "timestamp"
     static let country   : Key = "country"
+    static let flag      : Key = "flag"
 }
 
 
@@ -36,6 +37,9 @@ public struct Properties {
     
     @UserDefault(key: .country, defaultValue: "")
     var country: String? // country
+    
+    @UserDefault(key: .flag, defaultValue: "")
+    var flag: String? // flag
     
     private init() {}
 }

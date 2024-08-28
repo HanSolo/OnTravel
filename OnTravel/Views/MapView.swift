@@ -37,20 +37,29 @@ struct MapView: View {
         .task {
             self.visitedFill    = self.colorScheme == .dark ? Color(red: 255, green: 0, blue: 0) : Color(red: 200, green: 00, blue: 0)
             self.notVisitedFill = self.colorScheme == .dark ? Color(red: 10, green: 10, blue: 10)  : Color(red: 100, green: 100, blue: 100)
-            if !self.model.allVisits.isEmpty {
-                for isoCountry in IsoCountries.allCountries {
-                    for country in self.model.allVisits {
-                        if country.isoInfo.alpha2 == isoCountry.alpha2 {
-                            if let node = self.mapView.getNode(byId: country.isoInfo.alpha2.uppercased()) {
-                                self.visitedCountries.append(node)
-                            }
-                        }
-                        if let node = self.mapView.getNode(byId: isoCountry.alpha2.uppercased()) {
-                            self.allCountries.append(node)
+            updateNodes()
+        }
+        .onChange(of: self.model.allVisits) {
+            updateNodes()
+        }
+    }
+    
+    private func updateNodes() -> Void {
+        if !self.model.allVisits.isEmpty {
+            self.allCountries.removeAll()
+            self.visitedCountries.removeAll()
+            for isoCountry in IsoCountries.allCountries {
+                for country in self.model.allVisits {
+                    if country.isoInfo.alpha2 == isoCountry.alpha2 {
+                        if let node = self.mapView.getNode(byId: country.isoInfo.alpha2.uppercased()) {
+                            self.visitedCountries.append(node)
                         }
                     }
-                    
+                    if let node = self.mapView.getNode(byId: isoCountry.alpha2.uppercased()) {
+                        self.allCountries.append(node)
+                    }
                 }
+                
             }
         }
     }

@@ -15,8 +15,8 @@ import MapKit
 
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var locationStatus : CLAuthorizationStatus?
-    @Published var location       : CLLocation? {
+    @Published var locationStatus   : CLAuthorizationStatus?
+    @Published var location         : CLLocation? {
         willSet {
             objectWillChange.send()
         }
@@ -29,13 +29,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.lastLocation                 = self.location
         }
     }
-    @Published var lastLocation   : CLLocation?
-    @Published var placemark      : CLPlacemark?
-    @Published var latitude       : Double = 0.0
-    @Published var longitude      : Double = 0.0
+    @Published var lastLocation     : CLLocation?
+    @Published var placemark        : CLPlacemark?
+    @Published var latitude         : Double            = 0.0
+    @Published var longitude        : Double            = 0.0
+    @Published var storedProperties : Bool              = false
         
-    private      let locationManager : CLLocationManager = CLLocationManager()
-    private      let geocoder        : CLGeocoder        = CLGeocoder()
+    private    let locationManager  : CLLocationManager = CLLocationManager()
+    private    let geocoder         : CLGeocoder        = CLGeocoder()
     
     
     override init() {
@@ -101,9 +102,32 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             if nil != placemark.isoCountryCode {
-                Properties.instance.country   = placemark.isoCountryCode
-                Properties.instance.timestamp = Date.init().timeIntervalSince1970
-                print("Stored country and timestamp to properties")
+                let now            : Date     = Date.init()
+                let isoCountryCode : String   = placemark.isoCountryCode ?? ""
+                let flag           : String   = IsoCountryCodes.find(key: isoCountryCode)?.flag ?? ""
+                Properties.instance.country   = isoCountryCode
+                Properties.instance.flag      = flag
+                Properties.instance.timestamp = now.timeIntervalSince1970
+                // Create json file if not present
+                let json : String = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
+                if json.isEmpty {
+                    let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: placemark.isoCountryCode ?? "")!
+                    let country : Country        = Country(isoInfo: isoInfo)
+                    country.addVisit(date: now)
+                    var jsonTxt : String = "["
+                    jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
+                    jsonTxt += "\"visits\":["
+                    for date in country.visits {
+                        jsonTxt += "\(date.timeIntervalSince1970),"
+                    }
+                    jsonTxt += "]}]"
+                    DispatchQueue.global().async {
+                        Helper.saveJson(json: jsonTxt)
+                    }
+                    //print("Created json file in LocationManager")
+                }
+                //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")
+                self.storedProperties.toggle()
                 self.stopLocationUpdates()
             }
         }

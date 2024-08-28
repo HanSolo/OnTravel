@@ -51,17 +51,17 @@ struct CalendarView: View {
                                 .cornerRadius(5)
                         }
                         .alert(
-                            Text("Visited at \(dateFormatter.string(from: self.selectedDate))"),
+                            Text("At \(dateFormatter.string(from: self.selectedDate)) you've been to"),
                             isPresented: $showingAlert
                         ) {
                             Button("OK", role: .cancel) {}
                         } message: {
                             VStack(spacing: 5) {
-                                ForEach(getCountriesInDate(date: self.selectedDate)) { country in
-                                    Text("\(country.isoInfo.flag ?? "") \(country.isoInfo.name)")
-                                        .font(.system(size: 16))
-                                }
+                                let arrayMap : Array  = getCountriesInDate(date: self.selectedDate).map() { "\($0.isoInfo.flag ?? "") \($0.isoInfo.name)" }
+                                Text(arrayMap.joined(separator: "\n"))
+                                    .font(.system(size: 14))
                             }
+                            .frame(minHeight: 300)
                             .padding()
                         }
                         if (dateHasEvents(date: date)) {
@@ -194,6 +194,7 @@ struct CalendarView: View {
 
 public struct CalendarViewComponent<Day: View, Header: View, Title: View, Trailing: View>: View {
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject private  var model : OnTravelModel
 
     // Injected dependencies
     private var calendar: Calendar
@@ -249,8 +250,8 @@ public struct CalendarViewComponent<Day: View, Header: View, Title: View, Traili
                     }
                 }
             }
-            .frame(height: days.count  == 42    ? 300 : 270)
-            .shadow(color: colorScheme == .dark ? .white.opacity(0.4) : .black.opacity(0.35), radius: 5)
+            .frame(height: days.count == 42 ? 300 : 270)
+            //.shadow(color: colorScheme == .dark ? .white.opacity(0.4) : .black.opacity(0.35), radius: 5)
         }
     }
 }

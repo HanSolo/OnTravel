@@ -23,9 +23,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         // Code to be executed after app finished launching with options
         AppDelegate.instance = self
         
+        /*
         let json      : String    = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
-        let countries : [Country] = Helper.getCountriesFromJson(json: json)
+        let countries : [Country] = json.isEmpty ? [] : Helper.getCountriesFromJson(json: json)        
         for country in countries { self.model.allVisits.insert(country) }
+        */        
         
         self.locationManager.startLocationUpdates()
                 

@@ -59,7 +59,7 @@ public class Helper {
         }
     }
     
-    public static func readJson(year: Int) -> String {
+    public static func readJson(year: Int) -> String {        
         let filename     : String = "visits\(year).json"
         let documentsUrl : URL    = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url          : URL    = documentsUrl.appendingPathComponent(filename)

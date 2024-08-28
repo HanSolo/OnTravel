@@ -13,14 +13,13 @@ import MapKit
 
 
 public class OnTravelModel : ObservableObject {
-    @Published var networkMonitor     : NetworkMonitor = NetworkMonitor()
+    //@Published var networkMonitor     : NetworkMonitor = NetworkMonitor()
     @Published var lastGeoCodeLat     : Double         = 0.0
     @Published var lastGeoCodeLon     : Double         = 0.0
     @Published var country            : String         = ""
     @Published var allVisits          : Set<Country>   = Set<Country>()
     @Published var remainingDays      : Int            = 0
     @Published var availableYears     : [Int]          = Helper.getAvailableYears()
-    
     
     
     public func toJson() -> String {
