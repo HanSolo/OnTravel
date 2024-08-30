@@ -61,6 +61,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     private func registerBackgroundTasks() -> Void {
         print("registerBackgroundTasks")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: Constants.PROCESSING_TASK_REQUEST_ID, using: nil) { task in
+            task.setTaskCompleted(success: true)
             self.handleAppProcessing(task: task as! BGProcessingTask)
         }
     }
@@ -70,7 +71,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         print("scheduleAppProcessing")
         let request = BGProcessingTaskRequest(identifier: Constants.PROCESSING_TASK_REQUEST_ID)
         request.requiresExternalPower       = false
-        request.requiresNetworkConnectivity = true
+        request.requiresNetworkConnectivity = false
         request.earliestBeginDate           = Date(timeIntervalSinceNow: Constants.PROCESSING_INTERVAL)
         
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Constants.PROCESSING_TASK_REQUEST_ID)
@@ -83,8 +84,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     
     func handleAppProcessing(task: BGProcessingTask) {
         print("handleAppRefresh")
-        self.locationManager.startLocationUpdates()
         DispatchQueue.global().async {
+            self.locationManager.startLocationUpdates()
+            
             let taskID = UIApplication.shared.beginBackgroundTask(withName: Constants.PROCESSING_TASK_ID, expirationHandler: ({}))
             let queue  = OperationQueue()
             queue.maxConcurrentOperationCount = 1

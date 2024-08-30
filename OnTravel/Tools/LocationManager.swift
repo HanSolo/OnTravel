@@ -108,23 +108,45 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 Properties.instance.country   = isoCountryCode
                 Properties.instance.flag      = flag
                 Properties.instance.timestamp = now.timeIntervalSince1970
+                
+                let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: placemark.isoCountryCode ?? "")!
+                
                 // Create json file if not present
                 let json : String = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
                 if json.isEmpty {
-                    let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: placemark.isoCountryCode ?? "")!
-                    let country : Country        = Country(isoInfo: isoInfo)
-                    country.addVisit(date: now)
-                    var jsonTxt : String = "["
-                    jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
-                    jsonTxt += "\"visits\":["
-                    for date in country.visits {
-                        jsonTxt += "\(date.timeIntervalSince1970),"
-                    }
-                    jsonTxt += "]}]"
                     DispatchQueue.global().async {
+                        let country : Country = Country(isoInfo: isoInfo)
+                        country.addVisit(date: now)
+                        var jsonTxt : String = "["
+                        jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
+                        jsonTxt += "\"visits\":["
+                        for date in country.visits {
+                            jsonTxt += "\(date.timeIntervalSince1970),"
+                        }
+                        jsonTxt += "]}]"
+                    
                         Helper.saveJson(json: jsonTxt)
                     }
                     //print("Created json file in LocationManager")
+                } else {
+                    DispatchQueue.global().async {
+                        // Update json file
+                        var allVisits : Set<Country> = Set<Country>()
+                        let countries : [Country]    = Helper.getCountriesFromJson(json: json)
+                        for country in countries { allVisits.insert(country) }
+                        
+                        let countryFound : Country? = allVisits.filter{ $0.isoInfo.name == isoInfo.name }.first
+                        if countryFound == nil {
+                            let country : Country = Country(isoInfo: isoInfo)
+                            country.addVisit(date: now)
+                            allVisits.insert(country)
+                        } else {
+                            countryFound!.addVisit(date: now)
+                        }
+                                                                
+                        Helper.saveJson(json: Helper.visitsToJson(allVisits: allVisits))
+                        Swift.debugPrint("Saved json file from LocationManager")
+                    }
                 }
                 //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")
                 self.storedProperties.toggle()
@@ -148,5 +170,5 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     public func geocodeAsync() async throws -> [CLPlacemark?] {
         if nil == self.location { return [] }
         return try await geocoder.reverseGeocodeLocation(self.location!)
-    }
+    }            
 }

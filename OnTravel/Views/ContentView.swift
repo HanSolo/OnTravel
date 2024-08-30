@@ -108,7 +108,7 @@ struct ContentView: View {
                 }
             }
             .task {
-                updateCountryFromProperties()
+                //updateCountryFromProperties()
             }
             /*
              .onChange(of: self.locationManager.location) {
@@ -127,8 +127,10 @@ struct ContentView: View {
                 
                 // Update model with saved data
                 if self.model.allVisits.isEmpty {
+                    //Swift.debugPrint("AllVisits in model is empty -> load from json file")
                     let json : String = Helper.readJson(year: self.year)
                     if json.isEmpty {
+                        //Swift.debugPrint("Json string is empty, create new json file")
                         let isoCode : String = Properties.instance.country!
                         if !isoCode.isEmpty {
                             let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
@@ -143,22 +145,27 @@ struct ContentView: View {
                             }
                         }
                     } else {
+                        //Swift.debugPrint("Successfully loaded all visits from json string")
                         let countries : [Country] = Helper.getCountriesFromJson(json: json)
                         for country in countries { self.model.allVisits.insert(country) }
+                        //Swift.debugPrint("Updated model with data from json file")
                     }
                 }
                 
-                updateCountryFromProperties()
+                //updateCountryFromProperties()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
+                DispatchQueue.global().async {
+                    Helper.saveJson(json: self.model.toJson())
+                }
                 OnTravel.AppDelegate.instance.scheduleAppProcessing()
             }
             .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
                 switch result {
                 case .success(let url):
-                    print("Saved to \(url)")
+                    Swift.debugPrint("Saved to \(url)")
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    Swift.debugPrint("Error: \(error.localizedDescription)")
                 }
             }
             .onRotate { newOrientation in
@@ -167,7 +174,7 @@ struct ContentView: View {
         }
     }
     
-    
+    /*
     private func updateCountry() -> Void {
         // Avoid update country when on a plane
         if self.locationManager.location?.altitude ?? 0 > 4000 && self.locationManager.location?.speed ?? 0 > 250 { return }
@@ -203,6 +210,7 @@ struct ContentView: View {
             }
         }
     }
+    */
     
     private func updateCountryFromProperties() -> Void {
         // Avoid update country when on a plane

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 public class Constants {
@@ -15,4 +16,9 @@ public class Constants {
     public static let PROCESSING_TASK_ID         : String = "eu.hansolo.ontravel.processTaskId"
     public static let PROCESSING_SESSION_ID      : String = "eu.hansolo.ontravel.processSessionId"
     public static let PROCESSING_INTERVAL        : Double = 900 // 15min
+    
+    public static let VISITED_FILL_DARK          : Color  = Color(red: 255, green: 0, blue: 0)
+    public static let VISITED_FILL_BRIGHT        : Color  = Color(red: 200, green: 00, blue: 0)
+    public static let NOT_VISITED_FILL_DARK      : Color  = Color(red: 10, green: 10, blue: 10)
+    public static let NOT_VISITED_FILL_BRIGHT    : Color  = Color(red: 100, green: 100, blue: 100)    
 }

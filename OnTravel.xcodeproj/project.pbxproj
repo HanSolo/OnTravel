@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
 		4F38B0E12C7E42D10013F647 /* world1.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4F38B0E02C7E42D10013F647 /* world1.svg */; };
 		4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */; };
 		4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D82C79AFF000522ABC /* ContentView.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+documentsDirectory.swift"; sourceTree = "<group>"; };
 		4F38B0E02C7E42D10013F647 /* world1.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world1.svg; sourceTree = "<group>"; };
 		4F4F37D32C79AFF000522ABC /* OnTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelApp.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */,
 				4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */,
 				4FD755A82C7F2974001AB93C /* View+onRotate.swift */,
+				4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -260,8 +263,6 @@
 			);
 			mainGroup = 4F4F37CA2C79AFF000522ABC;
 			packageReferences = (
-				4F6EEFE32C7DACF500D4D5B0 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
-				4F6EEFEA2C7DC69200D4D5B0 /* XCRemoteSwiftPackageReference "InteractiveMap" */,
 				4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */,
 			);
 			productRefGroup = 4F4F37D42C79AFF000522ABC /* Products */;
@@ -312,6 +313,7 @@
 				4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */,
 				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
+				4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
 				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
 				4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */,
@@ -457,7 +459,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -466,6 +468,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We need to save the visits to the documents folder";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = 17.0.0;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
@@ -479,7 +482,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.0;
+				MARKETING_VERSION = 17.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -499,7 +502,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -508,6 +511,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = OnTravel;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We need to save the visits to the documents folder";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = 17.0.0;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to detect the country you are currently in";
 				INFOPLIST_KEY_NSLocationUsageDescription = "We need your location to detect the country you are currently in";
@@ -521,7 +525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.0;
+				MARKETING_VERSION = 17.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -558,22 +562,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4F6EEFE32C7DACF500D4D5B0 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.5.4;
-			};
-		};
-		4F6EEFEA2C7DC69200D4D5B0 /* XCRemoteSwiftPackageReference "InteractiveMap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/GrandSir/InteractiveMap";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/SVGView.git";

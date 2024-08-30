@@ -12,11 +12,12 @@ import os.log
 
 
 extension Key {
-    static let lastLat   : Key = "lastLat"
-    static let lastLon   : Key = "lastLon"
-    static let timestamp : Key = "timestamp"
-    static let country   : Key = "country"
-    static let flag      : Key = "flag"
+    static let lastLat      : Key = "lastLat"
+    static let lastLon      : Key = "lastLon"
+    static let timestamp    : Key = "timestamp"
+    static let country      : Key = "country"
+    static let flag         : Key = "flag"
+    static let jsonBookmark : Key = "jsonBookmark"
 }
 
 
@@ -40,6 +41,9 @@ public struct Properties {
     
     @UserDefault(key: .flag, defaultValue: "")
     var flag: String? // flag
+    
+    @UserDefault(key: .jsonBookmark, defaultValue: "")
+    var jsonBookmark: String?
     
     private init() {}
 }
