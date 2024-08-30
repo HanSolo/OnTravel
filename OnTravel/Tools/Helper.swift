@@ -106,50 +106,49 @@ public class Helper {
     public static func readJson(year: Int) -> String {
         let fileManager : FileManager = FileManager.default
         var json        : String      = ""
-
-        let filename : String = "visits\(year).json"
-        let url      : URL    = FileManager.documentsDirectory.appendingPathComponent(filename)
-        
-        do {
-            try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: url.path)
-        } catch {
-            Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
-        }
-        
-        do {
-            json = try String(contentsOf: url)
-        } catch {
-            Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
-            json = ""
-        }
-        
-        if json.isEmpty {
-            if let jsonBookmark = Data(base64Encoded: Properties.instance.jsonBookmark!.data(using: .utf8)!) {
-                var isStale : Bool = false
+                
+        if let jsonBookmark = Data(base64Encoded: Properties.instance.jsonBookmark!.data(using: .utf8)!) {
+            var isStale : Bool = false
+            do {
+                let resolvedUrl = try URL(resolvingBookmarkData: jsonBookmark, options: [.withoutUI], bookmarkDataIsStale: &isStale)
+                
                 do {
-                    let resolvedUrl = try URL(resolvingBookmarkData: jsonBookmark, options: [.withoutUI], bookmarkDataIsStale: &isStale)
-                    
-                    do {
-                        try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: resolvedUrl.path)
-                    } catch {
-                        Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
-                    }
-                    
-                    if resolvedUrl.startAccessingSecurityScopedResource() {
-                        do {
-                            json = try String(contentsOf: resolvedUrl)
-                            //Swift.debugPrint("Successfully read json from resolved file URL: \(resolvedUrl.path())")
-                        } catch {
-                            Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
-                            json = ""
-                        }
-                    }
-                    do { resolvedUrl.stopAccessingSecurityScopedResource() }
-                } catch let error {
-                    Swift.debugPrint("Error resolving URL from bookmark data. Error: \(error.localizedDescription)")
+                    try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: resolvedUrl.path)
+                } catch {
+                    Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
                 }
+                
+                if resolvedUrl.startAccessingSecurityScopedResource() {
+                    do {
+                        json = try String(contentsOf: resolvedUrl)
+                        //Swift.debugPrint("Successfully read json from resolved file URL: \(resolvedUrl.path())")
+                    } catch {
+                        Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
+                        json = ""
+                    }
+                }
+                do { resolvedUrl.stopAccessingSecurityScopedResource() }
+            } catch let error {
+                Swift.debugPrint("Error resolving URL from bookmark data. Error: \(error.localizedDescription)")
+            }
+        } else {
+            let filename : String = "visits\(year).json"
+            let url      : URL    = FileManager.documentsDirectory.appendingPathComponent(filename)
+            
+            do {
+                try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: url.path)
+            } catch {
+                Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
+            }
+            
+            do {
+                json = try String(contentsOf: url)
+            } catch {
+                Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
+                json = ""
             }
         }
+        
         return json
     }
     
