@@ -13,7 +13,7 @@ class Receiver {
     func attachToSender(sender: Sender) -> Void {
         
         sender.events.listenTo(eventName: Sender.SENDER_EVT, action: {
-            print("Received evt from sender")
+            //Swift.debugPrint("Received evt from sender")
         })
         
         sender.events.listenTo(eventName: Sender.SENDER_EVT, action: self.doSomething)
@@ -23,12 +23,12 @@ class Receiver {
                 
     
     func doSomething() -> Void {
-        print("do something because of evt from sender")
+        //Swift.debugPrint("do something because of evt from sender")
     }
     
     func doSomethingElse(information: Any?) {
         if let info = information as? String {
-            print("Info from sender evt: \(info)")
+            Swift.debugPrint("Info from sender evt: \(info)")
         }
     }
 }

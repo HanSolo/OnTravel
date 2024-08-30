@@ -22,7 +22,7 @@ class ProcessingOperation: Operation {
         if isCancelled {
             return
         }
-        print("main -> start location updates from background task")
+        Swift.debugPrint("main -> start location updates from background task")
         if nil != self.locationManager {
             self.locationManager?.startLocationUpdates()
         }

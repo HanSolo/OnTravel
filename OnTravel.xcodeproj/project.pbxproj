@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
+		4F1E3C172C81E42A00418609 /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4F1E3C162C81E42A00418609 /* SVGView */; };
 		4F38B0E12C7E42D10013F647 /* world1.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4F38B0E02C7E42D10013F647 /* world1.svg */; };
 		4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */; };
 		4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D82C79AFF000522ABC /* ContentView.swift */; };
@@ -97,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1E3C172C81E42A00418609 /* SVGView in Frameworks */,
 				4F6EEFF62C7DDDE100D4D5B0 /* SVGView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +235,7 @@
 			name = OnTravel;
 			packageProductDependencies = (
 				4F6EEFF52C7DDDE100D4D5B0 /* SVGView */,
+				4F1E3C162C81E42A00418609 /* SVGView */,
 			);
 			productName = OnTravel;
 			productReference = 4F4F37D32C79AFF000522ABC /* OnTravel.app */;
@@ -573,6 +576,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4F1E3C162C81E42A00418609 /* SVGView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */;
+			productName = SVGView;
+		};
 		4F6EEFF52C7DDDE100D4D5B0 /* SVGView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SVGView;

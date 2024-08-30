@@ -22,13 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Code to be executed after app finished launching with options
         AppDelegate.instance = self
-        
-        /*
-        let json      : String    = Helper.readJson(year: Calendar.current.component(.year, from: Date.init()))
-        let countries : [Country] = json.isEmpty ? [] : Helper.getCountriesFromJson(json: json)        
-        for country in countries { self.model.allVisits.insert(country) }
-        */        
-        
+                
         self.locationManager.startLocationUpdates()
                 
         registerBackgroundTasks()
@@ -37,12 +31,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        print("applicationDidBecomeActive")
+        Swift.debugPrint("applicationDidBecomeActive")
         self.locationManager.startLocationUpdates()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("applicationDidEnterBackground")
+        Swift.debugPrint("applicationDidEnterBackground")
         Properties.instance.lastLat = self.locationManager.latitude
         Properties.instance.lastLon = self.locationManager.longitude
         self.locationManager.stopLocationUpdates()
@@ -50,7 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        print("applicationWillTerminate")
+        Swift.debugPrint("applicationWillTerminate")
         Properties.instance.lastLat = self.locationManager.latitude
         Properties.instance.lastLon = self.locationManager.longitude
         self.locationManager.stopLocationUpdates()
@@ -59,7 +53,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     
     
     private func registerBackgroundTasks() -> Void {
-        print("registerBackgroundTasks")
+        Swift.debugPrint("registerBackgroundTasks")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: Constants.PROCESSING_TASK_REQUEST_ID, using: nil) { task in
             task.setTaskCompleted(success: true)
             self.handleAppProcessing(task: task as! BGProcessingTask)
@@ -68,7 +62,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     
     
     func scheduleAppProcessing() {
-        print("scheduleAppProcessing")
+        Swift.debugPrint("scheduleAppProcessing")
         let request = BGProcessingTaskRequest(identifier: Constants.PROCESSING_TASK_REQUEST_ID)
         request.requiresExternalPower       = false
         request.requiresNetworkConnectivity = false
@@ -78,12 +72,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         do {
             try BGTaskScheduler.shared.submit(request)
         } catch {
-            print("scheduleAppProcessing -> error: \(error.localizedDescription)")
+            Swift.debugPrint("scheduleAppProcessing. Error: \(error.localizedDescription)")
         }
     }
     
     func handleAppProcessing(task: BGProcessingTask) {
-        print("handleAppRefresh")
+        Swift.debugPrint("handleAppRefresh")
         DispatchQueue.global().async {
             self.locationManager.startLocationUpdates()
             
@@ -93,28 +87,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
                     
             let processingOperation = ProcessingOperation(locationManager: self.locationManager, model: self.model)
             queue.addOperation(processingOperation)
-            /*
-            task.expirationHandler = {
-                queue.cancelAllOperations()
-            }
-            */
             task.expirationHandler = {
                 task.setTaskCompleted(success: false)
-                /*
-                if nil != processingOperation.session {
-                    processingOperation.session!.invalidateAndCancel()
-                }
-                */
             }
             
             let lastOperation = queue.operations.last
             lastOperation?.completionBlock = {
                 task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
-                /*
-                if let processingOperation = lastOperation as? ProcessingOperation {
-                    processingOperation.session?.finishTasksAndInvalidate()
-                }
-                 */
             }
             UIApplication.shared.endBackgroundTask(taskID)
         }

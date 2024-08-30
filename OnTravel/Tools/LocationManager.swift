@@ -98,7 +98,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {
-                print("Error while geocding location")
+                Swift.debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
                 return
             }
             if nil != placemark.isoCountryCode {
@@ -145,7 +145,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                         }
                                                                 
                         Helper.saveJson(json: Helper.visitsToJson(allVisits: allVisits))
-                        Swift.debugPrint("Saved json file from LocationManager")
+                        //Swift.debugPrint("Saved json file from LocationManager")
                     }
                 }
                 //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")

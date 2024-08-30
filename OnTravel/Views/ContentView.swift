@@ -193,10 +193,10 @@ struct ContentView: View {
                             let country : Country = Country(isoInfo: isoInfo!)
                             country.addVisit(date: now)
                             self.model.allVisits.insert(country)
-                            print("no country found -> add \(String(describing: isoInfo?.alpha2)) to list")
+                            Swift.debugPrint("no country found -> add \(String(describing: isoInfo?.alpha2)) to list")
                         } else {
                             countryFound!.addVisit(date: now)
-                            print("country \(countryFound!.isoInfo.alpha2) to list")
+                            Swift.debugPrint("country \(countryFound!.isoInfo.alpha2) to list")
                         }
                         self.refreshCalendarView.toggle()
                         
