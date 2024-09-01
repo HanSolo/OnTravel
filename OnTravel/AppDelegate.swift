@@ -22,7 +22,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Code to be executed after app finished launching with options
         AppDelegate.instance = self
-                
+        
+        let now  : Date = Date.init()
+        let year : Int  = Calendar.current.component(.year, from: now)
+        if Helper.jsonExists(year: year) {
+            let json : String = Helper.readJson(year: year)
+            if !json.isEmpty {
+                let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                for country in countries { self.model.allVisits.insert(country) }
+                Swift.debugPrint("Loaded allVisits from json at startup in AppDelegate")
+            }
+        }
+        
         self.locationManager.startLocationUpdates()
                 
         registerBackgroundTasks()
@@ -30,6 +41,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         return true
     }
     
+    /*
     func applicationDidBecomeActive(_ application: UIApplication) {
         Swift.debugPrint("applicationDidBecomeActive")
         self.locationManager.startLocationUpdates()
@@ -37,19 +49,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         Swift.debugPrint("applicationDidEnterBackground")
-        Properties.instance.lastLat = self.locationManager.latitude
-        Properties.instance.lastLon = self.locationManager.longitude
         self.locationManager.stopLocationUpdates()
         scheduleAppProcessing()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         Swift.debugPrint("applicationWillTerminate")
-        Properties.instance.lastLat = self.locationManager.latitude
-        Properties.instance.lastLon = self.locationManager.longitude
         self.locationManager.stopLocationUpdates()
         scheduleAppProcessing()
     }
+    */
     
     
     private func registerBackgroundTasks() -> Void {

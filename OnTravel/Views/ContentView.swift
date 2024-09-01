@@ -127,37 +127,32 @@ struct ContentView: View {
                 
                 // Update model with saved data
                 if self.model.allVisits.isEmpty {
-                    //Swift.debugPrint("AllVisits in model is empty -> load from json file")
-                    let json : String = Helper.readJson(year: self.year)
-                    if json.isEmpty {
-                        //Swift.debugPrint("Json string is empty, create new json file")
-                        let isoCode : String = Properties.instance.country!
-                        if !isoCode.isEmpty {
-                            let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
-                            let now     : Date           = Date.init()
-                            let country : Country        = Country(isoInfo: isoInfo)
-                            country.addVisit(date: now)
-                            self.model.allVisits.insert(country)
-                            self.flag = isoInfo.flag ?? ""
-                            self.name = isoInfo.name
-                            DispatchQueue.global().async {
-                                Helper.saveJson(json: self.model.toJson())
+                    Swift.debugPrint("AllVisits in model is empty -> load from json file")
+                    if Helper.jsonExists(year: self.year) {
+                        let json : String = Helper.readJson(year: self.year)
+                        if json.isEmpty {
+                            Swift.debugPrint("Json file present but empty, create new one")
+                            let isoCode : String = Properties.instance.country!
+                            if !isoCode.isEmpty {
+                                let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
+                                let now     : Date           = Date.init()
+                                let country : Country        = Country(isoInfo: isoInfo)
+                                country.addVisit(date: now)
+                                self.model.allVisits.insert(country)
+                                self.flag = isoInfo.flag ?? ""
+                                self.name = isoInfo.name
                             }
+                        } else {
+                            let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                            for country in countries { self.model.allVisits.insert(country) }
+                            Swift.debugPrint("Loaded allVisits from json in ContentView")
                         }
                     } else {
-                        //Swift.debugPrint("Successfully loaded all visits from json string")
-                        let countries : [Country] = Helper.getCountriesFromJson(json: json)
-                        for country in countries { self.model.allVisits.insert(country) }
-                        //Swift.debugPrint("Updated model with data from json file")
+                        Swift.debugPrint("json file does not exists when try to read in ContentView")
                     }
                 }
-                
-                //updateCountryFromProperties()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
-                DispatchQueue.global().async {
-                    Helper.saveJson(json: self.model.toJson())
-                }
                 OnTravel.AppDelegate.instance.scheduleAppProcessing()
             }
             .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
@@ -228,19 +223,13 @@ struct ContentView: View {
                     if countryFound == nil {
                         let country : Country = Country(isoInfo: isoInfo!)
                         country.addVisit(date: now)
-                        self.model.allVisits.insert(country)
-                        //print("no country found -> add \(String(describing: isoInfo?.alpha2)) to list")
+                        self.model.allVisits.insert(country)                        
                     } else {
                         countryFound!.addVisit(date: now)
-                        //print("add country \(countryFound!.isoInfo.alpha2) to list")
                     }
                     self.refreshCalendarView.toggle()
                     
-                    self.model.remainingDays = Calendar.current.dateComponents([.day], from: now, to: Helper.getLastDayOfYear()).day!
-
-                    DispatchQueue.global().async {
-                        Helper.saveJson(json: self.model.toJson())
-                    }
+                    self.model.remainingDays  = Calendar.current.dateComponents([.day], from: now, to: Helper.getLastDayOfYear()).day!
                     self.model.availableYears = Helper.getAvailableYears()
                 }
             }

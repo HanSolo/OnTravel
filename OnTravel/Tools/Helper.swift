@@ -15,7 +15,7 @@ public class Helper {
     public static func getLastDayOfYear() -> Date {
         let now : Date = Date.init()
         // Get the current year
-        let year = Calendar.current.component(.year, from: now)
+        let year : Int = Calendar.current.component(.year, from: now)
         // Get the first day of next year
         if let firstOfNextYear = Calendar.current.date(from: DateComponents(year: year + 1, month: 1, day: 1)) {
             // Get the last day of the current year
@@ -47,58 +47,67 @@ public class Helper {
         return Array(yearsFound)
     }
         
-    public static func saveJson(json: String) -> Void {
+    public static func jsonExists(year: Int) -> Bool {
         let fileManager : FileManager = FileManager.default
-        let data        : Data        = Data(json.utf8)
-                          
-        if let jsonBookmark = Data(base64Encoded: Properties.instance.jsonBookmark!.data(using: .utf8)!) {
-            var isStale : Bool = false
-            do {
-                let resolvedUrl = try URL(resolvingBookmarkData: jsonBookmark, options: [.withoutUI], bookmarkDataIsStale: &isStale)
+        let filename    : String      = "visits\(year).json"
+        let url         : URL         = FileManager.documentsDirectory.appendingPathComponent(filename)
+        return fileManager.fileExists(atPath: url.path())
+    }
+    
+    public static func saveJson(json: String) -> Void {
+        Task {
+            let fileManager : FileManager = FileManager.default
+            let data        : Data        = Data(json.utf8)
+                              
+            if let jsonBookmark = Data(base64Encoded: Properties.instance.jsonBookmark!.data(using: .utf8)!) {
+                var isStale : Bool = false
+                do {
+                    let resolvedUrl = try URL(resolvingBookmarkData: jsonBookmark, options: [.withoutUI], bookmarkDataIsStale: &isStale)
+                    
+                    do {
+                        try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: resolvedUrl.path)
+                    } catch {
+                        Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
+                    }
+                    
+                    if resolvedUrl.startAccessingSecurityScopedResource() {
+                        do {
+                            try data.write(to: resolvedUrl, options: [.atomic, .noFileProtection])
+                            //Swift.debugPrint("Successfully saved json file via jsonBookmark")
+                            
+                            if let bookmark = try? resolvedUrl.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil) {
+                                Properties.instance.jsonBookmark = bookmark.base64EncodedString()
+                                //Swift.debugPrint("Successfully saved json bookmark to properties")
+                            }
+                        } catch {
+                            Swift.debugPrint("Error saving json file. Error: \(error.localizedDescription)")
+                        }
+                    }
+                    do { resolvedUrl.stopAccessingSecurityScopedResource() }
+                } catch let error {
+                    Swift.debugPrint("Error resolving URL from bookmark data. Error: \(error.localizedDescription)")
+                }
+            } else {
+                let filename : String      = "visits\(Calendar.current.component(.year, from: Date.init())).json"
+                let url      : URL         = FileManager.documentsDirectory.appendingPathComponent(filename)
                 
                 do {
-                    try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: resolvedUrl.path)
+                    try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: url.path)
                 } catch {
                     Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
                 }
                 
-                if resolvedUrl.startAccessingSecurityScopedResource() {
-                    do {
-                        try data.write(to: resolvedUrl, options: [.atomic, .noFileProtection])
-                        //Swift.debugPrint("Successfully saved json file via jsonBookmark")
-                        
-                        if let bookmark = try? resolvedUrl.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil) {
-                            Properties.instance.jsonBookmark = bookmark.base64EncodedString()
-                            //Swift.debugPrint("Successfully saved json bookmark to properties")
-                        }
-                    } catch {
-                        Swift.debugPrint("Error saving json file. Error: \(error.localizedDescription)")
+                do {
+                    try data.write(to: url, options: [.atomic, .noFileProtection])
+                    //Swift.debugPrint("Successfully saved json file")
+                    
+                    if let bookmark = try? url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil) {
+                        Properties.instance.jsonBookmark = bookmark.base64EncodedString()
+                        //Swift.debugPrint("Successfully saved json bookmark to properties")
                     }
+                } catch {
+                    Swift.debugPrint("Error saving json file. Error: \(error.localizedDescription)")
                 }
-                do { resolvedUrl.stopAccessingSecurityScopedResource() }
-            } catch let error {
-                Swift.debugPrint("Error resolving URL from bookmark data. Error: \(error.localizedDescription)")
-            }
-        } else {
-            let filename : String      = "visits\(Calendar.current.component(.year, from: Date.init())).json"
-            let url      : URL         = FileManager.documentsDirectory.appendingPathComponent(filename)
-            
-            do {
-                try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: url.path)
-            } catch {
-                Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
-            }
-            
-            do {
-                try data.write(to: url, options: [.atomic, .noFileProtection])
-                //Swift.debugPrint("Successfully saved json file")
-                
-                if let bookmark = try? url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil) {
-                    Properties.instance.jsonBookmark = bookmark.base64EncodedString()
-                    //Swift.debugPrint("Successfully saved json bookmark to properties")
-                }
-            } catch {
-                Swift.debugPrint("Error saving json file. Error: \(error.localizedDescription)")
             }
         }
     }
