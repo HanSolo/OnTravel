@@ -10,7 +10,6 @@ import Combine
 import CoreLocation
 import SVGView
 import WidgetKit
-import SwiftData
 
 
 struct ContentView: View {

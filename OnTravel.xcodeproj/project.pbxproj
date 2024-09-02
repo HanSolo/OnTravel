@@ -44,45 +44,49 @@
 		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
 		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
 		4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
-		4FA9B0582C85A4AA007F3B1B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA9B02F2C859034007F3B1B /* WidgetKit.framework */; };
-		4FA9B0592C85A4AA007F3B1B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA9B0312C859034007F3B1B /* SwiftUI.framework */; };
-		4FA9B0642C85A4AB007F3B1B /* OnTravelWidget-ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4FA9B0572C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4FA9B0692C85A4E1007F3B1B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E62C79B1B300522ABC /* NetworkMonitor.swift */; };
-		4FA9B06A2C85A4E1007F3B1B /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38102C79B76000522ABC /* JsonData.swift */; };
-		4FA9B06B2C85A4E1007F3B1B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38122C79BDE800522ABC /* Helper.swift */; };
-		4FA9B06C2C85A4E1007F3B1B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EC2C79B1B300522ABC /* LocationManager.swift */; };
-		4FA9B06D2C85A4E1007F3B1B /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EE2C79B1B300522ABC /* RestController.swift */; };
-		4FA9B06E2C85A4E1007F3B1B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382A2C7C5CFF006DDB8B /* TextFile.swift */; };
-		4FA9B06F2C85A4E1007F3B1B /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
-		4FA9B0702C85A4EB007F3B1B /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38022C79B2F100522ABC /* UserDefaultsObservation.swift */; };
-		4FA9B0712C85A4EB007F3B1B /* ObjectSaveableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38042C79B2F100522ABC /* ObjectSaveableError.swift */; };
-		4FA9B0722C85A4EB007F3B1B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38002C79B2F000522ABC /* UserDefault.swift */; };
-		4FA9B0732C85A4EB007F3B1B /* ObjectSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38032C79B2F100522ABC /* ObjectSaveable.swift */; };
-		4FA9B0742C85A4EB007F3B1B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38012C79B2F100522ABC /* Observable.swift */; };
-		4FA9B0752C85A4EB007F3B1B /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37FF2C79B2F000522ABC /* Properties.swift */; };
-		4FA9B0762C85A4F0007F3B1B /* Calendar+numberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */; };
-		4FA9B0772C85A4F0007F3B1B /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
-		4FA9B0782C85A4F0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
-		4FA9B0792C85A4F0007F3B1B /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
-		4FA9B07A2C85A57F007F3B1B /* IsoCountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */; };
-		4FA9B07B2C85A57F007F3B1B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EA2C79B1B300522ABC /* Country.swift */; };
-		4FA9B07C2C85A57F007F3B1B /* OnTravelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */; };
-		4FA9B07E2C85A57F007F3B1B /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E92C79B1B300522ABC /* IsoCountryCodes.swift */; };
-		4FA9B07F2C85A58D007F3B1B /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
-		4FA9B0802C85AA82007F3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EF2C79B1B300522ABC /* Constants.swift */; };
 		4FA9B0842C85C5D8007F3B1B /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0832C85C5D8007F3B1B /* Visit.swift */; };
-		4FA9B0852C85CD27007F3B1B /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0832C85C5D8007F3B1B /* Visit.swift */; };
+		4FA9B08E2C85EA82007F3B1B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA9B02F2C859034007F3B1B /* WidgetKit.framework */; };
+		4FA9B08F2C85EA82007F3B1B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA9B0312C859034007F3B1B /* SwiftUI.framework */; };
+		4FA9B0922C85EA82007F3B1B /* OnTravelWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0912C85EA82007F3B1B /* OnTravelWidgetBundle.swift */; };
+		4FA9B0942C85EA82007F3B1B /* OnTravelWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0932C85EA82007F3B1B /* OnTravelWidget.swift */; };
+		4FA9B0962C85EA83007F3B1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9B0952C85EA83007F3B1B /* Assets.xcassets */; };
+		4FA9B09A2C85EA83007F3B1B /* OnTravelWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4FA9B08D2C85EA82007F3B1B /* OnTravelWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4FA9B09F2C85EBA9007F3B1B /* OnTravelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E82C79B1B300522ABC /* OnTravelModel.swift */; };
+		4FA9B0A02C85EBA9007F3B1B /* IsoCountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37F02C79B1B300522ABC /* IsoCountryInfo.swift */; };
+		4FA9B0A12C85EBA9007F3B1B /* IsoCountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E92C79B1B300522ABC /* IsoCountryCodes.swift */; };
+		4FA9B0A22C85EBA9007F3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EF2C79B1B300522ABC /* Constants.swift */; };
+		4FA9B0A32C85EBA9007F3B1B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EA2C79B1B300522ABC /* Country.swift */; };
+		4FA9B0A42C85EBA9007F3B1B /* ProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E72C79B1B300522ABC /* ProcessingOperation.swift */; };
+		4FA9B0A52C85EBAF007F3B1B /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0832C85C5D8007F3B1B /* Visit.swift */; };
+		4FA9B0A62C85EBB5007F3B1B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EC2C79B1B300522ABC /* LocationManager.swift */; };
+		4FA9B0A72C85EBB5007F3B1B /* RestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37EE2C79B1B300522ABC /* RestController.swift */; };
+		4FA9B0A82C85EBB5007F3B1B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38122C79BDE800522ABC /* Helper.swift */; };
+		4FA9B0A92C85EBB5007F3B1B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382A2C7C5CFF006DDB8B /* TextFile.swift */; };
+		4FA9B0AA2C85EBB5007F3B1B /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38102C79B76000522ABC /* JsonData.swift */; };
+		4FA9B0AB2C85EBB5007F3B1B /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
+		4FA9B0AC2C85EBB5007F3B1B /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
+		4FA9B0AD2C85EBB5007F3B1B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37E62C79B1B300522ABC /* NetworkMonitor.swift */; };
+		4FA9B0AE2C85EBBA007F3B1B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38002C79B2F000522ABC /* UserDefault.swift */; };
+		4FA9B0AF2C85EBBA007F3B1B /* UserDefaultsObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38022C79B2F100522ABC /* UserDefaultsObservation.swift */; };
+		4FA9B0B02C85EBBA007F3B1B /* ObjectSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38032C79B2F100522ABC /* ObjectSaveable.swift */; };
+		4FA9B0B12C85EBBA007F3B1B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38012C79B2F100522ABC /* Observable.swift */; };
+		4FA9B0B22C85EBBA007F3B1B /* ObjectSaveableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38042C79B2F100522ABC /* ObjectSaveableError.swift */; };
+		4FA9B0B32C85EBBA007F3B1B /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37FF2C79B2F000522ABC /* Properties.swift */; };
+		4FA9B0B42C85EBC0007F3B1B /* Calendar+numberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */; };
+		4FA9B0B52C85EBC0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
+		4FA9B0B62C85EBC0007F3B1B /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
+		4FA9B0B72C85EBC0007F3B1B /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
 		4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
 		4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4FA9B0622C85A4AB007F3B1B /* PBXContainerItemProxy */ = {
+		4FA9B0982C85EA83007F3B1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4F4F37CB2C79AFF000522ABC /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4FA9B0562C85A4AA007F3B1B;
-			remoteInfo = "OnTravelWidget-ExtensionExtension";
+			remoteGlobalIDString = 4FA9B08C2C85EA82007F3B1B;
+			remoteInfo = OnTravelWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -93,7 +97,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				4FA9B0642C85A4AB007F3B1B /* OnTravelWidget-ExtensionExtension.appex in Embed Foundation Extensions */,
+				4FA9B09A2C85EA83007F3B1B /* OnTravelWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,13 +145,14 @@
 		4F7858A02C7CE87900462952 /* AppIconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconProvider.swift; sourceTree = "<group>"; };
 		4FA9B02F2C859034007F3B1B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		4FA9B0312C859034007F3B1B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		4FA9B0362C859034007F3B1B /* OnTravelWidget_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelWidget_Extension.swift; sourceTree = "<group>"; };
-		4FA9B0382C859035007F3B1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4FA9B03A2C859035007F3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4FA9B03B2C859035007F3B1B /* OnTravelWidget_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTravelWidget_Extension.entitlements; sourceTree = "<group>"; };
-		4FA9B0572C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "OnTravelWidget-ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA9B0812C85C302007F3B1B /* OnTravelWidget-ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OnTravelWidget-ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		4FA9B0832C85C5D8007F3B1B /* Visit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
+		4FA9B08D2C85EA82007F3B1B /* OnTravelWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OnTravelWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FA9B0912C85EA82007F3B1B /* OnTravelWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelWidgetBundle.swift; sourceTree = "<group>"; };
+		4FA9B0932C85EA82007F3B1B /* OnTravelWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelWidget.swift; sourceTree = "<group>"; };
+		4FA9B0952C85EA83007F3B1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4FA9B0972C85EA83007F3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FA9B09E2C85EA9C007F3B1B /* OnTravelWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTravelWidgetExtension.entitlements; sourceTree = "<group>"; };
 		4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 		4FD755A82C7F2974001AB93C /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,12 +167,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4FA9B0542C85A4AA007F3B1B /* Frameworks */ = {
+		4FA9B08A2C85EA82007F3B1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FA9B0592C85A4AA007F3B1B /* SwiftUI.framework in Frameworks */,
-				4FA9B0582C85A4AA007F3B1B /* WidgetKit.framework in Frameworks */,
+				4FA9B08F2C85EA82007F3B1B /* SwiftUI.framework in Frameworks */,
+				4FA9B08E2C85EA82007F3B1B /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,9 +182,10 @@
 		4F4F37CA2C79AFF000522ABC = {
 			isa = PBXGroup;
 			children = (
+				4FA9B09E2C85EA9C007F3B1B /* OnTravelWidgetExtension.entitlements */,
 				4FA9B0812C85C302007F3B1B /* OnTravelWidget-ExtensionExtension.entitlements */,
 				4F4F37D52C79AFF000522ABC /* OnTravel */,
-				4FA9B0332C859034007F3B1B /* OnTravelWidget-Extension */,
+				4FA9B0902C85EA82007F3B1B /* OnTravelWidget */,
 				4FA9B02E2C859034007F3B1B /* Frameworks */,
 				4F4F37D42C79AFF000522ABC /* Products */,
 			);
@@ -189,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				4F4F37D32C79AFF000522ABC /* OnTravel.app */,
-				4FA9B0572C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension.appex */,
+				4FA9B08D2C85EA82007F3B1B /* OnTravelWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,23 +304,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4FA9B0332C859034007F3B1B /* OnTravelWidget-Extension */ = {
-			isa = PBXGroup;
-			children = (
-				4FA9B03B2C859035007F3B1B /* OnTravelWidget_Extension.entitlements */,
-				4FA9B0382C859035007F3B1B /* Assets.xcassets */,
-				4FA9B03A2C859035007F3B1B /* Info.plist */,
-				4FA9B0362C859034007F3B1B /* OnTravelWidget_Extension.swift */,
-			);
-			path = "OnTravelWidget-Extension";
-			sourceTree = "<group>";
-		};
 		4FA9B0822C85C5B9007F3B1B /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				4FA9B0832C85C5D8007F3B1B /* Visit.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		4FA9B0902C85EA82007F3B1B /* OnTravelWidget */ = {
+			isa = PBXGroup;
+			children = (
+				4FA9B0912C85EA82007F3B1B /* OnTravelWidgetBundle.swift */,
+				4FA9B0932C85EA82007F3B1B /* OnTravelWidget.swift */,
+				4FA9B0952C85EA83007F3B1B /* Assets.xcassets */,
+				4FA9B0972C85EA83007F3B1B /* Info.plist */,
+			);
+			path = OnTravelWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,7 +338,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4FA9B0632C85A4AB007F3B1B /* PBXTargetDependency */,
+				4FA9B0992C85EA83007F3B1B /* PBXTargetDependency */,
 			);
 			name = OnTravel;
 			packageProductDependencies = (
@@ -343,21 +349,21 @@
 			productReference = 4F4F37D32C79AFF000522ABC /* OnTravel.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4FA9B0562C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension */ = {
+		4FA9B08C2C85EA82007F3B1B /* OnTravelWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4FA9B0652C85A4AB007F3B1B /* Build configuration list for PBXNativeTarget "OnTravelWidget-ExtensionExtension" */;
+			buildConfigurationList = 4FA9B09D2C85EA83007F3B1B /* Build configuration list for PBXNativeTarget "OnTravelWidgetExtension" */;
 			buildPhases = (
-				4FA9B0532C85A4AA007F3B1B /* Sources */,
-				4FA9B0542C85A4AA007F3B1B /* Frameworks */,
-				4FA9B0552C85A4AA007F3B1B /* Resources */,
+				4FA9B0892C85EA82007F3B1B /* Sources */,
+				4FA9B08A2C85EA82007F3B1B /* Frameworks */,
+				4FA9B08B2C85EA82007F3B1B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "OnTravelWidget-ExtensionExtension";
-			productName = "OnTravelWidget-ExtensionExtension";
-			productReference = 4FA9B0572C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension.appex */;
+			name = OnTravelWidgetExtension;
+			productName = OnTravelWidgetExtension;
+			productReference = 4FA9B08D2C85EA82007F3B1B /* OnTravelWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -373,7 +379,7 @@
 					4F4F37D22C79AFF000522ABC = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					4FA9B0562C85A4AA007F3B1B = {
+					4FA9B08C2C85EA82007F3B1B = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
@@ -395,7 +401,7 @@
 			projectRoot = "";
 			targets = (
 				4F4F37D22C79AFF000522ABC /* OnTravel */,
-				4FA9B0562C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension */,
+				4FA9B08C2C85EA82007F3B1B /* OnTravelWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -411,10 +417,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4FA9B0552C85A4AA007F3B1B /* Resources */ = {
+		4FA9B08B2C85EA82007F3B1B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA9B0962C85EA83007F3B1B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,44 +470,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4FA9B0532C85A4AA007F3B1B /* Sources */ = {
+		4FA9B0892C85EA82007F3B1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FA9B0802C85AA82007F3B1B /* Constants.swift in Sources */,
-				4FA9B0702C85A4EB007F3B1B /* UserDefaultsObservation.swift in Sources */,
-				4FA9B0712C85A4EB007F3B1B /* ObjectSaveableError.swift in Sources */,
-				4FA9B0762C85A4F0007F3B1B /* Calendar+numberOfDays.swift in Sources */,
-				4FA9B0772C85A4F0007F3B1B /* View+onRotate.swift in Sources */,
-				4FA9B0852C85CD27007F3B1B /* Visit.swift in Sources */,
-				4FA9B07A2C85A57F007F3B1B /* IsoCountryInfo.swift in Sources */,
-				4FA9B07B2C85A57F007F3B1B /* Country.swift in Sources */,
-				4FA9B07C2C85A57F007F3B1B /* OnTravelModel.swift in Sources */,
-				4FA9B07E2C85A57F007F3B1B /* IsoCountryCodes.swift in Sources */,
-				4FA9B0782C85A4F0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */,
-				4FA9B0792C85A4F0007F3B1B /* FileManager+documentsDirectory.swift in Sources */,
-				4FA9B0722C85A4EB007F3B1B /* UserDefault.swift in Sources */,
-				4FA9B0732C85A4EB007F3B1B /* ObjectSaveable.swift in Sources */,
-				4FA9B0742C85A4EB007F3B1B /* Observable.swift in Sources */,
-				4FA9B0752C85A4EB007F3B1B /* Properties.swift in Sources */,
-				4FA9B0692C85A4E1007F3B1B /* NetworkMonitor.swift in Sources */,
-				4FA9B06A2C85A4E1007F3B1B /* JsonData.swift in Sources */,
-				4FA9B07F2C85A58D007F3B1B /* DeviceRotationViewModifier.swift in Sources */,
-				4FA9B06B2C85A4E1007F3B1B /* Helper.swift in Sources */,
-				4FA9B06C2C85A4E1007F3B1B /* LocationManager.swift in Sources */,
-				4FA9B06D2C85A4E1007F3B1B /* RestController.swift in Sources */,
-				4FA9B06E2C85A4E1007F3B1B /* TextFile.swift in Sources */,
-				4FA9B06F2C85A4E1007F3B1B /* AppIconProvider.swift in Sources */,
+				4FA9B0AE2C85EBBA007F3B1B /* UserDefault.swift in Sources */,
+				4FA9B0AF2C85EBBA007F3B1B /* UserDefaultsObservation.swift in Sources */,
+				4FA9B0B42C85EBC0007F3B1B /* Calendar+numberOfDays.swift in Sources */,
+				4FA9B0B52C85EBC0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */,
+				4FA9B0B62C85EBC0007F3B1B /* View+onRotate.swift in Sources */,
+				4FA9B0B72C85EBC0007F3B1B /* FileManager+documentsDirectory.swift in Sources */,
+				4FA9B0B02C85EBBA007F3B1B /* ObjectSaveable.swift in Sources */,
+				4FA9B0B12C85EBBA007F3B1B /* Observable.swift in Sources */,
+				4FA9B0B22C85EBBA007F3B1B /* ObjectSaveableError.swift in Sources */,
+				4FA9B0B32C85EBBA007F3B1B /* Properties.swift in Sources */,
+				4FA9B0942C85EA82007F3B1B /* OnTravelWidget.swift in Sources */,
+				4FA9B09F2C85EBA9007F3B1B /* OnTravelModel.swift in Sources */,
+				4FA9B0A02C85EBA9007F3B1B /* IsoCountryInfo.swift in Sources */,
+				4FA9B0A12C85EBA9007F3B1B /* IsoCountryCodes.swift in Sources */,
+				4FA9B0A22C85EBA9007F3B1B /* Constants.swift in Sources */,
+				4FA9B0A62C85EBB5007F3B1B /* LocationManager.swift in Sources */,
+				4FA9B0A72C85EBB5007F3B1B /* RestController.swift in Sources */,
+				4FA9B0A82C85EBB5007F3B1B /* Helper.swift in Sources */,
+				4FA9B0A92C85EBB5007F3B1B /* TextFile.swift in Sources */,
+				4FA9B0AA2C85EBB5007F3B1B /* JsonData.swift in Sources */,
+				4FA9B0AB2C85EBB5007F3B1B /* AppIconProvider.swift in Sources */,
+				4FA9B0AC2C85EBB5007F3B1B /* DeviceRotationViewModifier.swift in Sources */,
+				4FA9B0AD2C85EBB5007F3B1B /* NetworkMonitor.swift in Sources */,
+				4FA9B0A32C85EBA9007F3B1B /* Country.swift in Sources */,
+				4FA9B0A42C85EBA9007F3B1B /* ProcessingOperation.swift in Sources */,
+				4FA9B0922C85EA82007F3B1B /* OnTravelWidgetBundle.swift in Sources */,
+				4FA9B0A52C85EBAF007F3B1B /* Visit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4FA9B0632C85A4AB007F3B1B /* PBXTargetDependency */ = {
+		4FA9B0992C85EA83007F3B1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4FA9B0562C85A4AA007F3B1B /* OnTravelWidget-ExtensionExtension */;
-			targetProxy = 4FA9B0622C85A4AB007F3B1B /* PBXContainerItemProxy */;
+			target = 4FA9B08C2C85EA82007F3B1B /* OnTravelWidgetExtension */;
+			targetProxy = 4FA9B0982C85EA83007F3B1B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -632,7 +642,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -676,7 +686,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -712,18 +722,18 @@
 			};
 			name = Release;
 		};
-		4FA9B0662C85A4AB007F3B1B /* Debug */ = {
+		4FA9B09B2C85EA83007F3B1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = "OnTravelWidget-ExtensionExtension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OnTravelWidget-Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OnTravelWidget-Extension";
+				INFOPLIST_FILE = OnTravelWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OnTravelWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -731,7 +741,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 17.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.hansolo.OnTravel.OnTravelWidget-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -744,18 +754,18 @@
 			};
 			name = Debug;
 		};
-		4FA9B0672C85A4AB007F3B1B /* Release */ = {
+		4FA9B09C2C85EA83007F3B1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = "OnTravelWidget-ExtensionExtension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OnTravelWidget-Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OnTravelWidget-Extension";
+				INFOPLIST_FILE = OnTravelWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OnTravelWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -763,7 +773,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 17.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.hansolo.OnTravel.OnTravelWidget-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -797,11 +807,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4FA9B0652C85A4AB007F3B1B /* Build configuration list for PBXNativeTarget "OnTravelWidget-ExtensionExtension" */ = {
+		4FA9B09D2C85EA83007F3B1B /* Build configuration list for PBXNativeTarget "OnTravelWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FA9B0662C85A4AB007F3B1B /* Debug */,
-				4FA9B0672C85A4AB007F3B1B /* Release */,
+				4FA9B09B2C85EA83007F3B1B /* Debug */,
+				4FA9B09C2C85EA83007F3B1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
