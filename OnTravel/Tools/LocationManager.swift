@@ -12,6 +12,7 @@ import Combine
 import SwiftUI
 import AVFoundation
 import MapKit
+import WidgetKit
 
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -129,6 +130,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             DispatchQueue.global().async {
                                 Helper.saveJson(json: jsonTxt)
                             }
+                            Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
                         }
                         print("Json file exists, but was empty -> saved new json file in LocationManager")
                     } else {
@@ -146,10 +148,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             } else {
                                 countryFound!.addVisit(date: now)
                             }
+                            let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
                             DispatchQueue.global().async {
-                                Helper.saveJson(json: Helper.visitsToJson(allVisits: allVisits))
+                                Helper.saveJson(json: jsonTxt)
                                 print("Json file exists -> updated visits and saved json file in LocationManager")
                             }
+                            Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
                         }
                     }
                 } else {
@@ -167,10 +171,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             Helper.saveJson(json: jsonTxt)
                             print("Json file did not exists -> saved new json file in LocationManager")
                         }
+                        Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
                     }
                 }
                 //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")
                 self.storedProperties.toggle()
+                WidgetCenter.shared.reloadAllTimelines()
                 self.stopLocationUpdates()
             }
         }

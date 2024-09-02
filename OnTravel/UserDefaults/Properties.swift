@@ -17,7 +17,7 @@ extension Key {
     static let timestamp    : Key = "timestamp"
     static let country      : Key = "country"
     static let flag         : Key = "flag"
-    static let jsonBookmark : Key = "jsonBookmark"
+    static let jsonBookmark : Key = "jsonBookmark"    
 }
 
 
@@ -44,6 +44,7 @@ public struct Properties {
     
     @UserDefault(key: .jsonBookmark, defaultValue: "")
     var jsonBookmark: String?
+        
     
     private init() {}
 }

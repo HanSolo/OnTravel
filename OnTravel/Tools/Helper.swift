@@ -46,7 +46,16 @@ public class Helper {
         }
         return Array(yearsFound)
     }
-        
+    
+    public static func getVisitsThisMonth(allVisits: Set<Country>) -> [Country] {
+        let now            : Date      = Date.init()
+        let calendar       : Calendar  = Calendar.current
+        let year           : Int       = calendar.component(.year, from: now)
+        let month          : Int       = calendar.component(.month, from: now)
+        let countriesFound : [Country] = allVisits.filter({ $0.getVisitsIn(month: month, year: year) > 0 })
+        return countriesFound
+    }
+    
     public static func jsonExists(year: Int) -> Bool {
         let fileManager : FileManager = FileManager.default
         let filename    : String      = "visits\(year).json"
@@ -86,6 +95,28 @@ public class Helper {
                     do { resolvedUrl.stopAccessingSecurityScopedResource() }
                 } catch let error {
                     Swift.debugPrint("Error resolving URL from bookmark data. Error: \(error.localizedDescription)")
+                    
+                    
+                    let filename : String      = "visits\(Calendar.current.component(.year, from: Date.init())).json"
+                    let url      : URL         = FileManager.documentsDirectory.appendingPathComponent(filename)
+                    
+                    do {
+                        try fileManager.setAttributes([.protectionKey: FileProtectionType.none], ofItemAtPath: url.path)
+                    } catch {
+                        Swift.debugPrint("Failed to set file protection. Error: \(error.localizedDescription)")
+                    }
+                    
+                    do {
+                        try data.write(to: url, options: [.atomic, .noFileProtection])
+                        //Swift.debugPrint("Successfully saved json file")
+                        
+                        if let bookmark = try? url.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil) {
+                            Properties.instance.jsonBookmark = bookmark.base64EncodedString()
+                            //Swift.debugPrint("Successfully saved json bookmark to properties")
+                        }
+                    } catch {
+                        Swift.debugPrint("Error saving json file. Error: \(error.localizedDescription)")
+                    }
                 }
             } else {
                 let filename : String      = "visits\(Calendar.current.component(.year, from: Date.init())).json"
@@ -161,6 +192,27 @@ public class Helper {
         return json
     }
     
+    public static func getAllVisitsFromFile() -> Set<Country> {
+        var allVisits : Set<Country> = Set()
+        let now       : Date         = Date.init()
+        let year      : Int          = Calendar.current.component(.year, from: now)
+        if Helper.jsonExists(year: year) {
+            let json : String = Helper.readJson(year: year)
+            if json.isEmpty {
+                print("Json file exists, but was empty in Helper")
+            } else {
+                let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                for country in countries {
+                    print("\(country.isoInfo.name) found")
+                    allVisits.insert(country)
+                }
+            }
+        } else {
+            print("json file not found")
+        }
+        return allVisits
+    }
+    
     public static func visitsToJson(allVisits : Set<Country>) -> String {
         if allVisits.isEmpty { return "[]" }
         
@@ -190,6 +242,30 @@ public class Helper {
             if nil != country { countries.append(country!) }
         }
         return countries
+    }
+    
+    public static func saveAllVisitsToUserDefaults(allVisits: Set<Country>) -> Void {
+        let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
+        saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
+    }
+    public static func saveAllVisitsToUserDefaults(jsonTxt: String) -> Void {        
+        let jsonData = jsonTxt.data(using: .utf8)
+        UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.set(jsonData, forKey: "allVisits")
+    }
+    
+    public static func getAllVisitsFromUserDefaults() -> Set<Country> {
+        var allVisits : Set<Country> = Set()
+        var countries : [Country]    = []
+        let encodedData = UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.object(forKey: "allVisits") as? Data
+        if let jsonEncoded = encodedData {
+            let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: jsonEncoded)
+            for jd in jsonData {
+                let country : Country? = jd.getCountry()
+                if nil != country { countries.append(country!) }
+            }
+            for country in countries { allVisits.insert(country) }
+        }
+        return allVisits
     }
     
     public static func countriesToCsv(countries: [Country]) -> String {

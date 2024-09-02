@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import CoreLocation
 import SVGView
+import WidgetKit
 
 
 struct ContentView: View {
@@ -109,6 +110,7 @@ struct ContentView: View {
             }
             .task {
                 //updateCountryFromProperties()
+                WidgetCenter.shared.reloadAllTimelines()
             }
             /*
              .onChange(of: self.locationManager.location) {
@@ -152,7 +154,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in                
                 OnTravel.AppDelegate.instance.scheduleAppProcessing()
             }
             .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
