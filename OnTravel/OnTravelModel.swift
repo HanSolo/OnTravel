@@ -19,26 +19,23 @@ public class OnTravelModel : ObservableObject {
     @Published var country            : String       = ""
     @Published var allVisits          : Set<Country> = Set<Country>()
     @Published var remainingDays      : Int          = 0
-    @Published var availableYears     : [Int]        = Helper.getAvailableYears()
+    @Published var availableYears     : [Int]        = Helper.availableYears()
     
     
     public func toJson() -> String {
-        var json : String = "["
-        
+        var jsonTxt : String = "["
         for country in self.allVisits {
-            json += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
-            json += "\"visits\":["
+            jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
+            jsonTxt += "\"visits\":["
             for date in country.visits {
-                json += "\(date.timeIntervalSince1970),"
+                jsonTxt += "\(date.timeIntervalSince1970),"
             }
-            if country.visits.count > 0 { json.removeLast() }
-            json += "]},"
+            if country.visits.count > 0 { jsonTxt.removeLast() }
+            jsonTxt += "]},"
         }
-        if self.allVisits.count > 0 { json.removeLast() }
-        
-        json += "]"
-        
-        return json
+        if self.allVisits.count > 0 { jsonTxt.removeLast() }
+        jsonTxt += "]"
+        return jsonTxt
     }
     
     public func toCSV() -> String {

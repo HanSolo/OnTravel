@@ -28,7 +28,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         if Helper.jsonExists(year: year) {
             let json : String = Helper.readJson(year: year)
             if !json.isEmpty {
-                let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                let countries : [Country] = Helper.countriesFromJson(jsonTxt: json)
                 for country in countries { self.model.allVisits.insert(country) }
                 Swift.debugPrint("Loaded allVisits from json at startup in AppDelegate")
             }

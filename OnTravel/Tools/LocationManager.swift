@@ -15,6 +15,7 @@ import MapKit
 import WidgetKit
 
 
+
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationStatus   : CLAuthorizationStatus?
     @Published var location         : CLLocation? {
@@ -38,11 +39,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     private    let locationManager  : CLLocationManager = CLLocationManager()
     private    let geocoder         : CLGeocoder        = CLGeocoder()
-    
-    
+            
+        
     override init() {
         super.init()
-          
+        
         locationManager.delegate                           = self
         locationManager.desiredAccuracy                    = kCLLocationAccuracyBest
         locationManager.distanceFilter                     = 10 // minimum movement in meter before location update
@@ -130,14 +131,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             DispatchQueue.global().async {
                                 Helper.saveJson(json: jsonTxt)
                             }
-                            Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
+                            Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                         }
                         print("Json file exists, but was empty -> saved new json file in LocationManager")
                     } else {
-                        DispatchQueue.global().async {
+                        DispatchQueue.global().async {                            
                             // Update json file
                             var allVisits : Set<Country> = Set<Country>()
-                            let countries : [Country]    = Helper.getCountriesFromJson(json: json)
+                            let countries : [Country]    = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { allVisits.insert(country) }
                             
                             let countryFound : Country? = allVisits.filter{ $0.isoInfo.name == isoInfo.name }.first
@@ -153,7 +154,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 Helper.saveJson(json: jsonTxt)
                                 print("Json file exists -> updated visits and saved json file in LocationManager")
                             }
-                            Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
+                            Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)                                                        
                         }
                     }
                 } else {
@@ -171,7 +172,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             Helper.saveJson(json: jsonTxt)
                             print("Json file did not exists -> saved new json file in LocationManager")
                         }
-                        Helper.saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
+                        Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                     }
                 }
                 //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")

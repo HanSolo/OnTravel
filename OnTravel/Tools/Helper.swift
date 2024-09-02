@@ -12,7 +12,7 @@ import SwiftUI
 public class Helper {
    
     
-    public static func getLastDayOfYear() -> Date {
+    public static func lastDayOfYear() -> Date {
         let now : Date = Date.init()
         // Get the current year
         let year : Int = Calendar.current.component(.year, from: now)
@@ -27,7 +27,7 @@ public class Helper {
             
     }
     
-    public static func getAvailableYears() -> [Int] {
+    public static func availableYears() -> [Int] {
         var yearsFound : Set<Int> = Set()
         let documentsUrl : URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         do {
@@ -47,7 +47,7 @@ public class Helper {
         return Array(yearsFound)
     }
     
-    public static func getVisitsThisMonth(allVisits: Set<Country>) -> [Country] {
+    public static func visitsThisMonth(allVisits: Set<Country>) -> [Country] {
         let now            : Date      = Date.init()
         let calendar       : Calendar  = Calendar.current
         let year           : Int       = calendar.component(.year, from: now)
@@ -55,6 +55,15 @@ public class Helper {
         let countriesFound : [Country] = allVisits.filter({ $0.getVisitsIn(month: month, year: year) > 0 })
         return countriesFound
     }
+    
+    public static func visitsThisYear(allVisits: Set<Country>) -> [Country] {
+        let now            : Date      = Date.init()
+        let calendar       : Calendar  = Calendar.current
+        let year           : Int       = calendar.component(.year, from: now)
+        let countriesFound : [Country] = allVisits.filter({ $0.getVisitsIn(year: year) > 0 })
+        return countriesFound
+    }
+    
     
     public static func jsonExists(year: Int) -> Bool {
         let fileManager : FileManager = FileManager.default
@@ -192,7 +201,7 @@ public class Helper {
         return json
     }
     
-    public static func getAllVisitsFromFile() -> Set<Country> {
+    public static func allVisitsFromFile() -> Set<Country> {
         var allVisits : Set<Country> = Set()
         let now       : Date         = Date.init()
         let year      : Int          = Calendar.current.component(.year, from: now)
@@ -201,7 +210,7 @@ public class Helper {
             if json.isEmpty {
                 print("Json file exists, but was empty in Helper")
             } else {
-                let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                let countries : [Country] = countriesFromJson(jsonTxt: json)
                 for country in countries {
                     print("\(country.isoInfo.name) found")
                     allVisits.insert(country)
@@ -232,10 +241,10 @@ public class Helper {
         return json
     }
     
-    public static func getCountriesFromJson(json: String) -> [Country] {
+    public static func countriesFromJson(jsonTxt: String) -> [Country] {
         var countries : [Country]  = []
-        if json.isEmpty { return countries }
-        let data      : Data?      = json.data(using: .utf8)
+        if jsonTxt.isEmpty { return countries }
+        let data      : Data?      = jsonTxt.data(using: .utf8)
         let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: data!)
         for jd in jsonData {
             let country : Country? = jd.getCountry()
@@ -243,45 +252,68 @@ public class Helper {
         }
         return countries
     }
-    
-    public static func saveAllVisitsToUserDefaults(allVisits: Set<Country>) -> Void {
-        let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
-        saveAllVisitsToUserDefaults(jsonTxt: jsonTxt)
+    public static func countriesToJson(countries: [Country]) -> String {
+        var jsonTxt : String = "["
+        for country in countries {
+            jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
+            jsonTxt += "\"visits\":["
+            for date in country.visits {
+                jsonTxt += "\(date.timeIntervalSince1970),"
+            }
+            if country.visits.count > 0 { jsonTxt.removeLast() }
+            jsonTxt += "]},"
+        }
+        if countries.count > 0 { jsonTxt.removeLast() }
+        jsonTxt += "]"
+        return jsonTxt
     }
-    public static func saveAllVisitsToUserDefaults(jsonTxt: String) -> Void {        
+    
+    public static func visitsThisMonthToUserDefaults(allVisits: Set<Country>) -> Void {
+        let visitsThisMonth : [Country] = visitsThisMonth(allVisits: allVisits)
+        let jsonTxt : String = countriesToJson(countries: visitsThisMonth)
+        visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
+    }
+    public static func visitsThisMonthToUserDefaults(jsonTxt: String) -> Void {
         let jsonData = jsonTxt.data(using: .utf8)
-        UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.set(jsonData, forKey: "allVisits")
+        UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.set(jsonData, forKey: Constants.VISITS_THIS_MONTH_KEY_UD)
     }
-    
-    public static func getAllVisitsFromUserDefaults() -> Set<Country> {
-        var allVisits : Set<Country> = Set()
+    public static func visitsThisMonthFromUserDefaults() -> [Country] {
         var countries : [Country]    = []
-        let encodedData = UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.object(forKey: "allVisits") as? Data
+        let encodedData = UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.object(forKey: Constants.VISITS_THIS_MONTH_KEY_UD) as? Data
         if let jsonEncoded = encodedData {
             let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: jsonEncoded)
             for jd in jsonData {
                 let country : Country? = jd.getCountry()
                 if nil != country { countries.append(country!) }
             }
-            for country in countries { allVisits.insert(country) }
         }
-        return allVisits
+        return countries
+    }
+    
+    public static func countriesFromVisits(visits: [Visit]) -> [Country] {
+        var countries : [Country] = []
+        for visit in visits {
+            let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: visit.iso!)!
+            let country : Country        = Country(isoInfo: isoInfo)
+            countries.append(country)
+        }
+        return countries
     }
     
     public static func countriesToCsv(countries: [Country]) -> String {
         let dateFormatter : DateFormatter = DateFormatter(dateFormat: "dd/MM/yyyy", calendar: Calendar.current)
-        var csv           : String        = "\"iso\",\"name\",\"date\"\n"
+        var csvTxt        : String        = "\"iso\",\"name\",\"date\"\n"
         for country in countries {
             for date in country.visits {
-                csv += "\"\(country.isoInfo.alpha2)\",\"\(country.isoInfo.name)\",\"\(dateFormatter.string(from: date))\"\n"
+                csvTxt += "\"\(country.isoInfo.alpha2)\",\"\(country.isoInfo.name)\",\"\(dateFormatter.string(from: date))\"\n"
             }
         }
-        return csv
+        return csvTxt
     }
     
     public static func createCSV(year: Int) -> String {
         let json      : String    = readJson(year: year)
-        let countries : [Country] = getCountriesFromJson(json: json)
+        let countries : [Country] = countriesFromJson(jsonTxt: json)
         let csv       : String    = countriesToCsv(countries: countries)
         return csv
     }

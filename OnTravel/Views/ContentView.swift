@@ -10,6 +10,7 @@ import Combine
 import CoreLocation
 import SVGView
 import WidgetKit
+import SwiftData
 
 
 struct ContentView: View {
@@ -24,7 +25,7 @@ struct ContentView: View {
     @State             private var isoInfo             : IsoCountryInfo?
     @State             private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
     @State             private var orientation         : UIDeviceOrientation = .unknown
-        
+            
     
     var body: some View {
         ViewThatFits {
@@ -125,7 +126,7 @@ struct ContentView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
                 // Update remaining days
-                self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.getLastDayOfYear()).day!
+                self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.lastDayOfYear()).day!
                 
                 // Update model with saved data
                 if self.model.allVisits.isEmpty {
@@ -145,7 +146,7 @@ struct ContentView: View {
                                 self.name = isoInfo.name
                             }
                         } else {
-                            let countries : [Country] = Helper.getCountriesFromJson(json: json)
+                            let countries : [Country] = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { self.model.allVisits.insert(country) }
                             Swift.debugPrint("Loaded allVisits from json in ContentView")
                         }
@@ -197,7 +198,7 @@ struct ContentView: View {
                         }
                         self.refreshCalendarView.toggle()
                         
-                        self.model.remainingDays = Calendar.current.dateComponents([.day], from: now, to: Helper.getLastDayOfYear()).day!
+                        self.model.remainingDays = Calendar.current.dateComponents([.day], from: now, to: Helper.lastDayOfYear()).day!
                         
                         DispatchQueue.global().async {
                             Helper.saveJson(json: self.model.toJson())
@@ -231,8 +232,8 @@ struct ContentView: View {
                     }
                     self.refreshCalendarView.toggle()
                     
-                    self.model.remainingDays  = Calendar.current.dateComponents([.day], from: now, to: Helper.getLastDayOfYear()).day!
-                    self.model.availableYears = Helper.getAvailableYears()
+                    self.model.remainingDays  = Calendar.current.dateComponents([.day], from: now, to: Helper.lastDayOfYear()).day!
+                    self.model.availableYears = Helper.availableYears()
                 }
             }
         }
