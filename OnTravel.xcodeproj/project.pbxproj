@@ -76,6 +76,7 @@
 		4FA9B0B52C85EBC0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
 		4FA9B0B62C85EBC0007F3B1B /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
 		4FA9B0B72C85EBC0007F3B1B /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
+		4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */; };
 		4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
 		4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
 /* End PBXBuildFile section */
@@ -153,6 +154,7 @@
 		4FA9B0952C85EA83007F3B1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FA9B0972C85EA83007F3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FA9B09E2C85EA9C007F3B1B /* OnTravelWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTravelWidgetExtension.entitlements; sourceTree = "<group>"; };
+		4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 		4FD755A82C7F2974001AB93C /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,6 +266,7 @@
 				4F4F37D82C79AFF000522ABC /* ContentView.swift */,
 				4F4F37EB2C79B1B300522ABC /* CalendarView.swift */,
 				4F6EEFFB2C7DEE8700D4D5B0 /* MapView.swift */,
+				4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */,
 				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
+				4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */,
 				4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
 				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
@@ -642,7 +646,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -665,7 +669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.5;
+				MARKETING_VERSION = 17.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -686,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -709,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.5;
+				MARKETING_VERSION = 17.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -729,7 +733,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -740,7 +744,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.5;
+				MARKETING_VERSION = 17.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -761,7 +765,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -772,7 +776,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.5;
+				MARKETING_VERSION = 17.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

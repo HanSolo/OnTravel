@@ -14,12 +14,22 @@ import MapKit
 
 public class OnTravelModel : ObservableObject {
     //@Published var networkMonitor     : NetworkMonitor = NetworkMonitor()
-    @Published var lastGeoCodeLat     : Double       = 0.0
-    @Published var lastGeoCodeLon     : Double       = 0.0
-    @Published var country            : String       = ""
-    @Published var allVisits          : Set<Country> = Set<Country>()
-    @Published var remainingDays      : Int          = 0
-    @Published var availableYears     : [Int]        = Helper.availableYears()
+    @Published var lastGeoCodeLat       : Double       = 0.0
+    @Published var lastGeoCodeLon       : Double       = 0.0
+    @Published var country              : String       = ""
+    @Published var allVisits            : Set<Country> = Set<Country>() {
+        didSet {
+            self.allVisitsWithoutHome.removeAll()
+            for country in allVisits.filter({ $0.isoInfo.alpha2 != self.homeCountry.alpha2 }) {
+                self.allVisitsWithoutHome.insert(country)
+            }
+        }
+    }
+    @Published var allVisitsWithoutHome : Set<Country>   = Set<Country>()
+    @Published var remainingDays        : Int            = 0
+    @Published var availableYears       : [Int]          = Helper.availableYears()
+    @Published var homeCountry          : IsoCountryInfo = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]
+    @Published var ignoreHomeCountry    : Bool           = Properties.instance.ignoreHomeCountry!
     
     
     public func toJson() -> String {

@@ -19,6 +19,9 @@ public class Constants {
     
     public static let VISITS_THIS_MONTH_KEY_UD   : String = "visitsThisMonth"
     
+    public static let SPEED_LIMIT                : Double = 250.0
+    public static let ALTITUDE_LIMIT             : Double = 4000.0
+    
     public static let VISITED_FILL_DARK          : Color  = Color(red: 255, green: 0, blue: 0)    
     public static let VISITED_FILL_BRIGHT        : Color  = Color(red: 200, green: 00, blue: 0)
     public static let NOT_VISITED_FILL_DARK      : Color  = Color(red: 10, green: 10, blue: 10)

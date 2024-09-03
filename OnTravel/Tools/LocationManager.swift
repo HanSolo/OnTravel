@@ -17,8 +17,8 @@ import WidgetKit
 
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var locationStatus   : CLAuthorizationStatus?
-    @Published var location         : CLLocation? {
+    @Published var locationStatus    : CLAuthorizationStatus?
+    @Published var location          : CLLocation? {
         willSet {
             objectWillChange.send()
         }
@@ -31,14 +31,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.lastLocation                 = self.location
         }
     }
-    @Published var lastLocation     : CLLocation?
-    @Published var placemark        : CLPlacemark?
-    @Published var latitude         : Double            = 0.0
-    @Published var longitude        : Double            = 0.0
-    @Published var storedProperties : Bool              = false
+    @Published var lastLocation      : CLLocation?
+    @Published var placemark         : CLPlacemark?
+    @Published var latitude          : Double            = 0.0
+    @Published var longitude         : Double            = 0.0
+    @Published var storedProperties  : Bool              = false
         
-    private    let locationManager  : CLLocationManager = CLLocationManager()
-    private    let geocoder         : CLGeocoder        = CLGeocoder()
+    private    let locationManager   : CLLocationManager = CLLocationManager()
+    private    let geocoder          : CLGeocoder        = CLGeocoder()
             
         
     override init() {
@@ -70,6 +70,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     public func startLocationUpdates() -> Void {
+        debugPrint("Start location updates")
         locationManager.allowsBackgroundLocationUpdates  = true
         locationManager.showsBackgroundLocationIndicator = true
         locationManager.requestWhenInUseAuthorization()
@@ -81,6 +82,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     public func stopLocationUpdates() -> Void {
+        debugPrint("Stop location updates")
         locationManager.allowsBackgroundLocationUpdates  = false
         locationManager.showsBackgroundLocationIndicator = false
         locationManager.stopUpdatingLocation()
@@ -100,7 +102,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {
-                Swift.debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
+                debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
                 return
             }
             if nil != placemark.isoCountryCode {
@@ -133,7 +135,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             }
                             Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                         }
-                        print("Json file exists, but was empty -> saved new json file in LocationManager")
+                        debugPrint("Json file exists, but was empty -> saved new json file in LocationManager")
                     } else {
                         DispatchQueue.global().async {                            
                             // Update json file
@@ -141,20 +143,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             let countries : [Country]    = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { allVisits.insert(country) }
                             
-                            let countryFound : Country? = allVisits.filter{ $0.isoInfo.name == isoInfo.name }.first
+                            let countryFound   : Country? = allVisits.filter{ $0.isoInfo.name == isoInfo.name }.first
+                            var needsToBeSaved : Bool = true
                             if countryFound == nil {
+                                // No country found -> create new country and save it to json file
                                 let country : Country = Country(isoInfo: isoInfo)
                                 country.addVisit(date: now)
                                 allVisits.insert(country)
                             } else {
-                                countryFound!.addVisit(date: now)
+                                // Country found, add visit to country if not already present
+                                needsToBeSaved = countryFound!.addVisit(date: now)
                             }
-                            let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
-                            DispatchQueue.global().async {
-                                Helper.saveJson(json: jsonTxt)
-                                print("Json file exists -> updated visits and saved json file in LocationManager")
+                            
+                            if needsToBeSaved {
+                                // Only save json file if needed
+                                let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
+                                DispatchQueue.global().async {
+                                    Helper.saveJson(json: jsonTxt)
+                                    debugPrint("Json file exists -> updated visits and saved json file in LocationManager")
+                                }
+                                Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)
+                            } else {
+                                debugPrint("No changes -> saving json file not needed")
                             }
-                            Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)                                                        
                         }
                     }
                 } else {
@@ -170,12 +181,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                         jsonTxt += "]}]"
                         DispatchQueue.global().async {
                             Helper.saveJson(json: jsonTxt)
-                            print("Json file did not exists -> saved new json file in LocationManager")
+                            debugPrint("Json file did not exists -> saved new json file in LocationManager")
                         }
                         Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                     }
                 }
-                //print("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")
+                //debugPrint("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")
                 self.storedProperties.toggle()
                 WidgetCenter.shared.reloadAllTimelines()
                 self.stopLocationUpdates()

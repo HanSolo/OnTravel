@@ -67,8 +67,12 @@ struct CalendarView: View {
                         if (dateHasEvents(date: date)) {
                             HStack(alignment: .center, spacing: 2) {
                                 ForEach(getFlagsInDate(date: date), id: \.self) { flag in
-                                    Text("\(flag)")
-                                        .font(.system(size: 12))
+                                    if self.model.ignoreHomeCountry && flag == self.model.homeCountry.flag {
+                                        
+                                    } else {
+                                        Text("\(flag)")
+                                            .font(.system(size: 12))
+                                    }
                                 }
                             }
                             .offset(x: CGFloat(0), y: CGFloat(12))

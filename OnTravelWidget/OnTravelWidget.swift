@@ -46,11 +46,28 @@ struct OnTravelEntry: TimelineEntry {
 
 
 struct OnTravelWidgetEntryView : View {
+    @Environment(\.widgetFamily) private var family
+    
     var entry: Provider.Entry
     
 
-    var body: some View {        
+    var body: some View {
         VStack {
+            if self.entry.countries.count < 5 {
+                HStack {
+                    Spacer()
+                    if let image = UIImage(named: AppIconProvider.appIcon()) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .frame(width: 20, height: 20)
+                    }
+                    Text("Visits this month")
+                        .font(.system(size: 24))
+                    Spacer()
+                }
+            }
             if !self.entry.countries.isEmpty {
                 let sorted = Array(self.entry.countries).sorted(by: { lhs, rhs in
                     return rhs.visits.count < lhs.visits.count

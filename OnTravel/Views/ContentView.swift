@@ -13,9 +13,9 @@ import WidgetKit
 
 
 struct ContentView: View {
-    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dismiss)    var dismiss
     @EnvironmentObject private var model               : OnTravelModel
-    @EnvironmentObject private var locationManager     : LocationManager
+    @EnvironmentObject private var locationManager     : LocationManager    
     @State             private var name                : String              = ""
     @State             private var flag                : String              = ""
     @State             private var refreshCalendarView : Bool                = false
@@ -23,7 +23,7 @@ struct ContentView: View {
     @State             private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
     @State             private var isoInfo             : IsoCountryInfo?
     @State             private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State             private var orientation         : UIDeviceOrientation = .unknown
+    @State             private var settingsVisible     : Bool                = false
             
     
     var body: some View {
@@ -31,12 +31,6 @@ struct ContentView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     HStack(spacing: 5) {
-                        Picker("Year", selection: self.$selectedYear) {
-                            ForEach(self.model.availableYears, id: \.self) { year in
-                                Text("\(year, format: .number.grouping(.never))")
-                            }
-                        }
-                        .frame(minWidth: 80)
                         Spacer()
                         HStack {
                             if let image = UIImage(named: AppIconProvider.appIcon()) {
@@ -50,14 +44,34 @@ struct ContentView: View {
                                 .font(.system(size: 20))
                         }
                         Spacer()
-                        Button(action: {
-                            self.showingExporter = true
-                        }, label: {
-                            Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 14))
-                                .foregroundColor(.accentColor)
-                        })
-                        .frame(minWidth: 80)
+                        Menu {
+                            Picker("Year for export", selection: self.$selectedYear) {
+                                ForEach(self.model.availableYears, id: \.self) { year in
+                                    Text("\(year, format: .number.grouping(.never))")
+                                }
+                            }.pickerStyle(.menu)
+                            
+                            Button(action: {
+                                self.showingExporter = true
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                    Text("Export to CSV")
+                                }
+                            })
+                            
+                            Button(action: {
+                                self.settingsVisible.toggle()
+                            }) {
+                                HStack {
+                                    Image(systemName: "gear")
+                                    Text("Settings")
+                                }
+                            }
+                                        
+                        } label: {
+                            Image(systemName: "line.3.horizontal")
+                        }
                     }
                     .padding()
                     HStack(spacing: 5) {
@@ -74,26 +88,44 @@ struct ContentView: View {
                         .font(.system(size: 14))
                     List {
                         Section {
-                            if !self.model.allVisits.isEmpty {
-                                let sorted = Array(self.model.allVisits).sorted(by: { lhs, rhs in
-                                    return rhs.visits.count < lhs.visits.count
-                                })
-                                ForEach(Array(sorted)) { country in
-                                    HStack {
-                                        Text(country.isoInfo.flag ?? "")
-                                            .font(.system(size: 24))
-                                        Text(country.isoInfo.name)
-                                            .font(.system(size: 13))
-                                        Spacer()
-                                        Text("\(country.getAllVisits())")
-                                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                            if self.model.ignoreHomeCountry {
+                                if !self.model.allVisitsWithoutHome.isEmpty {
+                                    let sorted = Array(self.model.allVisitsWithoutHome).sorted(by: { lhs, rhs in
+                                        return rhs.visits.count < lhs.visits.count
+                                    })
+                                    ForEach(Array(sorted)) { country in
+                                        HStack {
+                                            Text(country.isoInfo.flag ?? "")
+                                                .font(.system(size: 24))
+                                            Text(country.isoInfo.name)
+                                                .font(.system(size: 13))
+                                            Spacer()
+                                            Text("\(country.getAllVisits())")
+                                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                        }
+                                    }
+                                }
+                            } else {
+                                if !self.model.allVisits.isEmpty {
+                                    let sorted = Array(self.model.allVisits).sorted(by: { lhs, rhs in
+                                        return rhs.visits.count < lhs.visits.count
+                                    })
+                                    ForEach(Array(sorted)) { country in
+                                        HStack {
+                                            Text(country.isoInfo.flag ?? "")
+                                                .font(.system(size: 24))
+                                            Text(country.isoInfo.name)
+                                                .font(.system(size: 13))
+                                            Spacer()
+                                            Text("\(country.getAllVisits())")
+                                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                        }
                                     }
                                 }
                             }
                         }
                         .listSectionSeparator(.visible)
                     }
-                    //.listStyle(.plain)
                     .contentMargins(.top, 5, for: .scrollContent)
                     .contentMargins(.trailing, 5, for: .scrollContent)
                     .contentMargins(.bottom, 5, for: .scrollContent)
@@ -108,15 +140,9 @@ struct ContentView: View {
                         .frame(width: 360, height: 237)
                 }
             }
-            .task {
-                //updateCountryFromProperties()
+            .task {             
                 WidgetCenter.shared.reloadAllTimelines()
             }
-            /*
-             .onChange(of: self.locationManager.location) {
-             //updateCountry()
-             }
-             */
             .onChange(of: self.locationManager.storedProperties) {
                 updateCountryFromProperties()
             }
@@ -124,6 +150,9 @@ struct ContentView: View {
                 refreshCalendarView.toggle()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
+                // Start location updates
+                self.locationManager.startLocationUpdates()
+                
                 // Update remaining days
                 self.model.remainingDays = Calendar.current.dateComponents([.day], from: Date.init(), to: Helper.lastDayOfYear()).day!
                 
@@ -164,54 +193,16 @@ struct ContentView: View {
                 case .failure(let error):
                     Swift.debugPrint("Error: \(error.localizedDescription)")
                 }
-            }
-            .onRotate { newOrientation in
-                self.orientation = newOrientation
-            }
+            }            
+            .sheet(isPresented: self.$settingsVisible, content: {
+                SettingsView()
+            })
         }
     }
-    
-    /*
-    private func updateCountry() -> Void {
-        // Avoid update country when on a plane
-        if self.locationManager.location?.altitude ?? 0 > 4000 && self.locationManager.location?.speed ?? 0 > 250 { return }
-        locationManager.geocode() { placemark, error in
-            guard let placemark = placemark, error == nil else { return }
-            DispatchQueue.main.async {
-                if nil != placemark.isoCountryCode {                    
-                    self.isoInfo = IsoCountryCodes.find(key: placemark.isoCountryCode ?? "")
-                    if nil != isoInfo {
-                        let now : Date = Date.init()
-                        self.flag = isoInfo!.flag ?? ""
-                        self.name = isoInfo!.name
-                        
-                        let countryFound : Country? = self.model.allVisits.filter{ $0.isoInfo.name == isoInfo!.name }.first
-                        if countryFound == nil {
-                            let country : Country = Country(isoInfo: isoInfo!)
-                            country.addVisit(date: now)
-                            self.model.allVisits.insert(country)
-                            Swift.debugPrint("no country found -> add \(String(describing: isoInfo?.alpha2)) to list")
-                        } else {
-                            countryFound!.addVisit(date: now)
-                            Swift.debugPrint("country \(countryFound!.isoInfo.alpha2) to list")
-                        }
-                        self.refreshCalendarView.toggle()
-                        
-                        self.model.remainingDays = Calendar.current.dateComponents([.day], from: now, to: Helper.lastDayOfYear()).day!
-                        
-                        DispatchQueue.global().async {
-                            Helper.saveJson(json: self.model.toJson())
-                        }
-                    }
-                }
-            }
-        }
-    }
-    */
     
     private func updateCountryFromProperties() -> Void {
         // Avoid update country when on a plane
-        if self.locationManager.location?.altitude ?? 0 > 4000 && self.locationManager.location?.speed ?? 0 > 250 { return }
+        if self.locationManager.location?.altitude ?? 0 > Constants.ALTITUDE_LIMIT && self.locationManager.location?.speed ?? 0 > Constants.SPEED_LIMIT { return }
         DispatchQueue.main.async {
             let country : String = Properties.instance.country!
             let now     : Date   = Date.init(timeIntervalSince1970: Properties.instance.timestamp!)            
@@ -236,9 +227,5 @@ struct ContentView: View {
                 }
             }
         }
-    }
-    
-    private func resetVisits() -> Void {
-        self.model.allVisits.removeAll()
     }
 }

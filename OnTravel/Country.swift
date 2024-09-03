@@ -21,13 +21,15 @@ public class Country : Hashable, Identifiable {
     }
     
     
-    public func addVisit(date: Date) -> Void {
+    public func addVisit(date: Date) -> Bool {
         let calendar : Calendar = Calendar.current
         let exists   : Bool     = self.visits.filter({ calendar.component(.year, from: $0)  == calendar.component(.year, from: date) &&
                                                        calendar.component(.month, from: $0) == calendar.component(.month, from: date) &&
                                                        calendar.component(.day, from: $0)   == calendar.component(.day, from: date)}).count > 0
-        if exists { return }
+        if exists { return false }
+        
         self.visits.insert(date)
+        return true
     }
     
     
