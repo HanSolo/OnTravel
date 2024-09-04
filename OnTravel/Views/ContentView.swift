@@ -13,20 +13,23 @@ import WidgetKit
 
 
 struct ContentView: View {
-    @Environment(\.dismiss)    var dismiss
-    @EnvironmentObject private var model               : OnTravelModel
-    @EnvironmentObject private var locationManager     : LocationManager    
-    @State             private var name                : String              = ""
-    @State             private var flag                : String              = ""
-    @State             private var refreshCalendarView : Bool                = false
-    @State             private var showingExporter     : Bool                = false
-    @State             private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State             private var isoInfo             : IsoCountryInfo?
-    @State             private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State             private var settingsVisible     : Bool                = false
+    @Environment(\.dismiss)      var dismiss
+    @Environment(\.displayScale) var displayScale
+    @EnvironmentObject   private var model               : OnTravelModel
+    @EnvironmentObject   private var locationManager     : LocationManager
+    @State               private var name                : String              = ""
+    @State               private var flag                : String              = ""
+    @State               private var refreshCalendarView : Bool                = false
+    @State               private var showingExporter     : Bool                = false
+    @State               private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var isoInfo             : IsoCountryInfo?
+    @State               private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var settingsVisible     : Bool                = false
+    @State               private var chartVisible        : Bool                = false
             
     
     var body: some View {
+        
         ViewThatFits {
             ScrollView {
                 VStack(spacing: 5) {
@@ -59,6 +62,17 @@ struct ContentView: View {
                                     Text("Export to CSV")
                                 }
                             })
+                            
+                            /*
+                            Button(action: {
+                                self.chartVisible.toggle()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "chart.pie.fill")
+                                    Text("Show chart")
+                                }
+                            })
+                            */
                             
                             Button(action: {
                                 self.settingsVisible.toggle()
@@ -182,6 +196,8 @@ struct ContentView: View {
                         Swift.debugPrint("json file does not exists when try to read in ContentView")
                     }
                 }
+                
+                WidgetCenter.shared.reloadAllTimelines()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in                
                 OnTravel.AppDelegate.instance.scheduleAppProcessing()
@@ -197,8 +213,12 @@ struct ContentView: View {
             .sheet(isPresented: self.$settingsVisible, content: {
                 SettingsView()
             })
+            .sheet(isPresented: self.$chartVisible, content: {                
+                PiechartView(allVisits: self.model.allVisits)                
+            })
         }
     }
+
     
     private func updateCountryFromProperties() -> Void {
         // Avoid update country when on a plane

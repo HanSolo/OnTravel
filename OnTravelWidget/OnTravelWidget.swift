@@ -24,15 +24,16 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<OnTravelEntry>) -> ()) {
-        var entries     : [OnTravelEntry] = []
-        let currentDate : Date            = Date()
-        for minuteOffset in 0 ..< 30 {
-            let entryDate       : Date          = Calendar.current.date(byAdding: .minute, value: minuteOffset, to: currentDate)!
+        var entries : [OnTravelEntry] = []
+        let now     : Date            = Date()
+            
+        for hourOffset in 0 ..< 2 { // 2 entries an hour
+            let entryDate       : Date          = Calendar.current.date(byAdding: .hour, value: hourOffset, to: now)!
             let visitsThisMonth : [Country]     = Helper.visitsThisMonthFromUserDefaults()
             let entry           : OnTravelEntry = OnTravelEntry(date: entryDate, countries: visitsThisMonth)
             entries.append(entry)
         }
-
+        
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
@@ -52,22 +53,7 @@ struct OnTravelWidgetEntryView : View {
     
 
     var body: some View {
-        VStack {
-            if self.entry.countries.count < 5 {
-                HStack {
-                    Spacer()
-                    if let image = UIImage(named: AppIconProvider.appIcon()) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                            .frame(width: 20, height: 20)
-                    }
-                    Text("Visits this month")
-                        .font(.system(size: 24))
-                    Spacer()
-                }
-            }
+        VStack {            
             if !self.entry.countries.isEmpty {
                 let sorted = Array(self.entry.countries).sorted(by: { lhs, rhs in
                     return rhs.visits.count < lhs.visits.count

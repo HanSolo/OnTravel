@@ -162,10 +162,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                     Helper.saveJson(json: jsonTxt)
                                     debugPrint("Json file exists -> updated visits and saved json file in LocationManager")
                                 }
-                                Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)
                             } else {
                                 debugPrint("No changes -> saving json file not needed")
                             }
+                            Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)
                         }
                     }
                 } else {
