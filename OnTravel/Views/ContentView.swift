@@ -170,11 +170,11 @@ struct ContentView: View {
                 
                 // Update model with saved data
                 if self.model.allVisits.isEmpty {
-                    Swift.debugPrint("AllVisits in model is empty -> load from json file")
+                    //Swift.debugPrint("AllVisits in model is empty -> load from json file")
                     if Helper.jsonExists(year: self.year) {
                         let json : String = Helper.readJson(year: self.year)
                         if json.isEmpty {
-                            Swift.debugPrint("Json file present but empty, create new one")
+                            //Swift.debugPrint("Json file present but empty, create new one")
                             let isoCode : String = Properties.instance.country!
                             if !isoCode.isEmpty {
                                 let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
@@ -188,10 +188,10 @@ struct ContentView: View {
                         } else {
                             let countries : [Country] = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { self.model.allVisits.insert(country) }
-                            Swift.debugPrint("Loaded allVisits from json in ContentView")
+                            //Swift.debugPrint("Loaded allVisits from json in ContentView")
                         }
                     } else {
-                        Swift.debugPrint("json file does not exists when try to read in ContentView")
+                        //Swift.debugPrint("json file does not exists when try to read in ContentView")
                     }
                 }
                 

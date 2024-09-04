@@ -28,7 +28,7 @@ struct PiechartView: View {
                 .buttonStyle(.bordered)
                 Spacer()
                 VStack(alignment: .center) {
-                    Text("On travel this year")
+                    Text("Days on travel this year")
                         .font(.system(size: 18))
                         .foregroundStyle(.primary)                    
                 }
@@ -46,27 +46,30 @@ struct PiechartView: View {
             }
             .padding()
                         
-            Chart(self.data) { d in
-                SectorMark(
-                    angle       : .value(Text(verbatim: d.country), d.visits),
-                    innerRadius : .ratio(0.6),
-                    angularInset: 2.0
-                )
-                .foregroundStyle(by: .value(Text(verbatim: d.country), d.country))
-                .cornerRadius(10.0)
-                .annotation(position: .overlay, alignment: .center) {
-                    Text("\(d.visits)")
-                        .font(.headline)
-                        .foregroundStyle(.white)
+            ZStack(alignment: .center) {
+                Chart(self.data) { d in
+                    SectorMark(
+                        angle       : .value(Text(verbatim: d.country), d.visits),
+                        innerRadius : .ratio(0.6),
+                        angularInset: 2.0
+                    )
+                    .foregroundStyle(by: .value(Text(verbatim: d.country), d.country))
+                    .cornerRadius(10.0)
+                    .annotation(position: .overlay, alignment: .center) {
+                        Text("\(d.visits)")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                    }
                 }
+                Text("\(Calendar.current.component(.year, from: Date.init()), format: .number.grouping(.never))")
+                    .font(.system(size: 24))
+                    .foregroundStyle(.primary)
             }
             
             Spacer()
         }
         .padding()
-        .task {
-            //let totalVisits : Double      = Double(self.model.allVisits.map( {$0.visits.count }).reduce(0, +))
-            debugPrint("Home country: \(self.model.homeCountry)")
+        .task {            
             for country in self.model.allVisits {
                 self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count))
             }
