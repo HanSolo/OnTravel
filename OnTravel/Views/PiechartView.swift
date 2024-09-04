@@ -12,18 +12,9 @@ import Charts
 
 struct PiechartView: View {
     @Environment(\.dismiss) private var dismiss
-    @State                  private var data: [VisitData] = []
-    
-    @State var allVisits : Set<Country> {
-        didSet {
-            print("check")
-            let totalVisits : Double = Double(self.allVisits.map( {$0.visits.count }).reduce(0, +))
-            for country in self.allVisits {
-                self.data.append(VisitData(country: country.isoInfo.name, visits: Double(country.visits.count) / totalVisits))
-            }
-        }
-    }
-        
+    @EnvironmentObject      private var model : OnTravelModel
+    @State                  private var data  : [VisitData] = []
+            
     
     var body: some View {        
         VStack {
@@ -36,21 +27,35 @@ struct PiechartView: View {
                 }
                 .buttonStyle(.bordered)
                 Spacer()
-                Text("Visits this year")
+                VStack(alignment: .center) {
+                    Text("On travel this year")
+                        .font(.system(size: 18))
+                        .foregroundStyle(.primary)                    
+                }
                 Spacer()
             }
             .padding()
-            
-            Chart(data) { data in
+                                             
+            VStack(alignment: .center, spacing: 5) {
+                Text("On travel recorded: \(self.model.totalDaysOnTravel()) \(self.model.totalDaysOnTravel() > 1 ? "days" : "day")")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.primary)
+                Text("In foreign countries: \(self.model.daysOnTravelOutsideHomeCountry()) \(self.model.totalDaysOnTravel() > 1 ? "days" : "day")")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.primary)
+            }
+            .padding()
+                        
+            Chart(self.data) { d in
                 SectorMark(
-                    angle       : .value(Text(verbatim: data.country), data.visits),
+                    angle       : .value(Text(verbatim: d.country), d.visits),
                     innerRadius : .ratio(0.6),
                     angularInset: 2.0
                 )
-                .foregroundStyle(by: .value(Text(verbatim: data.country), data.country))
+                .foregroundStyle(by: .value(Text(verbatim: d.country), d.country))
                 .cornerRadius(10.0)
                 .annotation(position: .overlay, alignment: .center) {
-                    Text("\(data.visits)")
+                    Text("\(d.visits)")
                         .font(.headline)
                         .foregroundStyle(.white)
                 }
@@ -58,11 +63,19 @@ struct PiechartView: View {
             
             Spacer()
         }
+        .padding()
+        .task {
+            //let totalVisits : Double      = Double(self.model.allVisits.map( {$0.visits.count }).reduce(0, +))
+            debugPrint("Home country: \(self.model.homeCountry)")
+            for country in self.model.allVisits {
+                self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count))
+            }
+        }
     }
 }
 
 struct VisitData: Identifiable {
     let id      : UUID = UUID()
     let country : String
-    let visits  : Double
+    let visits  : Int
 }

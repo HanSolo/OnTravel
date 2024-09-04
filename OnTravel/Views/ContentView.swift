@@ -62,8 +62,7 @@ struct ContentView: View {
                                     Text("Export to CSV")
                                 }
                             })
-                            
-                            /*
+                                                        
                             Button(action: {
                                 self.chartVisible.toggle()
                             }, label: {
@@ -71,8 +70,7 @@ struct ContentView: View {
                                     Image(systemName: "chart.pie.fill")
                                     Text("Show chart")
                                 }
-                            })
-                            */
+                            })                            
                             
                             Button(action: {
                                 self.settingsVisible.toggle()
@@ -214,7 +212,7 @@ struct ContentView: View {
                 SettingsView()
             })
             .sheet(isPresented: self.$chartVisible, content: {                
-                PiechartView(allVisits: self.model.allVisits)                
+                PiechartView()
             })
         }
     }

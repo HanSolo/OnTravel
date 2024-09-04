@@ -20,6 +20,7 @@ struct SettingsView: View {
         VStack {
             HStack {
                 Button(action: {
+                    self.model.updateVisitsWithoutHome()
                     dismiss()
                 }) {
                     Image(systemName: "arrow.left")

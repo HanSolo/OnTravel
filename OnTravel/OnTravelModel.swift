@@ -32,6 +32,23 @@ public class OnTravelModel : ObservableObject {
     @Published var ignoreHomeCountry    : Bool           = Properties.instance.ignoreHomeCountry!
     
     
+    
+    public func totalDaysOnTravel() -> Int {
+        return self.allVisits.map( {$0.visits.count }).reduce(0, +)
+    }
+    
+    public func daysOnTravelOutsideHomeCountry() -> Int {
+        return self.allVisitsWithoutHome.map( {$0.visits.count }).reduce(0, +)
+    }
+    
+    public func updateVisitsWithoutHome() -> Void {
+        self.homeCountry = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]
+        self.allVisitsWithoutHome.removeAll()
+        for country in allVisits.filter({ $0.isoInfo.alpha2 != self.homeCountry.alpha2 }) {
+            self.allVisitsWithoutHome.insert(country)
+        }        
+    }
+    
     public func toJson() -> String {
         var jsonTxt : String = "["
         for country in self.allVisits {
