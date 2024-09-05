@@ -34,6 +34,9 @@ struct ContentView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     HStack(spacing: 5) {
+                        Image(systemName: "wifi.slash")
+                            .font(.system(size: 18))
+                            .opacity(self.locationManager.networkMonitor.online ? 0.0 : 1.0)
                         Spacer()
                         HStack {
                             if let image = UIImage(named: AppIconProvider.appIcon()) {

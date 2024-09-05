@@ -102,7 +102,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.location = currentLocation
         
         // Only update if online
-        if !self.networkMonitor.isConnectedToInternet { return }
+        if !self.networkMonitor.online { return }
                 
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {

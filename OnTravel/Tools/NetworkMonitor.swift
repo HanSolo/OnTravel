@@ -7,21 +7,21 @@
 
 import Foundation
 import Network
+import SwiftUI
 
-import Foundation
-import Network
 
 class NetworkMonitor: ObservableObject {
+    @State public var online : Bool = false
+    
     private let networkMonitor = NWPathMonitor()
 
     var isConnected : Bool  = false {
         didSet {
             Task {
-                self.isConnectedToInternet = await RestController.isConnected()
+                self.online = await RestController.isConnected()
             }
         }
     }
-    var isConnectedToInternet : Bool = false
 
     
     init() {
