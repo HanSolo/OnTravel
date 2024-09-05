@@ -7,12 +7,8 @@
 
 import Foundation
 import Network
-import SwiftUI
-
 
 class NetworkMonitor: ObservableObject {
-    @State public var online : Bool = false
-    
     private let networkMonitor = NWPathMonitor()
 
     var isConnected : Bool  = false {
@@ -22,6 +18,7 @@ class NetworkMonitor: ObservableObject {
             }
         }
     }
+    var online : Bool = false
 
     
     init() {
@@ -36,4 +33,5 @@ class NetworkMonitor: ObservableObject {
         networkMonitor.start(queue: DispatchQueue.global())
     }
 }
+
 

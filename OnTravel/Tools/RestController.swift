@@ -34,5 +34,5 @@ class RestController {
         } catch {
             return false
         }
-    }
+    }        
 }
