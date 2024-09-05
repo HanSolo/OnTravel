@@ -24,12 +24,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             objectWillChange.send()
         }
         didSet {
-            self.latitude                     = location?.coordinate.latitude  ?? 0.0
-            self.longitude                    = location?.coordinate.longitude ?? 0.0
-            Properties.instance.lastLat       = self.latitude
-            Properties.instance.lastLon       = self.longitude
+            self.latitude                 = location?.coordinate.latitude  ?? 0.0
+            self.longitude                = location?.coordinate.longitude ?? 0.0
+            Properties.instance.lastLat   = self.latitude
+            Properties.instance.lastLon   = self.longitude
             Properties.instance.timestamp = Date().timeIntervalSince1970
-            self.lastLocation                 = self.location
+            self.lastLocation             = self.location
         }
     }
     @Published var lastLocation      : CLLocation?
@@ -71,6 +71,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     public func startLocationUpdates() -> Void {
+        // Start location update only if online
+        if !self.networkMonitor.online { return }
+        
         debugPrint("Start location updates")
         locationManager.allowsBackgroundLocationUpdates  = true
         locationManager.showsBackgroundLocationIndicator = true
@@ -100,10 +103,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        
         guard let currentLocation = locations.first else { return }
         self.location = currentLocation
-        
-        // Only update if online
-        if !self.networkMonitor.online { return }
-                
+                                
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {
                 debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
