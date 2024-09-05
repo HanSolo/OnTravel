@@ -83,6 +83,7 @@ struct ContentView: View {
                                         
                         } label: {
                             Image(systemName: "line.3.horizontal")
+                                .font(.system(size: 24))
                         }
                     }
                     .padding()
@@ -219,8 +220,8 @@ struct ContentView: View {
 
     
     private func updateCountryFromProperties() -> Void {
-        // Avoid update country when on a plane
-        if self.locationManager.location?.altitude ?? 0 > Constants.ALTITUDE_LIMIT && self.locationManager.location?.speed ?? 0 > Constants.SPEED_LIMIT { return }
+        // Avoid update country when altitude > 6000m or speed > 300 kph (usually when on a plane)
+        if self.locationManager.location?.altitude ?? 0 > Constants.ALTITUDE_LIMIT || self.locationManager.location?.speed ?? 0 > Constants.SPEED_LIMIT { return }
         DispatchQueue.main.async {
             let country : String = Properties.instance.country!
             let now     : Date   = Date.init(timeIntervalSince1970: Properties.instance.timestamp!)            

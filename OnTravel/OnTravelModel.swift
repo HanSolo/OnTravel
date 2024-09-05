@@ -13,7 +13,6 @@ import MapKit
 
 
 public class OnTravelModel : ObservableObject {
-    //@Published var networkMonitor     : NetworkMonitor = NetworkMonitor()
     @Published var lastGeoCodeLat       : Double       = 0.0
     @Published var lastGeoCodeLon       : Double       = 0.0
     @Published var country              : String       = ""

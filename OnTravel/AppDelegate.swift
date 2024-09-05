@@ -41,25 +41,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         return true
     }
     
-    /*
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        Swift.debugPrint("applicationDidBecomeActive")
-        self.locationManager.startLocationUpdates()
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        Swift.debugPrint("applicationDidEnterBackground")
-        self.locationManager.stopLocationUpdates()
-        scheduleAppProcessing()
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        Swift.debugPrint("applicationWillTerminate")
-        self.locationManager.stopLocationUpdates()
-        scheduleAppProcessing()
-    }
-    */
-    
     
     private func registerBackgroundTasks() -> Void {
         Swift.debugPrint("registerBackgroundTasks")

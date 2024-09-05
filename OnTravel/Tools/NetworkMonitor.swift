@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+import Foundation
+import Network
+
 class NetworkMonitor: ObservableObject {
     private let networkMonitor = NWPathMonitor()
 

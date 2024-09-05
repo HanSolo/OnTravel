@@ -17,6 +17,7 @@ import WidgetKit
 
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var networkMonitor    : NetworkMonitor    = NetworkMonitor()
     @Published var locationStatus    : CLAuthorizationStatus?
     @Published var location          : CLLocation? {
         willSet {
@@ -100,6 +101,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let currentLocation = locations.first else { return }
         self.location = currentLocation
         
+        // Only update if online
+        if !self.networkMonitor.isConnectedToInternet { return }
+                
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {
                 debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
