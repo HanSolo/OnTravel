@@ -82,7 +82,16 @@ struct ContentView: View {
                                     Text("Export to CSV")
                                 }
                             })
-                                                        
+                            
+                            Button(action: {
+                                self.globeVisible.toggle()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "globe.europe.africa")
+                                    Text("Show globe")
+                                }
+                            })
+                            
                             Button(action: {
                                 self.chartVisible.toggle()
                             }, label: {
@@ -170,10 +179,7 @@ struct ContentView: View {
                         .id(self.refreshCalendarView)
                     
                     MapView()
-                        .frame(width: 360, height: 237)                    
-                        .onTapGesture {
-                            self.globeVisible = true
-                        }
+                        .frame(width: 360, height: 237)                        
                 }
             }
             .task {             
