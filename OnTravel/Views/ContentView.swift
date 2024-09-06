@@ -26,6 +26,7 @@ struct ContentView: View {
     @State               private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
     @State               private var settingsVisible     : Bool                = false
     @State               private var chartVisible        : Bool                = false
+    @State               private var globeVisible        : Bool                = false
             
     
     var body: some View {
@@ -169,7 +170,10 @@ struct ContentView: View {
                         .id(self.refreshCalendarView)
                     
                     MapView()
-                        .frame(width: 360, height: 237)
+                        .frame(width: 360, height: 237)                    
+                        .onTapGesture {
+                            self.globeVisible = true
+                        }
                 }
             }
             .task {             
@@ -233,6 +237,9 @@ struct ContentView: View {
             })
             .sheet(isPresented: self.$chartVisible, content: {                
                 PiechartView()
+            })
+            .sheet(isPresented: self.$globeVisible, content: {
+                GlobeView()
             })
         }
     }

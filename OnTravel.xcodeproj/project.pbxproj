@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
 		4F1E3C172C81E42A00418609 /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4F1E3C162C81E42A00418609 /* SVGView */; };
+		4F34E0DC2C8AED5600C1F45E /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */; };
 		4F38B0E12C7E42D10013F647 /* world1.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4F38B0E02C7E42D10013F647 /* world1.svg */; };
 		4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */; };
 		4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D82C79AFF000522ABC /* ContentView.swift */; };
@@ -108,6 +109,7 @@
 
 /* Begin PBXFileReference section */
 		4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+documentsDirectory.swift"; sourceTree = "<group>"; };
+		4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
 		4F38B0E02C7E42D10013F647 /* world1.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world1.svg; sourceTree = "<group>"; };
 		4F4F37D32C79AFF000522ABC /* OnTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelApp.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				4F6EEFFB2C7DEE8700D4D5B0 /* MapView.swift */,
 				4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */,
 				4FA749822C87739E000A2344 /* PiechartView.swift */,
+				4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */,
 				4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */,
 				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
+				4F34E0DC2C8AED5600C1F45E /* GlobeView.swift in Sources */,
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
 				4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */,
