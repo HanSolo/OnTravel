@@ -72,7 +72,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     public func startLocationUpdates() -> Void {
         // Start location update only if online
-        if !self.networkMonitor.online { return }
+        if !self.networkMonitor.online {
+            debugPrint("Offline -> no location updates")
+            return
+        }
         
         debugPrint("Start location updates")
         locationManager.allowsBackgroundLocationUpdates  = true

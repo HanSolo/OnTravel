@@ -34,8 +34,24 @@ struct ContentView: View {
             ScrollView {
                 VStack(spacing: 5) {
                     HStack(spacing: 5) {
-                        Image(systemName: "wifi.slash")
-                            .font(.system(size: 18))
+                        Text("OFFLINE")
+                            .font(.system(size: 8))
+                            .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
+                            .foregroundStyle(.white)
+                            .background(
+                                ZStack {
+                                    RoundedRectangle(
+                                        cornerRadius: 5,
+                                        style       : .continuous
+                                    )
+                                    .fill(.red)
+                                    RoundedRectangle(
+                                        cornerRadius: 5,
+                                        style       : .continuous
+                                    )
+                                    .stroke(.red, lineWidth: 1)
+                                }
+                            )
                             .opacity(self.locationManager.networkMonitor.online ? 0.0 : 1.0)
                         Spacer()
                         HStack {
@@ -43,7 +59,7 @@ struct ContentView: View {
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                                    .clipShape(RoundedRectangle(cornerRadius: 3))
                                     .frame(width: 20, height: 20)
                             }
                             Text("On Travel")
