@@ -51,6 +51,7 @@ struct GlobeView: View {
                                 ZStack {                                    
                                     RoundedRectangle(cornerRadius: 5)
                                         .fill(Color.blue)
+                                        .stroke(Color.white, lineWidth: 2)
                                 }
                             }
                         }

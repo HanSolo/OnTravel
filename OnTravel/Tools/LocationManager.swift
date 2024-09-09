@@ -71,11 +71,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     public func startLocationUpdates() -> Void {
-        // Start location update only if online
+        /* Start location update only if online
         if !self.networkMonitor.online {
             debugPrint("Offline -> no location updates")
             return
         }
+        */
         
         debugPrint("Start location updates")
         locationManager.allowsBackgroundLocationUpdates  = true
@@ -107,12 +108,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let currentLocation = locations.first else { return }
         self.location = currentLocation
                                 
+        // Avoid update country when altitude > 6000m or speed > 300 kph (usually when on a plane)
+        if self.location?.altitude ?? 0 > Constants.ALTITUDE_LIMIT || self.location?.speed ?? 0 > Constants.SPEED_LIMIT {
+            self.stopLocationUpdates()
+            return
+        }
+        
         self.geocode() { placemark, error in
             guard let placemark = placemark, error == nil else {
                 debugPrint("Error while geocding location. Error: \(String(describing: error?.localizedDescription))")
                 return
             }
             if nil != placemark.isoCountryCode {
+                self.placemark = placemark
+                
                 let now            : Date     = Date.init()
                 let year           : Int      = Calendar.current.component(.year, from: now)
                 let isoCountryCode : String   = placemark.isoCountryCode ?? ""
