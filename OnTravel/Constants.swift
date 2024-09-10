@@ -19,6 +19,9 @@ public class Constants {
     
     public static let VISITS_THIS_MONTH_KEY_UD   : String = "visitsThisMonth"
     
+    public static let CURRENCIES_KEY_UD          : String = "currencies"
+    public static let OPEN_EXCHANGE_RATE_API_URL : String = "https://open.er-api.com/v6/latest/"    
+    
     public static let SPEED_LIMIT                : Double = 300.0
     public static let ALTITUDE_LIMIT             : Double = 6000.0
     
@@ -26,4 +29,7 @@ public class Constants {
     public static let VISITED_FILL_BRIGHT        : Color  = Color(red: 200, green: 00, blue: 0)
     public static let NOT_VISITED_FILL_DARK      : Color  = Color(red: 10, green: 10, blue: 10)
     public static let NOT_VISITED_FILL_BRIGHT    : Color  = Color(red: 100, green: 100, blue: 100)    
+    
+    public static let SECONDS_24H                : Double = 86_400
+    public static let SECONDS_48H                : Double = 172_800
 }

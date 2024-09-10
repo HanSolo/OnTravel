@@ -124,6 +124,13 @@ struct ContentView: View {
                             .font(.system(size: 20))
                         Spacer()
                     }
+                    if self.isoInfo != nil {
+                        let text : String = Helper.getCurrencyRateString(homeCountry: self.model.homeCountry, currentCountry: self.isoInfo!)
+                        if !text.isEmpty {
+                            Text("\(text)")
+                                .font(.system(size: 12))
+                        }
+                    }
                     Text("You've been to \(self.model.allVisits.count) \(self.model.allVisits.count < 2 ? "country" : "countries") in \(self.year, format: .number.grouping(.never))")
                         .font(.system(size: 16))
                     Text("(\(self.model.remainingDays) remaining days)")
@@ -183,7 +190,7 @@ struct ContentView: View {
                 }
             }
             .task {             
-                WidgetCenter.shared.reloadAllTimelines()
+                WidgetCenter.shared.reloadAllTimelines()                
             }
             .onChange(of: self.locationManager.storedProperties) {
                 updateCountryFromProperties()

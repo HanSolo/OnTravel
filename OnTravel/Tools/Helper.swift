@@ -318,4 +318,42 @@ public class Helper {
         return csv
     }
     
+    public static func updateCurrencies(forceUpdate: Bool? = false) -> Void {
+        Task {
+            if forceUpdate! {
+                let rates : [String:Double] = await RestController.getCurrencies()
+                storeCurrenciesToUserDefaults(currencies: rates)
+                debugPrint("Forced currencies updated and stored to properties")
+            } else {
+                let lastUpdate : Double = Properties.instance.lastCurrencyUpdate!
+                let now        : Double = Date.init().timeIntervalSince1970
+                let delta      : Double = now - lastUpdate
+                if delta > Constants.SECONDS_24H {
+                    let rates : [String:Double] = await RestController.getCurrencies()
+                    storeCurrenciesToUserDefaults(currencies: rates)
+                    debugPrint("Currencies updated and stored to properties")
+                }
+            }
+        }
+    }
+    
+    public static func getCurrencyRateString(homeCountry: IsoCountryInfo, currentCountry: IsoCountryInfo) -> String {
+        if homeCountry.currency == currentCountry.currency { return "" }
+        let currency   : String          = currentCountry.currency
+        let currencies : [String:Double] = Helper.readCurrenciesFromUserDefaults()
+        if currencies.isEmpty { return "" }
+        let rate       : Double          = currencies[currency] ?? 1
+        return "10 \(currency) -> \(String(format: "%.2f", (10.0 / rate))) \(homeCountry.currency)"
+    }
+    
+    public static func storeCurrenciesToUserDefaults(currencies: [String:Double]) -> Void {
+        let userDefaults = UserDefaults.standard        
+        userDefaults.set(currencies, forKey: Constants.CURRENCIES_KEY_UD)
+    }
+    
+    public static func readCurrenciesFromUserDefaults() -> [String:Double] {
+        let userDefaults = UserDefaults.standard
+        return (userDefaults.object(forKey: Constants.CURRENCIES_KEY_UD) as? [String:Double]) ?? [:]
+    }
+    
 }

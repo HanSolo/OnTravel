@@ -191,6 +191,10 @@
 		4F34E3B22C8B160500C1F45E /* MKMultiPoint+coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E3B12C8B160500C1F45E /* MKMultiPoint+coordinates.swift */; };
 		4F34E3B42C8B247400C1F45E /* CLLocationCoordinate2D+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E3B32C8B247400C1F45E /* CLLocationCoordinate2D+Hashable.swift */; };
 		4F38B0E12C7E42D10013F647 /* world1.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4F38B0E02C7E42D10013F647 /* world1.svg */; };
+		4F3D75A92C9026910010EE0A /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D75A82C9026910010EE0A /* Rates.swift */; };
+		4F3D75AD2C902CDA0010EE0A /* ExchangeRateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */; };
+		4F3D75AE2C9032B30010EE0A /* ExchangeRateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */; };
+		4F3D75AF2C9032B60010EE0A /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D75A82C9026910010EE0A /* Rates.swift */; };
 		4F4F37D72C79AFF000522ABC /* OnTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */; };
 		4F4F37D92C79AFF000522ABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F37D82C79AFF000522ABC /* ContentView.swift */; };
 		4F4F37DB2C79AFF100522ABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F37DA2C79AFF100522ABC /* Assets.xcassets */; };
@@ -471,6 +475,8 @@
 		4F34E3B12C8B160500C1F45E /* MKMultiPoint+coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMultiPoint+coordinates.swift"; sourceTree = "<group>"; };
 		4F34E3B32C8B247400C1F45E /* CLLocationCoordinate2D+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Hashable.swift"; sourceTree = "<group>"; };
 		4F38B0E02C7E42D10013F647 /* world1.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = world1.svg; sourceTree = "<group>"; };
+		4F3D75A82C9026910010EE0A /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; };
+		4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateData.swift; sourceTree = "<group>"; };
 		4F4F37D32C79AFF000522ABC /* OnTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4F37D62C79AFF000522ABC /* OnTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTravelApp.swift; sourceTree = "<group>"; };
 		4F4F37D82C79AFF000522ABC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -836,6 +842,8 @@
 				4F74382A2C7C5CFF006DDB8B /* TextFile.swift */,
 				4F7858A02C7CE87900462952 /* AppIconProvider.swift */,
 				4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */,
+				4F3D75A82C9026910010EE0A /* Rates.swift */,
+				4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1187,11 +1195,13 @@
 				4F34E3B42C8B247400C1F45E /* CLLocationCoordinate2D+Hashable.swift in Sources */,
 				4FA9B0842C85C5D8007F3B1B /* Visit.swift in Sources */,
 				4F7438302C7C840A006DDB8B /* EventListenerAction.swift in Sources */,
+				4F3D75AD2C902CDA0010EE0A /* ExchangeRateData.swift in Sources */,
 				4F4F37F22C79B1B300522ABC /* ProcessingOperation.swift in Sources */,
 				4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */,
 				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
 				4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */,
+				4F3D75A92C9026910010EE0A /* Rates.swift in Sources */,
 				4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
 				4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */,
@@ -1227,6 +1237,7 @@
 				4FA9B0942C85EA82007F3B1B /* OnTravelWidget.swift in Sources */,
 				4FA9B09F2C85EBA9007F3B1B /* OnTravelModel.swift in Sources */,
 				4FA9B0A02C85EBA9007F3B1B /* IsoCountryInfo.swift in Sources */,
+				4F3D75AF2C9032B60010EE0A /* Rates.swift in Sources */,
 				4FA9B0A12C85EBA9007F3B1B /* IsoCountryCodes.swift in Sources */,
 				4FA9B0A22C85EBA9007F3B1B /* Constants.swift in Sources */,
 				4FA9B0A62C85EBB5007F3B1B /* LocationManager.swift in Sources */,
@@ -1236,6 +1247,7 @@
 				4FA9B0AA2C85EBB5007F3B1B /* JsonData.swift in Sources */,
 				4FA9B0AB2C85EBB5007F3B1B /* AppIconProvider.swift in Sources */,
 				4FA9B0AC2C85EBB5007F3B1B /* DeviceRotationViewModifier.swift in Sources */,
+				4F3D75AE2C9032B30010EE0A /* ExchangeRateData.swift in Sources */,
 				4FA9B0AD2C85EBB5007F3B1B /* NetworkMonitor.swift in Sources */,
 				4FA9B0A32C85EBA9007F3B1B /* Country.swift in Sources */,
 				4FA9B0A42C85EBA9007F3B1B /* ProcessingOperation.swift in Sources */,

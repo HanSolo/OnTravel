@@ -177,6 +177,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 DispatchQueue.global().async {
                                     Helper.saveJson(json: jsonTxt)
                                     debugPrint("Json file exists -> updated visits and saved json file in LocationManager")
+                                    Helper.updateCurrencies(forceUpdate: false)
                                 }
                             } else {
                                 debugPrint("No changes -> saving json file not needed")
@@ -198,6 +199,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                         DispatchQueue.global().async {
                             Helper.saveJson(json: jsonTxt)
                             debugPrint("Json file did not exists -> saved new json file in LocationManager")
+                            Helper.updateCurrencies(forceUpdate: false)
                         }
                         Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                     }

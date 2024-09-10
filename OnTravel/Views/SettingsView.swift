@@ -21,6 +21,7 @@ struct SettingsView: View {
             HStack {
                 Button(action: {
                     self.model.updateVisitsWithoutHome()
+                    Helper.updateCurrencies(forceUpdate: true)
                     dismiss()
                 }) {
                     Image(systemName: "arrow.left")

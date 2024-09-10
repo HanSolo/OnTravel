@@ -12,14 +12,15 @@ import os.log
 
 
 extension Key {
-    static let lastLat          : Key = "lastLat"
-    static let lastLon          : Key = "lastLon"
-    static let timestamp        : Key = "timestamp"
-    static let country          : Key = "country"
-    static let flag             : Key = "flag"
-    static let jsonBookmark     : Key = "jsonBookmark"
-    static let homeCountryIndex : Key = "homeCountryIndex"
-    static let ignoreHomeCountry: Key = "ignoreHomeCountry"
+    static let lastLat            : Key = "lastLat"
+    static let lastLon            : Key = "lastLon"
+    static let timestamp          : Key = "timestamp"
+    static let country            : Key = "country"
+    static let flag               : Key = "flag"
+    static let jsonBookmark       : Key = "jsonBookmark"
+    static let homeCountryIndex   : Key = "homeCountryIndex"
+    static let ignoreHomeCountry  : Key = "ignoreHomeCountry"
+    static let lastCurrencyUpdate : Key = "lastCurrencyUpdate" 
 }
 
 
@@ -53,5 +54,8 @@ public struct Properties {
     @UserDefault(key: .ignoreHomeCountry, defaultValue: false)
     var ignoreHomeCountry: Bool?
     
+    @UserDefault(key: .lastCurrencyUpdate, defaultValue: Date.init().timeIntervalSince1970 - Constants.SECONDS_48H)
+    var lastCurrencyUpdate: Double?
+        
     private init() {}
 }
