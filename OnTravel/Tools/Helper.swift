@@ -355,5 +355,4 @@ public class Helper {
         let userDefaults = UserDefaults.standard
         return (userDefaults.object(forKey: Constants.CURRENCIES_KEY_UD) as? [String:Double]) ?? [:]
     }
-    
 }
