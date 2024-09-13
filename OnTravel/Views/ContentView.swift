@@ -32,161 +32,161 @@ struct ContentView: View {
     var body: some View {
         
         ViewThatFits {
-            ScrollView {
-                VStack(spacing: 5) {
-                    HStack(spacing: 5) {
-                        Text("OFFLINE")
-                            .font(.system(size: 8))
-                            .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
-                            .foregroundStyle(.white)
-                            .background(
-                                ZStack {
-                                    RoundedRectangle(
-                                        cornerRadius: 5,
-                                        style       : .continuous
-                                    )
-                                    .fill(.red)
-                                    RoundedRectangle(
-                                        cornerRadius: 5,
-                                        style       : .continuous
-                                    )
-                                    .stroke(.red, lineWidth: 1)
-                                }
-                            )
-                            .opacity(self.locationManager.networkMonitor.online ? 0.0 : 1.0)
-                        Spacer()
-                        HStack {
-                            if let image = UIImage(named: AppIconProvider.appIcon()) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 3))
-                                    .frame(width: 20, height: 20)
+            VStack(spacing: 5) {
+                HStack(spacing: 5) {
+                    Text("OFFLINE")
+                        .font(.system(size: 8))
+                        .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
+                        .foregroundStyle(.white)
+                        .background(
+                            ZStack {
+                                RoundedRectangle(
+                                    cornerRadius: 5,
+                                    style       : .continuous
+                                )
+                                .fill(.red)
+                                RoundedRectangle(
+                                    cornerRadius: 5,
+                                    style       : .continuous
+                                )
+                                .stroke(.red, lineWidth: 1)
                             }
-                            Text("On Travel")
-                                .font(.system(size: 20))
+                        )
+                        .opacity(self.locationManager.networkMonitor.online ? 0.0 : 1.0)
+                    Spacer()
+                    HStack {
+                        if let image = UIImage(named: AppIconProvider.appIcon()) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 3))
+                                .frame(width: 20, height: 20)
                         }
-                        Spacer()
-                        Menu {
-                            Picker("Year for export", selection: self.$selectedYear) {
-                                ForEach(self.model.availableYears, id: \.self) { year in
-                                    Text("\(year, format: .number.grouping(.never))")
-                                }
-                            }.pickerStyle(.menu)
-                            
-                            Button(action: {
-                                self.showingExporter = true
-                            }, label: {
-                                HStack {
-                                    Image(systemName: "square.and.arrow.up")
-                                    Text("Export to CSV")
-                                }
-                            })
-                            
-                            Button(action: {
-                                self.globeVisible.toggle()
-                            }, label: {
-                                HStack {
-                                    Image(systemName: "globe.europe.africa")
-                                    Text("Show globe")
-                                }
-                            })
-                            
-                            Button(action: {
-                                self.chartVisible.toggle()
-                            }, label: {
-                                HStack {
-                                    Image(systemName: "chart.pie.fill")
-                                    Text("Show chart")
-                                }
-                            })                            
-                            
-                            Button(action: {
-                                self.settingsVisible.toggle()
-                            }) {
-                                HStack {
-                                    Image(systemName: "gear")
-                                    Text("Settings")
-                                }
-                            }
-                                        
-                        } label: {
-                            Image(systemName: "line.3.horizontal")
-                                .font(.system(size: 24))
-                        }
-                    }
-                    .padding()
-                    HStack(spacing: 5) {
-                        Spacer()
-                        Text(self.flag)
-                            .font(.system(size: 36))
-                        Text(self.name)
+                        Text("On Travel")
                             .font(.system(size: 20))
-                        Spacer()
                     }
-                    if self.isoInfo != nil {
-                        let text : String = Helper.getCurrencyRateString(homeCountry: self.model.homeCountry, currentCountry: self.isoInfo!)
-                        if !text.isEmpty {
-                            Text("\(text)")
-                                .font(.system(size: 12))
+                    Spacer()
+                    Menu {
+                        Picker("Year for export", selection: self.$selectedYear) {
+                            ForEach(self.model.availableYears, id: \.self) { year in
+                                Text("\(year, format: .number.grouping(.never))")
+                            }
+                        }.pickerStyle(.menu)
+                        
+                        Button(action: {
+                            self.showingExporter = true
+                        }, label: {
+                            HStack {
+                                Image(systemName: "square.and.arrow.up")
+                                Text("Export to CSV")
+                            }
+                        })
+                        
+                        Button(action: {
+                            self.globeVisible.toggle()
+                        }, label: {
+                            HStack {
+                                Image(systemName: "globe.europe.africa")
+                                Text("Show globe")
+                            }
+                        })
+                        
+                        Button(action: {
+                            self.chartVisible.toggle()
+                        }, label: {
+                            HStack {
+                                Image(systemName: "chart.pie.fill")
+                                Text("Show chart")
+                            }
+                        })
+                        
+                        Button(action: {
+                            self.settingsVisible.toggle()
+                        }) {
+                            HStack {
+                                Image(systemName: "gear")
+                                Text("Settings")
+                            }
                         }
+                                    
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .font(.system(size: 24))
                     }
-                    Text("You've been to \(self.model.allVisits.count) \(self.model.allVisits.count < 2 ? "country" : "countries") in \(self.year, format: .number.grouping(.never))")
-                        .font(.system(size: 16))
-                    Text("(\(self.model.remainingDays) remaining days)")
-                        .font(.system(size: 14))
-                    List {
-                        Section {
-                            if self.model.ignoreHomeCountry {
-                                if !self.model.allVisitsWithoutHome.isEmpty {
-                                    let sorted = Array(self.model.allVisitsWithoutHome).sorted(by: { lhs, rhs in
-                                        return rhs.visits.count < lhs.visits.count
-                                    })
-                                    ForEach(Array(sorted)) { country in
-                                        HStack {
-                                            Text(country.isoInfo.flag ?? "")
-                                                .font(.system(size: 24))
-                                            Text(country.isoInfo.name)
-                                                .font(.system(size: 13))
-                                            Spacer()
-                                            Text("\(country.getAllVisits())")
-                                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
-                                        }
-                                    }
+                }
+                .padding()
+                HStack(spacing: 5) {
+                    Spacer()
+                    Text(self.flag)
+                        .font(.system(size: 36))
+                    Text(self.name)
+                        .font(.system(size: 20))
+                    Spacer()
+                }
+                if self.isoInfo != nil {
+                    let text : String = Helper.getCurrencyRateString(homeCountry: self.model.homeCountry, currentCountry: self.isoInfo!)
+                    if !text.isEmpty {
+                        Text("\(text)")
+                            .font(.system(size: 12))
+                    }
+                }
+                Text("You've been to \(self.model.allVisits.count) \(self.model.allVisits.count < 2 ? "country" : "countries") in \(self.year, format: .number.grouping(.never))")
+                    .font(.system(size: 16))
+                Text("(\(self.model.remainingDays) remaining days)")
+                    .font(.system(size: 14))
+                List {
+                    Section {
+                        if self.model.ignoreHomeCountry {
+                            if !self.model.allVisitsWithoutHome.isEmpty {
+                                let sorted = Array(self.model.allVisitsWithoutHome).sorted(by: { lhs, rhs in
+                                    return rhs.visits.count < lhs.visits.count
+                                })
+                                ForEach(Array(sorted)) { country in
+                                    HStack {
+                                        Text(country.isoInfo.flag ?? "")
+                                            .font(.system(size: 24))
+                                        Text(country.isoInfo.name)
+                                            .font(.system(size: 13))
+                                        Spacer()
+                                        Text("\(country.getAllVisits())")
+                                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                    }                                    
                                 }
-                            } else {
-                                if !self.model.allVisits.isEmpty {
-                                    let sorted = Array(self.model.allVisits).sorted(by: { lhs, rhs in
-                                        return rhs.visits.count < lhs.visits.count
-                                    })
-                                    ForEach(Array(sorted)) { country in
-                                        HStack {
-                                            Text(country.isoInfo.flag ?? "")
-                                                .font(.system(size: 24))
-                                            Text(country.isoInfo.name)
-                                                .font(.system(size: 13))
-                                            Spacer()
-                                            Text("\(country.getAllVisits())")
-                                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
-                                        }
+                            }
+                        } else {
+                            if !self.model.allVisits.isEmpty {
+                                let sorted = Array(self.model.allVisits).sorted(by: { lhs, rhs in
+                                    return rhs.visits.count < lhs.visits.count
+                                })
+                                ForEach(Array(sorted)) { country in
+                                    HStack {
+                                        Text(country.isoInfo.flag ?? "")
+                                            .font(.system(size: 24))
+                                        Text(country.isoInfo.name)
+                                            .font(.system(size: 13))
+                                        Spacer()
+                                        Text("\(country.getAllVisits())")
+                                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
                                     }
                                 }
                             }
                         }
-                        .listSectionSeparator(.visible)
                     }
-                    .contentMargins(.top, 5, for: .scrollContent)
-                    .contentMargins(.trailing, 5, for: .scrollContent)
-                    .contentMargins(.bottom, 5, for: .scrollContent)
-                    .contentMargins(.leading, 5, for: .scrollContent)
-                    .frame(minHeight: 250)
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    
+                    .listSectionSeparator(.visible)
+                }
+                .contentMargins(.top, 5, for: .scrollContent)
+                .contentMargins(.trailing, 5, for: .scrollContent)
+                .contentMargins(.bottom, 5, for: .scrollContent)
+                .contentMargins(.leading, 5, for: .scrollContent)
+                .frame(minHeight: 290, maxHeight: 290)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                
+                ScrollView {
                     CalendarView(calendar: Calendar.current)
                         .id(self.refreshCalendarView)
                     
                     MapView()
-                        .frame(width: 360, height: 237)                        
+                        .frame(width: 360, height: 237)
                 }
             }
             .task {             
