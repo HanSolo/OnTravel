@@ -49,38 +49,116 @@ struct OnTravelEntry: TimelineEntry {
 struct OnTravelWidgetEntryView : View {
     @Environment(\.widgetFamily) private var family
     
-    var entry: Provider.Entry
+    var entry  : Provider.Entry
     
 
     var body: some View {
-        VStack {            
-            if !self.entry.countries.isEmpty {
-                let sorted = Array(self.entry.countries).sorted(by: { lhs, rhs in
-                    return rhs.visits.count < lhs.visits.count
-                })
-                ForEach(Array(sorted)) { country in
-                    HStack {
-                        Text(country.isoInfo.flag ?? "")
-                            .font(.system(size: 24))
-                        Text(country.isoInfo.name)
-                            .font(.system(size: 13))
-                        Spacer()
-                        Text("\(country.getAllVisits())")
-                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
+        let sorted : [Country] = Array(self.entry.countries).sorted(by: { lhs, rhs in
+            return rhs.visits.count < lhs.visits.count
+        })
+        let count  : Int       = sorted.count
+        
+        if family == .systemLarge {
+            VStack {
+                if self.entry.countries.isEmpty {
+                    Text("No visits yet...")
+                        .font(.system(size: 13))
+                } else {
+                    ForEach(Array(sorted)) { country in
+                        HStack {
+                            Text(country.isoInfo.flag ?? "")
+                                .font(.system(size: 24))
+                            Text(country.isoInfo.name)
+                                .font(.system(size: 13))
+                            Spacer()
+                            Text("\(country.getAllVisits())")
+                                .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .containerBackground(for: .widget) {
+                Color.init(red: 0.1, green: 0.1, blue: 0.1)
+            }
+            .cornerRadius(5)
+            .edgesIgnoringSafeArea(.all)
+        } else {
+            if self.entry.countries.isEmpty {
+                VStack {
+                    Text("No visits yet...")
+                        .font(.system(size: 13))
+                }
             } else {
-                Text("No visits yet...")
-                    .font(.system(size: 13))
+                if count > 4 {
+                    let left  : [Country] = Array(sorted.prefix(through: 3))
+                    let right : [Country] = Array(sorted.suffix(from: 4))
+                    HStack(alignment: .top, spacing: 20) {
+                        VStack {
+                            ForEach(Array(left)) { country in
+                                HStack {
+                                    Text(country.isoInfo.flag ?? "")
+                                        .font(.system(size: 24))
+                                    Text(country.isoInfo.alpha3)
+                                        .font(.system(size: 13))
+                                    Spacer()
+                                    Text("\(country.getAllVisits())")
+                                        .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                }
+                            }
+                            Spacer()
+                        }
+                        VStack {
+                            ForEach(Array(right)) { country in
+                                HStack {
+                                    Text(country.isoInfo.flag ?? "")
+                                        .font(.system(size: 24))
+                                    Text(country.isoInfo.alpha3)
+                                        .font(.system(size: 13))
+                                    Spacer()
+                                    Text("\(country.getAllVisits())")
+                                        .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    .containerBackground(for: .widget) {
+                        Color.init(red: 0.1, green: 0.1, blue: 0.1)
+                    }
+                    .cornerRadius(5)
+                    .edgesIgnoringSafeArea(.all)
+                } else {
+                    VStack {
+                        if self.entry.countries.isEmpty {
+                            Text("No visits yet...")
+                                .font(.system(size: 13))
+                        } else {
+                            ForEach(Array(sorted)) { country in
+                                HStack {
+                                    Text(country.isoInfo.flag ?? "")
+                                        .font(.system(size: 24))
+                                    Text(country.isoInfo.name)
+                                        .font(.system(size: 13))
+                                    Spacer()
+                                    Text("\(country.getAllVisits())")
+                                        .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    .containerBackground(for: .widget) {
+                        Color.init(red: 0.1, green: 0.1, blue: 0.1)
+                    }
+                    .cornerRadius(5)
+                    .edgesIgnoringSafeArea(.all)
+                }
             }
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .containerBackground(for: .widget) {
-            Color.init(red: 0.1, green: 0.1, blue: 0.1)
-        }
-        .cornerRadius(5)
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
