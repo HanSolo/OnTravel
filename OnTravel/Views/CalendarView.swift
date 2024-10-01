@@ -11,7 +11,9 @@ import UIKit
 
 
 struct CalendarView: View {
-    @EnvironmentObject private var model : OnTravelModel
+    @EnvironmentObject private var model           : OnTravelModel
+    @EnvironmentObject private var locationManager : LocationManager
+    
     private let calendar        : Calendar
     private let monthFormatter  : DateFormatter
     private let dayFormatter    : DateFormatter
@@ -21,7 +23,7 @@ struct CalendarView: View {
 
     @State private var showingAlert : Bool   = false
     @State private var selectedDate : Date   = Self.now
-    private static var now          : Date   = Date()
+    private static var now          : Date   = Date.now
 
         
     
@@ -147,9 +149,10 @@ struct CalendarView: View {
     
     
     func dateHasEvents(date: Date) -> Bool {
+        let dateToCheck : Date = date.addingTimeInterval(self.locationManager.offsetFromGMT)
         for country in self.model.allVisits {
             for visit in country.visits {
-                if calendar.isDate(date, inSameDayAs: visit) {
+                if calendar.isDate(dateToCheck, inSameDayAs: visit) {
                     return true
                 }
             }
@@ -158,10 +161,11 @@ struct CalendarView: View {
     }
     
     func numberOfEventsInDate(date: Date) -> Int {
+        let dateToCheck : Date = date.addingTimeInterval(self.locationManager.offsetFromGMT)
         var count: Int = 0
         for country in self.model.allVisits {
             for visit in country.visits {
-                if calendar.isDate(date, inSameDayAs: visit) {
+                if calendar.isDate(dateToCheck, inSameDayAs: visit) {
                     count += 1
                 }
             }
@@ -170,10 +174,11 @@ struct CalendarView: View {
     }
     
     func getFlagsInDate(date: Date) -> [String] {
+        let dateToCheck : Date = date.addingTimeInterval(self.locationManager.offsetFromGMT)
         var flags : [String] = []
         for country in self.model.allVisits {
             for visit in country.visits {
-                if calendar.isDate(date, inSameDayAs: visit) {
+                if calendar.isDate(dateToCheck, inSameDayAs: visit) {
                     flags.append(country.isoInfo.flag ?? "")
                 }
             }
@@ -182,10 +187,11 @@ struct CalendarView: View {
     }
     
     func getCountriesInDate(date: Date) -> [Country] {
+        let dateToCheck : Date = date.addingTimeInterval(self.locationManager.offsetFromGMT)
         var countries : [Country] = []
         for country in self.model.allVisits {
             for visit in country.visits {
-                if calendar.isDate(date, inSameDayAs: visit) {
+                if calendar.isDate(dateToCheck, inSameDayAs: visit) {
                     countries.append(country)
                 }
             }
