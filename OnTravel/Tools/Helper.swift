@@ -211,8 +211,7 @@ public class Helper {
                 print("Json file exists, but was empty in Helper")
             } else {
                 let countries : [Country] = countriesFromJson(jsonTxt: json)
-                for country in countries {
-                    print("\(country.isoInfo.name) found")
+                for country in countries {                    
                     allVisits.insert(country)
                 }
             }

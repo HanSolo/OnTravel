@@ -21,6 +21,7 @@ struct ContentView: View {
     @State               private var flag                : String              = ""
     @State               private var refreshCalendarView : Bool                = false
     @State               private var showingExporter     : Bool                = false
+    @State               private var importVisible       : Bool                = false
     @State               private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
     @State               private var isoInfo             : IsoCountryInfo?
     @State               private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
@@ -83,6 +84,15 @@ struct ContentView: View {
                         })
                         
                         Button(action: {
+                            self.importVisible.toggle()
+                        }, label: {
+                            HStack {
+                                Image(systemName: "square.and.arrow.down")
+                                Text("Import from json")
+                            }
+                        })
+                        
+                        Button(action: {
                             self.globeVisible.toggle()
                         }, label: {
                             HStack {
@@ -108,7 +118,7 @@ struct ContentView: View {
                                 Text("Settings")
                             }
                         }
-                                    
+                        
                     } label: {
                         Image(systemName: "line.3.horizontal")
                             .font(.system(size: 24))
@@ -246,11 +256,14 @@ struct ContentView: View {
                 case .failure(let error):
                     Swift.debugPrint("Error: \(error.localizedDescription)")
                 }
-            }            
+            }
+            .sheet(isPresented: self.$importVisible, content: {
+                ImportJsonView()
+            })
             .sheet(isPresented: self.$settingsVisible, content: {
                 SettingsView()
             })
-            .sheet(isPresented: self.$chartVisible, content: {                
+            .sheet(isPresented: self.$chartVisible, content: {
                 PiechartView()
             })
             .sheet(isPresented: self.$globeVisible, content: {

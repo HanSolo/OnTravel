@@ -229,6 +229,7 @@
 		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
 		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
 		4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
+		4F7DCFC42CABE80E00B4676F /* ImportJsonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7DCFC32CABE80E00B4676F /* ImportJsonView.swift */; };
 		4FA749832C87739E000A2344 /* PiechartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA749822C87739E000A2344 /* PiechartView.swift */; };
 		4FA9B0842C85C5D8007F3B1B /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9B0832C85C5D8007F3B1B /* Visit.swift */; };
 		4FA9B08E2C85EA82007F3B1B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA9B02F2C859034007F3B1B /* WidgetKit.framework */; };
@@ -513,6 +514,7 @@
 		4F7438332C7C8A12006DDB8B /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		4F7438352C7C8B46006DDB8B /* TestEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEvents.swift; sourceTree = "<group>"; };
 		4F7858A02C7CE87900462952 /* AppIconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconProvider.swift; sourceTree = "<group>"; };
+		4F7DCFC32CABE80E00B4676F /* ImportJsonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportJsonView.swift; sourceTree = "<group>"; };
 		4FA749822C87739E000A2344 /* PiechartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiechartView.swift; sourceTree = "<group>"; };
 		4FA9B02F2C859034007F3B1B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		4FA9B0312C859034007F3B1B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -827,6 +829,7 @@
 				4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */,
 				4FA749822C87739E000A2344 /* PiechartView.swift */,
 				4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */,
+				4F7DCFC32CABE80E00B4676F /* ImportJsonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 				4FA9B0842C85C5D8007F3B1B /* Visit.swift in Sources */,
 				4F7438302C7C840A006DDB8B /* EventListenerAction.swift in Sources */,
 				4F3D75AD2C902CDA0010EE0A /* ExchangeRateData.swift in Sources */,
+				4F7DCFC42CABE80E00B4676F /* ImportJsonView.swift in Sources */,
 				4F4F37F22C79B1B300522ABC /* ProcessingOperation.swift in Sources */,
 				4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */,
 				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
