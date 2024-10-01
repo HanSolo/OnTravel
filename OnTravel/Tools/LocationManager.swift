@@ -30,6 +30,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             Properties.instance.lastLon   = self.longitude
             Properties.instance.timestamp = Date().timeIntervalSince1970
             self.lastLocation             = self.location
+            self.timezone                 = TimeZone.current
+            self.abbreviation             = self.timezone.abbreviation() ?? ""
+            self.identifier               = self.timezone.identifier
+            self.offsetFromGMT            = Double(self.timezone.secondsFromGMT())
+            self.isDST                    = TimeZone.current.isDaylightSavingTime()
         }
     }
     @Published var lastLocation      : CLLocation?
@@ -37,6 +42,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var latitude          : Double            = 0.0
     @Published var longitude         : Double            = 0.0
     @Published var storedProperties  : Bool              = false
+    @Published var timezone          : TimeZone          = TimeZone.current
+    @Published var abbreviation      : String            = TimeZone.current.abbreviation() ?? ""
+    @Published var identifier        : String            = TimeZone.current.identifier
+    @Published var offsetFromGMT     : Double            = Double(TimeZone.current.secondsFromGMT())    
+    @Published var isDST             : Bool              = TimeZone.current.isDaylightSavingTime()
         
     private    let locationManager   : CLLocationManager = CLLocationManager()
     private    let geocoder          : CLGeocoder        = CLGeocoder()

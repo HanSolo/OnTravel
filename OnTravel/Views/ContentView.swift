@@ -114,7 +114,7 @@ struct ContentView: View {
                             .font(.system(size: 24))
                     }
                 }
-                .padding()
+                .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
                 HStack(spacing: 5) {
                     Spacer()
                     Text(self.flag)
@@ -123,6 +123,8 @@ struct ContentView: View {
                         .font(.system(size: 20))
                     Spacer()
                 }
+                Text("\(self.locationManager.abbreviation) (\(self.locationManager.offsetFromGMT > 0 ? "+" : "")\(String(format: "%.1f", (self.locationManager.offsetFromGMT / 3600)))h)")
+                    .font(.system(size: 12))
                 if self.isoInfo != nil {
                     let text : String = Helper.getCurrencyRateString(homeCountry: self.model.homeCountry, currentCountry: self.isoInfo!)
                     if !text.isEmpty {

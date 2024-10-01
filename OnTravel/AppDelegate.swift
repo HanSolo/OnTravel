@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         // Code to be executed after app finished launching with options
         AppDelegate.instance = self
         
-        let now  : Date = Date.init()
+        let now  : Date = Date.now
         let year : Int  = Calendar.current.component(.year, from: now)
         if Helper.jsonExists(year: year) {
             let json : String = Helper.readJson(year: year)
