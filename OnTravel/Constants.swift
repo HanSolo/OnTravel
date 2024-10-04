@@ -17,6 +17,7 @@ public class Constants {
     public static let PROCESSING_SESSION_ID      : String = "eu.hansolo.ontravel.processSessionId"
     public static let PROCESSING_INTERVAL        : Double = 1200 // 20 min interval for background processing
     
+    public static let VISITS_THIS_YEAR_KEY_UD    : String = "visitsThisYear"
     public static let VISITS_THIS_MONTH_KEY_UD   : String = "visitsThisMonth"
     
     public static let CURRENCIES_KEY_UD          : String = "currencies"

@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 
-class ProcessingOperation: Operation {
+class ProcessingOperation: Operation, @unchecked Sendable {
     let locationManager : LocationManager?
     let model           : OnTravelModel?
     

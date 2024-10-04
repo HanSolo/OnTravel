@@ -148,7 +148,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     if json.isEmpty {
                         DispatchQueue.global().async {
                             let country : Country = Country(isoInfo: isoInfo)
-                            country.addVisit(date: now)
+                            _ = country.addVisit(date: now)
                             var jsonTxt : String = "["
                             jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
                             jsonTxt += "\"visits\":["
@@ -160,6 +160,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 Helper.saveJson(json: jsonTxt)
                             }
                             Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
+                            Helper.visitsThisYearToUserDefaults(jsonTxt: jsonTxt)
                         }
                         debugPrint("Json file exists, but was empty -> saved new json file in LocationManager")
                     } else {
@@ -174,7 +175,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             if countryFound == nil {
                                 // No country found -> create new country and save it to json file
                                 let country : Country = Country(isoInfo: isoInfo)
-                                country.addVisit(date: now)
+                                _ = country.addVisit(date: now)
                                 allVisits.insert(country)
                             } else {
                                 // Country found, add visit to country if not already present
@@ -193,12 +194,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 debugPrint("No changes -> saving json file not needed")
                             }
                             Helper.visitsThisMonthToUserDefaults(allVisits: allVisits)
+                            Helper.visitsThisYearToUserDefaults(allVisits: allVisits)
                         }
                     }
                 } else {
                     DispatchQueue.global().async {
                         let country : Country = Country(isoInfo: isoInfo)
-                        country.addVisit(date: now)
+                        _ = country.addVisit(date: now)
                         var jsonTxt : String = "["
                         jsonTxt += "{ \"iso\":\"\(country.isoInfo.alpha2)\","
                         jsonTxt += "\"visits\":["
@@ -212,6 +214,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             Helper.updateCurrencies(forceUpdate: false)
                         }
                         Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
+                        Helper.visitsThisYearToUserDefaults(jsonTxt: jsonTxt)
                     }
                 }
                 //debugPrint("Stored flag, country and timestamp for \(flag) \(isoCountryCode) to properties")

@@ -48,10 +48,11 @@ public class Helper {
     }
     
     public static func visitsThisMonth(allVisits: Set<Country>) -> [Country] {
-        let now            : Date      = Date.init()
+        let now            : Date      = Date.now
         let calendar       : Calendar  = Calendar.current
         let year           : Int       = calendar.component(.year, from: now)
         let month          : Int       = calendar.component(.month, from: now)
+                        
         let countriesFound : [Country] = allVisits.filter({ $0.getVisitsIn(month: month, year: year) > 0 })
         return countriesFound
     }
@@ -246,8 +247,9 @@ public class Helper {
         let data      : Data?      = jsonTxt.data(using: .utf8)
         let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: data!)
         for jd in jsonData {
-            let country : Country? = jd.getCountry()
-            if nil != country { countries.append(country!) }
+            if let country = jd.getCountry() {
+                countries.append(country)
+            }
         }
         return countries
     }
@@ -267,9 +269,31 @@ public class Helper {
         return jsonTxt
     }
     
+    public static func visitsThisYearToUserDefaults(allVisits: Set<Country>) -> Void {
+        let visitsThisYear : [Country] = visitsThisYear(allVisits: allVisits)
+        let jsonTxt        : String = countriesToJson(countries: visitsThisYear)
+        visitsThisYearToUserDefaults(jsonTxt: jsonTxt)
+    }
+    public static func visitsThisYearToUserDefaults(jsonTxt: String) -> Void {
+        let jsonData = jsonTxt.data(using: .utf8)
+        UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.set(jsonData, forKey: Constants.VISITS_THIS_YEAR_KEY_UD)
+    }
+    public static func visitsThisYearFromUserDefaults() -> [Country] {
+        var countries : [Country]    = []
+        let encodedData = UserDefaults(suiteName: "group.eu.hansolo.ontravel")!.object(forKey: Constants.VISITS_THIS_YEAR_KEY_UD) as? Data
+        if let jsonEncoded = encodedData {
+            let jsonData  : [JsonData] = try! JSONDecoder().decode([JsonData].self, from: jsonEncoded)
+            for jd in jsonData {
+                let country : Country? = jd.getCountry()
+                if nil != country { countries.append(country!) }
+            }
+        }
+        return countries
+    }
+    
     public static func visitsThisMonthToUserDefaults(allVisits: Set<Country>) -> Void {
         let visitsThisMonth : [Country] = visitsThisMonth(allVisits: allVisits)
-        let jsonTxt : String = countriesToJson(countries: visitsThisMonth)
+        let jsonTxt         : String = countriesToJson(countries: visitsThisMonth)
         visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
     }
     public static func visitsThisMonthToUserDefaults(jsonTxt: String) -> Void {

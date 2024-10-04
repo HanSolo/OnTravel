@@ -13,18 +13,20 @@ import MapKit
 
 
 public class OnTravelModel : ObservableObject {
-    @Published var lastGeoCodeLat       : Double       = 0.0
-    @Published var lastGeoCodeLon       : Double       = 0.0
-    @Published var country              : String       = ""
-    @Published var allVisits            : Set<Country> = Set<Country>() {
+    @Published var lastGeoCodeLat       : Double         = 0.0
+    @Published var lastGeoCodeLon       : Double         = 0.0
+    @Published var country              : String         = ""
+    @Published var allVisits            : Set<Country>   = Set<Country>() {
         didSet {
+            /*
             self.allVisitsWithoutHome.removeAll()
             for country in allVisits.filter({ $0.isoInfo.alpha2 != self.homeCountry.alpha2 }) {
                 self.allVisitsWithoutHome.insert(country)
             }
+            */
         }
     }
-    @Published var allVisitsWithoutHome : Set<Country>   = Set<Country>()
+    //@Published var allVisitsWithoutHome : Set<Country>   = Set<Country>()
     @Published var remainingDays        : Int            = 0
     @Published var availableYears       : [Int]          = Helper.availableYears()
     @Published var homeCountry          : IsoCountryInfo = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]
@@ -37,15 +39,13 @@ public class OnTravelModel : ObservableObject {
     }
     
     public func daysOnTravelOutsideHomeCountry() -> Int {
-        return self.allVisitsWithoutHome.map( {$0.visits.count }).reduce(0, +)
-    }
-    
-    public func updateVisitsWithoutHome() -> Void {
-        self.homeCountry = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]
-        self.allVisitsWithoutHome.removeAll()
-        for country in allVisits.filter({ $0.isoInfo.alpha2 != self.homeCountry.alpha2 }) {
-            self.allVisitsWithoutHome.insert(country)
-        }        
+        var daysOutsideHomeCountry : Int = 0
+        for country in self.allVisits {
+            if country.isoInfo.alpha2 != self.homeCountry.alpha2 {
+                daysOutsideHomeCountry += country.getAllVisits()
+            }
+        }
+        return daysOutsideHomeCountry        
     }
     
     public func toJson() -> String {

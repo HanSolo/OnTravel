@@ -9,7 +9,8 @@ import Foundation
 import MapKit
 
 
-extension CLLocationCoordinate2D : Hashable {
+extension CLLocationCoordinate2D: @retroactive Equatable {}
+extension CLLocationCoordinate2D : @retroactive Hashable {
     
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude

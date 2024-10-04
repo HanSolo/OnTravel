@@ -20,7 +20,7 @@ struct SettingsView: View {
         VStack {
             HStack {
                 Button(action: {
-                    self.model.updateVisitsWithoutHome()
+                    self.model.homeCountry = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]                    
                     Helper.updateCurrencies(forceUpdate: true)
                     dismiss()
                 }) {
@@ -52,7 +52,7 @@ struct SettingsView: View {
         }
         .onChange(of: self.ignoreHomeCountry) {
             Properties.instance.ignoreHomeCountry = self.ignoreHomeCountry
-            self.model.ignoreHomeCountry = self.ignoreHomeCountry
+            self.model.ignoreHomeCountry          = self.ignoreHomeCountry
         }
     }
 }

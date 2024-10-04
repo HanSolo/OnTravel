@@ -45,7 +45,8 @@ struct GlobeView: View {
                         Map(initialPosition: .region(MKCoordinateRegion(center: self.locationManager.getCurrentCoordinate(), span: MKCoordinateSpan(latitudeDelta: 90, longitudeDelta: 180))), interactionModes: [.rotate, .zoom, .pan]) {
                             ForEach(self.coordinates, id: \.self) { coords in
                                 MapPolygon(coordinates: coords)
-                                    .foregroundStyle(.red.opacity(0.7))                                                                        
+                                    .foregroundStyle(.red.opacity(0.5))
+                                    .stroke(.red.opacity(1.0), lineWidth: 1)
                             }
                             Annotation("You", coordinate: self.locationManager.getCurrentCoordinate()) {
                                 ZStack {                                    

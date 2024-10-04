@@ -33,11 +33,12 @@ public class Country : Hashable, Identifiable {
     }
     
     
-    public func getVisitsIn(month : Int, year: Int) -> Int {
+    public func getVisitsIn(month : Int, year: Int) -> Int {                
         precondition((1...12).contains(month))
         precondition((1970...3000).contains(year))
-        let calendar : Calendar = Calendar.current
-        return self.visits.filter({ calendar.component(.year, from: $0) == year && calendar.component(.month, from: $0) == month }).count
+        let calendar : Calendar = Calendar.current        
+        let filteredByMonthAndYear = self.visits.filter({ calendar.component(.year, from: $0) == year && calendar.component(.month, from: $0) == month })
+        return filteredByMonthAndYear.count
     }
     
     public func getVisitsIn(year : Int) -> Int {
@@ -47,6 +48,14 @@ public class Country : Hashable, Identifiable {
     }
     
     public func getAllVisits() -> Int { return self.visits.count }
+    
+    public func getVisitsThisMonth() -> Int {
+        let now      : Date      = Date.now
+        let calendar : Calendar  = Calendar.current
+        let year     : Int       = calendar.component(.year, from: now)
+        let month    : Int       = calendar.component(.month, from: now)
+        return self.getVisitsIn(month: month, year: year)
+    }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(isoInfo.alpha2)

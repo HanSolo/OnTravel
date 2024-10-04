@@ -63,7 +63,8 @@ struct MapView: View {
     }
 }
 
-extension SVGNode: Hashable {
+extension SVGNode: @retroactive Equatable {}
+extension SVGNode: @retroactive Hashable {
     
     public static func == (lhs: SVGNode, rhs: SVGNode) -> Bool {
         return lhs.id == rhs.id

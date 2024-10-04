@@ -15,19 +15,22 @@ import WidgetKit
 struct ContentView: View {
     @Environment(\.dismiss)      var dismiss
     @Environment(\.displayScale) var displayScale
-    @EnvironmentObject   private var model               : OnTravelModel
-    @EnvironmentObject   private var locationManager     : LocationManager
-    @State               private var name                : String              = ""
-    @State               private var flag                : String              = ""
-    @State               private var refreshCalendarView : Bool                = false
-    @State               private var showingExporter     : Bool                = false
-    @State               private var importVisible       : Bool                = false
-    @State               private var selectedYear        : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State               private var isoInfo             : IsoCountryInfo?
-    @State               private var year                : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State               private var settingsVisible     : Bool                = false
-    @State               private var chartVisible        : Bool                = false
-    @State               private var globeVisible        : Bool                = false
+    @EnvironmentObject   private var model                    : OnTravelModel
+    @EnvironmentObject   private var locationManager          : LocationManager
+    @State               private var name                     : String              = ""
+    @State               private var flag                     : String              = ""
+    @State               private var refreshCalendarView      : Bool                = false
+    @State               private var showingExporter          : Bool                = false
+    @State               private var importVisible            : Bool                = false
+    @State               private var selectedYear             : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var isoInfo                  : IsoCountryInfo?
+    @State               private var year                     : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var settingsVisible          : Bool                = false
+    @State               private var chartVisible             : Bool                = false
+    @State               private var globeVisible             : Bool                = false
+    @State               private var sortedCountries          : [Country]           = []
+    @State               private var sortedCountriesThisMonth : [Country]           = []
+    @State               private var selectedTimeFrame        : Int                 = 0
             
     
     var body: some View {
@@ -146,41 +149,26 @@ struct ContentView: View {
                     .font(.system(size: 16))
                 Text("(\(self.model.remainingDays) remaining days)")
                     .font(.system(size: 14))
+                
+                
+                Picker("", selection: $selectedTimeFrame) {
+                    Text("Year").tag(0)
+                    Text("Month").tag(1)
+                }
+                .pickerStyle(.segmented)
+                
+                
                 List {
                     Section {
-                        if self.model.ignoreHomeCountry {
-                            if !self.model.allVisitsWithoutHome.isEmpty {
-                                let sorted = Array(self.model.allVisitsWithoutHome).sorted(by: { lhs, rhs in
-                                    return rhs.visits.count < lhs.visits.count
-                                })
-                                ForEach(Array(sorted)) { country in
-                                    HStack {
-                                        Text(country.isoInfo.flag ?? "")
-                                            .font(.system(size: 24))
-                                        Text(country.isoInfo.name)
-                                            .font(.system(size: 13))
-                                        Spacer()
-                                        Text("\(country.getAllVisits())")
-                                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
-                                    }                                    
-                                }
-                            }
-                        } else {
-                            if !self.model.allVisits.isEmpty {
-                                let sorted = Array(self.model.allVisits).sorted(by: { lhs, rhs in
-                                    return rhs.visits.count < lhs.visits.count
-                                })
-                                ForEach(Array(sorted)) { country in
-                                    HStack {
-                                        Text(country.isoInfo.flag ?? "")
-                                            .font(.system(size: 24))
-                                        Text(country.isoInfo.name)
-                                            .font(.system(size: 13))
-                                        Spacer()
-                                        Text("\(country.getAllVisits())")
-                                            .font(.system(size: 13)).multilineTextAlignment(.trailing)
-                                    }
-                                }
+                        ForEach(Array(self.selectedTimeFrame == 0 ? self.sortedCountries : self.sortedCountriesThisMonth)) { country in
+                            HStack {
+                                Text(country.isoInfo.flag ?? "")
+                                    .font(.system(size: 24))
+                                Text(country.isoInfo.name)
+                                    .font(.system(size: 13))
+                                Spacer()
+                                Text("\(self.selectedTimeFrame == 0 ? country.getAllVisits() : country.getVisitsThisMonth())")
+                                    .font(.system(size: 13)).multilineTextAlignment(.trailing)
                             }
                         }
                     }
@@ -190,7 +178,7 @@ struct ContentView: View {
                 .contentMargins(.trailing, 5, for: .scrollContent)
                 .contentMargins(.bottom, 5, for: .scrollContent)
                 .contentMargins(.leading, 5, for: .scrollContent)
-                .frame(minHeight: 290, maxHeight: 290)
+                .frame(minHeight: 280, maxHeight: 280)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 
                 ScrollView {
@@ -201,14 +189,16 @@ struct ContentView: View {
                         .frame(width: 360, height: 237)
                 }
             }
-            .task {             
+            .task {
+                self.updateSortedCountries()
                 WidgetCenter.shared.reloadAllTimelines()                
             }
             .onChange(of: self.locationManager.storedProperties) {
-                updateCountryFromProperties()
+                self.updateCountryFromProperties()
             }
             .onChange(of: self.model.allVisits) {
                 refreshCalendarView.toggle()
+                self.updateSortedCountries()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
                 // Start location updates
@@ -229,7 +219,7 @@ struct ContentView: View {
                                 let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
                                 let now     : Date           = Date.init()
                                 let country : Country        = Country(isoInfo: isoInfo)
-                                country.addVisit(date: now)
+                                _ = country.addVisit(date: now)
                                 self.model.allVisits.insert(country)
                                 self.flag = isoInfo.flag ?? ""
                                 self.name = isoInfo.name
@@ -258,10 +248,15 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: self.$importVisible, content: {
-                ImportJsonView()
+                ImportJsonView().onDisappear() {
+                    debugPrint("Returned from import view")
+                }
             })
             .sheet(isPresented: self.$settingsVisible, content: {
-                SettingsView()
+                SettingsView().onDisappear() {
+                    self.updateSortedCountries()
+                    Helper.updateCurrencies(forceUpdate: true)
+                }
             })
             .sheet(isPresented: self.$chartVisible, content: {
                 PiechartView()
@@ -269,6 +264,29 @@ struct ContentView: View {
             .sheet(isPresented: self.$globeVisible, content: {
                 GlobeView()
             })
+        }
+    }
+    
+    private func updateSortedCountries() -> Void {
+        if self.model.ignoreHomeCountry {
+            self.sortedCountries = Helper.visitsThisYearFromUserDefaults().filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: Set<Country>(self.sortedCountries)).filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            Helper.visitsThisMonthToUserDefaults(jsonTxt: Helper.visitsToJson(allVisits: Set<Country>(self.sortedCountriesThisMonth)))
+        } else {
+            self.sortedCountries = Helper.visitsThisYearFromUserDefaults().sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: Set<Country>(self.sortedCountries)).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            for country in self.sortedCountriesThisMonth {
+                debugPrint("Country: \(country.isoInfo.name), Visits: \(country.visits.count)")
+            }
+            Helper.visitsThisMonthToUserDefaults(jsonTxt: Helper.visitsToJson(allVisits: Set<Country>(self.sortedCountriesThisMonth)))
         }
     }
 
@@ -288,10 +306,10 @@ struct ContentView: View {
                     let countryFound : Country? = self.model.allVisits.filter{ $0.isoInfo.name == isoInfo!.name }.first
                     if countryFound == nil {
                         let country : Country = Country(isoInfo: isoInfo!)
-                        country.addVisit(date: now)
-                        self.model.allVisits.insert(country)                        
+                        _ = country.addVisit(date: now)
+                        self.model.allVisits.insert(country)
                     } else {
-                        countryFound!.addVisit(date: now)
+                        _ = countryFound!.addVisit(date: now)
                     }
                     self.refreshCalendarView.toggle()
                     

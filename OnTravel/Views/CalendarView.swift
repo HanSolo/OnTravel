@@ -85,6 +85,9 @@ struct CalendarView: View {
                     Text(dayFormatter.string(from: date))
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))
+                        .padding(EdgeInsets(top: 1, leading: 0, bottom: 6, trailing: 0))
+                        .frame(width: 24, height: 24)
+                        .cornerRadius(5)
                 },
                 header: { date in
                     Text(weekDayFormatter.string(from: date))
@@ -117,7 +120,7 @@ struct CalendarView: View {
                             selectedDate = Date.now
                         } label: {
                             Text(monthFormatter.string(from: date))
-                                .foregroundColor(.blue)
+                                .foregroundColor(calendar.component(.month, from: date) == calendar.component(.month, from: Date.now) ? .orange : .primary)
                                 .font(.system(size: 18))
                                 .padding(2)
                         }
@@ -127,7 +130,6 @@ struct CalendarView: View {
                         Button {
                             guard let newDate = calendar.date(byAdding: .month, value: 1, to: selectedDate) else { return }
                             selectedDate = newDate
-                            
                         } label: {
                             Label(
                                 title: { Text("Next") },
