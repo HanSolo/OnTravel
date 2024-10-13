@@ -225,9 +225,18 @@ struct ContentView: View {
                     .frame(minHeight: 280, maxHeight: 280)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     
-                    
+                    Button(action: {
+                        self.globeVisible.toggle()
+                    }, label: {
+                        HStack {
+                            Image(systemName: "globe.europe.africa")
+                            Text("Show globe")
+                        }
+                    })
+                    /*
                     MapView()
                         .frame(width: 360, height: 237)
+                     */
                 }
             }
             .task {
