@@ -15,29 +15,32 @@ import WidgetKit
 struct ContentView: View {
     @Environment(\.dismiss)      var dismiss
     @Environment(\.displayScale) var displayScale
-    @EnvironmentObject   private var model                    : OnTravelModel
-    @EnvironmentObject   private var locationManager          : LocationManager
-    @State               private var name                     : String              = ""
-    @State               private var flag                     : String              = ""
-    @State               private var refreshCalendarView      : Bool                = false
-    @State               private var showingExporter          : Bool                = false
-    @State               private var importVisible            : Bool                = false
-    @State               private var selectedYear             : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State               private var isoInfo                  : IsoCountryInfo?
-    @State               private var year                     : Int                 = Calendar.current.component(.year, from: Date.init())
-    @State               private var settingsVisible          : Bool                = false
-    @State               private var chartVisible             : Bool                = false
-    @State               private var globeVisible             : Bool                = false
-    @State               private var sortedCountries          : [Country]           = []
-    @State               private var sortedCountriesThisMonth : [Country]           = []
-    @State               private var selectedTimeFrame        : Int                 = 0
+    @EnvironmentObject   private var model                        : OnTravelModel
+    @EnvironmentObject   private var locationManager              : LocationManager
+    @State               private var name                         : String              = ""
+    @State               private var flag                         : String              = ""
+    @State               private var refreshCalendarView          : Bool                = false
+    @State               private var showingExporter              : Bool                = false
+    @State               private var importVisible                : Bool                = false
+    @State               private var selectedYear                 : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var isoInfo                      : IsoCountryInfo?
+    @State               private var year                         : Int                 = Calendar.current.component(.year, from: Date.init())
+    @State               private var settingsVisible              : Bool                = false
+    @State               private var chartVisible                 : Bool                = false
+    @State               private var globeVisible                 : Bool                = false
+    @State               private var sortedCountries              : [Country]           = []
+    @State               private var sortedCountriesThisMonth     : [Country]           = []
+    @State               private var sortedCountriesSelectedMonth : [Country]           = []
+    @State               private var selectedTimeFrame            : Int                 = 0
+    
+    var calendarView : CalendarView = CalendarView(calendar: Calendar.current)
             
     
     var body: some View {
         
         ViewThatFits {
             VStack(spacing: 5) {
-                HStack(spacing: 5) {
+                HStack(spacing: 5) { // Title and icon
                     Text("OFFLINE")
                         .font(.system(size: 8))
                         .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
@@ -128,7 +131,7 @@ struct ContentView: View {
                     }
                 }
                 .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
-                HStack(spacing: 5) {
+                HStack(spacing: 5) { // Current country and flag
                     Spacer()
                     Text(self.flag)
                         .font(.system(size: 36))
@@ -136,8 +139,21 @@ struct ContentView: View {
                         .font(.system(size: 20))
                     Spacer()
                 }
-                Text("\(self.locationManager.abbreviation) (\(self.locationManager.offsetFromGMT > 0 ? "+" : "")\(String(format: "%.1f", (self.locationManager.offsetFromGMT / 3600)))h)")
-                    .font(.system(size: 12))
+                HStack() { // Target sunrise and sunset
+                    let latTarget : Double = self.locationManager.latitude
+                    let lonTarget : Double = self.locationManager.longitude
+                    if latTarget != 0 && lonTarget != 0 {
+                        Label("\(self.model.metric ? self.locationManager.sunriseMetric : self.locationManager.sunriseImperial)", systemImage: "sunrise")
+                            .font(.system(size: 12))
+                        Spacer()
+                        Text("\(self.locationManager.abbreviation) (\(self.locationManager.offsetFromGMT > 0 ? "+" : "")\(String(format: "%.1f", (self.locationManager.offsetFromGMT / 3600)))h)")
+                            .font(.system(size: 12))
+                        Spacer()
+                        Label("\(self.model.metric ? self.locationManager.sunsetMetric : self.locationManager.sunsetImperial)", systemImage: "sunset")
+                            .font(.system(size: 12))
+                    }
+                }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                                
                 if self.isoInfo != nil {
                     let text : String = Helper.getCurrencyRateString(homeCountry: self.model.homeCountry, currentCountry: self.isoInfo!)
                     if !text.isEmpty {
@@ -152,8 +168,8 @@ struct ContentView: View {
                 
                 
                 Picker("", selection: $selectedTimeFrame) {
-                    Text("Year").tag(0)
-                    Text("Month").tag(1)
+                    Text("This Year").tag(0)
+                    Text("This Month").tag(1)
                 }
                 .pickerStyle(.segmented)
                 
@@ -182,8 +198,33 @@ struct ContentView: View {
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 
                 ScrollView {
-                    CalendarView(calendar: Calendar.current)
+                    self.calendarView
                         .id(self.refreshCalendarView)
+                    Text("Visits selected month")
+                        .font(.system(size: 14))
+                    List {
+                        Section {
+                            ForEach(Array(self.sortedCountriesSelectedMonth)) { country in
+                                HStack {
+                                    Text(country.isoInfo.flag ?? "")
+                                        .font(.system(size: 24))
+                                    Text(country.isoInfo.name)
+                                        .font(.system(size: 13))
+                                    Spacer()
+                                    Text("\(country.getVisitsSelectedMonth(month: self.model.selectedMonth))")
+                                        .font(.system(size: 13)).multilineTextAlignment(.trailing)
+                                }
+                            }
+                        }
+                        .listSectionSeparator(.visible)
+                    }
+                    .contentMargins(.top, 5, for: .scrollContent)
+                    .contentMargins(.trailing, 5, for: .scrollContent)
+                    .contentMargins(.bottom, 5, for: .scrollContent)
+                    .contentMargins(.leading, 5, for: .scrollContent)
+                    .frame(minHeight: 280, maxHeight: 280)
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    
                     
                     MapView()
                         .frame(width: 360, height: 237)
@@ -191,7 +232,8 @@ struct ContentView: View {
             }
             .task {
                 self.updateSortedCountries()
-                WidgetCenter.shared.reloadAllTimelines()                
+                self.updateSortedCountriesForSelection()
+                WidgetCenter.shared.reloadAllTimelines()
             }
             .onChange(of: self.locationManager.storedProperties) {
                 self.updateCountryFromProperties()
@@ -199,6 +241,9 @@ struct ContentView: View {
             .onChange(of: self.model.allVisits) {
                 refreshCalendarView.toggle()
                 self.updateSortedCountries()
+            }
+            .onChange(of: self.model.selectedMonth) {
+                self.updateSortedCountriesForSelection()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
                 // Start location updates
@@ -209,11 +254,9 @@ struct ContentView: View {
                 
                 // Update model with saved data
                 if self.model.allVisits.isEmpty {
-                    //Swift.debugPrint("AllVisits in model is empty -> load from json file")
                     if Helper.jsonExists(year: self.year) {
                         let json : String = Helper.readJson(year: self.year)
                         if json.isEmpty {
-                            //Swift.debugPrint("Json file present but empty, create new one")
                             let isoCode : String = Properties.instance.country!
                             if !isoCode.isEmpty {
                                 let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
@@ -227,7 +270,6 @@ struct ContentView: View {
                         } else {
                             let countries : [Country] = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { self.model.allVisits.insert(country) }
-                            //Swift.debugPrint("Loaded allVisits from json in ContentView")
                         }
                     } else {
                         //Swift.debugPrint("json file does not exists when try to read in ContentView")
@@ -241,10 +283,10 @@ struct ContentView: View {
             }
             .fileExporter(isPresented: $showingExporter, document: TextFile(initialText: Helper.createCSV(year: self.selectedYear), year: self.selectedYear), contentType: .plainText) { result in
                 switch result {
-                case .success(let url):
-                    Swift.debugPrint("Saved to \(url)")
-                case .failure(let error):
-                    Swift.debugPrint("Error: \(error.localizedDescription)")
+                    case .success(let url):
+                        Swift.debugPrint("Saved to \(url)")
+                    case .failure(let error):
+                        Swift.debugPrint("Error: \(error.localizedDescription)")
                 }
             }
             .sheet(isPresented: self.$importVisible, content: {
@@ -283,12 +325,23 @@ struct ContentView: View {
             self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: Set<Country>(self.sortedCountries)).sorted(by: { lhs, rhs in
                 return rhs.visits.count < lhs.visits.count
             })
-            for country in self.sortedCountriesThisMonth {
-                debugPrint("Country: \(country.isoInfo.name), Visits: \(country.visits.count)")
-            }
             Helper.visitsThisMonthToUserDefaults(jsonTxt: Helper.visitsToJson(allVisits: Set<Country>(self.sortedCountriesThisMonth)))
         }
+        
     }
+    
+    private func updateSortedCountriesForSelection() -> Void {
+        if self.model.ignoreHomeCountry {
+            self.sortedCountriesSelectedMonth = Helper.visitsSelectedMonth(selectedMonth: self.model.selectedMonth, allVisits: Set<Country>(self.sortedCountries)).filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+        } else {
+            self.sortedCountriesSelectedMonth = Helper.visitsSelectedMonth(selectedMonth: self.model.selectedMonth, allVisits: Set<Country>(self.sortedCountries)).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+        }
+    }
+    
 
     
     private func updateCountryFromProperties() -> Void {

@@ -57,6 +57,13 @@ public class Country : Hashable, Identifiable {
         return self.getVisitsIn(month: month, year: year)
     }
     
+    public func getVisitsSelectedMonth(month: Int) -> Int {
+        let now      : Date     = Date.now
+        let calendar : Calendar = Calendar.current
+        let year     : Int      = calendar.component(.year, from: now)
+        return self.getVisitsIn(month: month, year: year)
+    }
+    
     public func hash(into hasher: inout Hasher) {
         hasher.combine(isoInfo.alpha2)
     }

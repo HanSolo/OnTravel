@@ -12,6 +12,8 @@ struct SettingsView: View {
     @EnvironmentObject      private var model             : OnTravelModel
     @State                  private var selectedIndex     : Int           = Properties.instance.homeCountryIndex!
     @State                  private var ignoreHomeCountry : Bool          = Properties.instance.ignoreHomeCountry!
+    @State                  private var metric            : Bool          = Properties.instance.metric!
+    
     
     private let isoCountries      : [IsoCountryInfo] = IsoCountries.allCountries
     private let numberOfCountries : Int              = IsoCountries.allCountries.count
@@ -45,6 +47,9 @@ struct SettingsView: View {
             Toggle(isOn: self.$ignoreHomeCountry, label: {
                 Text("Ignore home country")
             })
+            Toggle(isOn: self.$metric, label: {
+                Text("Metric system")
+            })
         }
         .onChange(of: self.selectedIndex) {
             Properties.instance.homeCountryIndex = self.selectedIndex
@@ -53,6 +58,10 @@ struct SettingsView: View {
         .onChange(of: self.ignoreHomeCountry) {
             Properties.instance.ignoreHomeCountry = self.ignoreHomeCountry
             self.model.ignoreHomeCountry          = self.ignoreHomeCountry
+        }
+        .onChange(of: self.metric) {
+            Properties.instance.metric = self.metric
+            self.model.metric          = self.metric
         }
     }
 }

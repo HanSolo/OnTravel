@@ -20,7 +20,8 @@ extension Key {
     static let jsonBookmark       : Key = "jsonBookmark"
     static let homeCountryIndex   : Key = "homeCountryIndex"
     static let ignoreHomeCountry  : Key = "ignoreHomeCountry"
-    static let lastCurrencyUpdate : Key = "lastCurrencyUpdate" 
+    static let lastCurrencyUpdate : Key = "lastCurrencyUpdate"
+    static let metric             : Key = "metric"
 }
 
 
@@ -56,6 +57,9 @@ public struct Properties {
     
     @UserDefault(key: .lastCurrencyUpdate, defaultValue: Date.init().timeIntervalSince1970 - Constants.SECONDS_48H)
     var lastCurrencyUpdate: Double?
+    
+    @UserDefault(key: .metric, defaultValue: true)
+    var metric: Bool?
         
     private init() {}
 }

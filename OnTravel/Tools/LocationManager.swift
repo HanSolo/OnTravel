@@ -35,6 +35,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.identifier               = self.timezone.identifier
             self.offsetFromGMT            = Double(self.timezone.secondsFromGMT())
             self.isDST                    = TimeZone.current.isDaylightSavingTime()
+            
+            DispatchQueue.main.async {
+                let times         : Dictionary<String, Date> = self.magicHours.getTimes(date: Date.now, lat: self.latitude, lon: self.longitude)
+                let dateFormatter : DateFormatter            = DateFormatter()
+                
+                dateFormatter.timeZone   = self.timezone
+                dateFormatter.dateFormat = Constants.METRIC_TIME_FORMAT
+                self.sunriseMetric       = dateFormatter.string(from: times["sunrise"]!)
+                self.sunsetMetric        = dateFormatter.string(from: times["sunset"]!)
+                
+                dateFormatter.dateFormat = Constants.IMPERIAL_TIME_FORMAT
+                self.sunriseImperial     = dateFormatter.string(from: times["sunrise"]!)
+                self.sunsetImperial      = dateFormatter.string(from: times["sunset"]!)
+            }
         }
     }
     @Published var lastLocation      : CLLocation?
@@ -47,6 +61,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var identifier        : String            = TimeZone.current.identifier
     @Published var offsetFromGMT     : Double            = Double(TimeZone.current.secondsFromGMT())    
     @Published var isDST             : Bool              = TimeZone.current.isDaylightSavingTime()
+    @Published var magicHours        : MagicHours        = MagicHours()
+    @Published var sunriseMetric     : String            = "-"
+    @Published var sunsetMetric      : String            = "-"
+    @Published var sunriseImperial   : String            = "-"
+    @Published var sunsetImperial    : String            = "-"
         
     private    let locationManager   : CLLocationManager = CLLocationManager()
     private    let geocoder          : CLGeocoder        = CLGeocoder()

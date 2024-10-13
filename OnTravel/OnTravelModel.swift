@@ -31,6 +31,8 @@ public class OnTravelModel : ObservableObject {
     @Published var availableYears       : [Int]          = Helper.availableYears()
     @Published var homeCountry          : IsoCountryInfo = IsoCountries.allCountries[Properties.instance.homeCountryIndex!]
     @Published var ignoreHomeCountry    : Bool           = Properties.instance.ignoreHomeCountry!
+    @Published var metric               : Bool           = Properties.instance.metric!
+    @Published var selectedMonth        : Int            = Calendar.current.component(.month, from: Date.now)
     
     
     
@@ -65,7 +67,7 @@ public class OnTravelModel : ObservableObject {
     }
     
     public func toCSV() -> String {
-        let dateFormatter : DateFormatter = DateFormatter(dateFormat: "dd/MM/yyyy", calendar: Calendar.current)
+        let dateFormatter : DateFormatter = DateFormatter(dateFormat: self.metric ? Constants.METRIC_DATE_FORMAT : Constants.IMPERIAL_DATE_FORMAT, calendar: Calendar.current)
         var csv           : String        = "\"iso\",\"name\",\"date\"\n"
         for country in self.allVisits {
             for date in country.visits {

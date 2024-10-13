@@ -263,6 +263,8 @@
 		4FA9B0B52C85EBC0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
 		4FA9B0B62C85EBC0007F3B1B /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
 		4FA9B0B72C85EBC0007F3B1B /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
+		4FAF7FC92CB7AE78004D766A /* MagicHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF7FC82CB7AE78004D766A /* MagicHours.swift */; };
+		4FAF7FCA2CB7AE78004D766A /* MagicHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF7FC82CB7AE78004D766A /* MagicHours.swift */; };
 		4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */; };
 		4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
 		4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
@@ -526,6 +528,7 @@
 		4FA9B0952C85EA83007F3B1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FA9B0972C85EA83007F3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FA9B09E2C85EA9C007F3B1B /* OnTravelWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTravelWidgetExtension.entitlements; sourceTree = "<group>"; };
+		4FAF7FC82CB7AE78004D766A /* MagicHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHours.swift; sourceTree = "<group>"; };
 		4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 		4FD755A82C7F2974001AB93C /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
@@ -847,6 +850,7 @@
 				4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */,
 				4F3D75A82C9026910010EE0A /* Rates.swift */,
 				4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */,
+				4FAF7FC82CB7AE78004D766A /* MagicHours.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1191,6 +1195,7 @@
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
 				4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */,
+				4FAF7FCA2CB7AE78004D766A /* MagicHours.swift in Sources */,
 				4F6EEFFC2C7DEE8700D4D5B0 /* MapView.swift in Sources */,
 				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
 				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
@@ -1233,6 +1238,7 @@
 				4FA9B0B42C85EBC0007F3B1B /* Calendar+numberOfDays.swift in Sources */,
 				4FA9B0B52C85EBC0007F3B1B /* DateFormatter+convenienceInit.swift in Sources */,
 				4FA9B0B62C85EBC0007F3B1B /* View+onRotate.swift in Sources */,
+				4FAF7FC92CB7AE78004D766A /* MagicHours.swift in Sources */,
 				4FA9B0B72C85EBC0007F3B1B /* FileManager+documentsDirectory.swift in Sources */,
 				4FA9B0B02C85EBBA007F3B1B /* ObjectSaveable.swift in Sources */,
 				4FA9B0B12C85EBBA007F3B1B /* Observable.swift in Sources */,

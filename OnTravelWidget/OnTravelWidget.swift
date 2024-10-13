@@ -13,13 +13,11 @@ struct Provider: TimelineProvider {
     @EnvironmentObject private var model : OnTravelModel
     
     func placeholder(in context: Context) -> OnTravelEntry {
-        //let visitsThisMonth : [Country] = Helper.visitsThisMonth(allVisits: Set<Country>(Helper.visitsThisMonthFromUserDefaults()))
         let visitsThisMonth : [Country] = Helper.visitsThisMonthFromUserDefaults()
         return OnTravelEntry(date: Date(), countries: visitsThisMonth)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (OnTravelEntry) -> ()) {
-        //let visitsThisMonth : [Country] = Helper.visitsThisMonth(allVisits: Set<Country>(Helper.visitsThisMonthFromUserDefaults()))
         let visitsThisMonth : [Country] = Helper.visitsThisMonthFromUserDefaults()
         let entry = OnTravelEntry(date: Date(), countries: visitsThisMonth)
         completion(entry)
@@ -30,8 +28,7 @@ struct Provider: TimelineProvider {
         let now     : Date            = Date()
             
         for hourOffset in 0 ..< 2 { // 2 entries an hour
-            let entryDate       : Date          = Calendar.current.date(byAdding: .hour, value: hourOffset, to: now)!
-            //let visitsThisMonth : [Country]     = Helper.visitsThisMonth(allVisits: Set<Country>(Helper.visitsThisMonthFromUserDefaults()))
+            let entryDate       : Date          = Calendar.current.date(byAdding: .hour, value: hourOffset, to: now)!            
             let visitsThisMonth : [Country]     = Helper.visitsThisMonthFromUserDefaults()
             let entry           : OnTravelEntry = OnTravelEntry(date: entryDate, countries: visitsThisMonth)
             entries.append(entry)

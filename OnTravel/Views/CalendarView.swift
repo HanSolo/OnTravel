@@ -22,7 +22,11 @@ struct CalendarView: View {
     private let dateFormatter   : DateFormatter
 
     @State private var showingAlert : Bool   = false
-    @State private var selectedDate : Date   = Self.now
+    @State private var selectedDate : Date   = Self.now {
+        didSet {
+            self.model.selectedMonth = Calendar.current.dateComponents([.month], from: selectedDate).month!
+        }
+    }
     private static var now          : Date   = Date.now
 
         

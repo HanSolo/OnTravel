@@ -57,6 +57,12 @@ public class Helper {
         return countriesFound
     }
     
+    public static func visitsSelectedMonth(selectedMonth: Int, allVisits: Set<Country>) -> [Country] {                
+        let month          : Int       = selectedMonth
+        let countriesFound : [Country] = allVisits.filter({ $0.getVisitsSelectedMonth(month: month) > 0 })
+        return countriesFound
+    }
+    
     public static func visitsThisYear(allVisits: Set<Country>) -> [Country] {
         let now            : Date      = Date.init()
         let calendar       : Calendar  = Calendar.current
@@ -377,5 +383,18 @@ public class Helper {
     public static func readCurrenciesFromUserDefaults() -> [String:Double] {
         let userDefaults = UserDefaults.standard
         return (userDefaults.object(forKey: Constants.CURRENCIES_KEY_UD) as? [String:Double]) ?? [:]
+    }
+    
+    public static func dateToString(fromDate date: Date, formatString: String) -> String {
+        return dateToString(fromDate: date, formatString: formatString, timezone: TimeZone.current)
+    }
+    public static func dateToString(fromDate date: Date, formatString: String, timezoneIdentifier: String) -> String {
+        return dateToString(fromDate: date, formatString: formatString, timezone: TimeZone(identifier: timezoneIdentifier) ?? .current)
+    }
+    public static func dateToString(fromDate date: Date, formatString: String, timezone: TimeZone) -> String {
+        let dateFormatter        = DateFormatter()
+        dateFormatter.timeZone   = timezone
+        dateFormatter.dateFormat = formatString.isEmpty ? Constants.METRIC_DATE_TIME_FORMAT : formatString
+        return dateFormatter.string(from: date)
     }
 }
