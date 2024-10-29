@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
-		4F1E3C172C81E42A00418609 /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4F1E3C162C81E42A00418609 /* SVGView */; };
 		4F34E0DC2C8AED5600C1F45E /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */; };
 		4F34E2FF2C8B106A00C1F45E /* MRT.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F34E24D2C8B106200C1F45E /* MRT.geo.json */; };
 		4F34E3002C8B106A00C1F45E /* UZB.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F34E24E2C8B106200C1F45E /* UZB.geo.json */; };
@@ -219,8 +218,6 @@
 		4F4F380D2C79B30800522ABC /* Calendar+numberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */; };
 		4F4F38112C79B76000522ABC /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38102C79B76000522ABC /* JsonData.swift */; };
 		4F4F38132C79BDE800522ABC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F38122C79BDE800522ABC /* Helper.swift */; };
-		4F6EEFF62C7DDDE100D4D5B0 /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4F6EEFF52C7DDDE100D4D5B0 /* SVGView */; };
-		4F6EEFFC2C7DEE8700D4D5B0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6EEFFB2C7DEE8700D4D5B0 /* MapView.swift */; };
 		4F7438292C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */; };
 		4F74382B2C7C5CFF006DDB8B /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382A2C7C5CFF006DDB8B /* TextFile.swift */; };
 		4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74382D2C7C83EE006DDB8B /* EventManager.swift */; };
@@ -507,7 +504,6 @@
 		4F4F380C2C79B30800522ABC /* Calendar+numberOfDays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+numberOfDays.swift"; sourceTree = "<group>"; };
 		4F4F38102C79B76000522ABC /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 		4F4F38122C79BDE800522ABC /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		4F6EEFFB2C7DEE8700D4D5B0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4F7438282C7C5A59006DDB8B /* DateFormatter+convenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+convenienceInit.swift"; sourceTree = "<group>"; };
 		4F74382A2C7C5CFF006DDB8B /* TextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFile.swift; sourceTree = "<group>"; };
 		4F74382D2C7C83EE006DDB8B /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
@@ -539,8 +535,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1E3C172C81E42A00418609 /* SVGView in Frameworks */,
-				4F6EEFF62C7DDDE100D4D5B0 /* SVGView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,7 +822,6 @@
 			children = (
 				4F4F37D82C79AFF000522ABC /* ContentView.swift */,
 				4F4F37EB2C79B1B300522ABC /* CalendarView.swift */,
-				4F6EEFFB2C7DEE8700D4D5B0 /* MapView.swift */,
 				4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */,
 				4FA749822C87739E000A2344 /* PiechartView.swift */,
 				4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */,
@@ -914,8 +907,6 @@
 			);
 			name = OnTravel;
 			packageProductDependencies = (
-				4F6EEFF52C7DDDE100D4D5B0 /* SVGView */,
-				4F1E3C162C81E42A00418609 /* SVGView */,
 			);
 			productName = OnTravel;
 			productReference = 4F4F37D32C79AFF000522ABC /* OnTravel.app */;
@@ -966,7 +957,6 @@
 			);
 			mainGroup = 4F4F37CA2C79AFF000522ABC;
 			packageReferences = (
-				4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */,
 			);
 			productRefGroup = 4F4F37D42C79AFF000522ABC /* Products */;
 			projectDirPath = "";
@@ -1196,7 +1186,6 @@
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
 				4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */,
 				4FAF7FCA2CB7AE78004D766A /* MagicHours.swift in Sources */,
-				4F6EEFFC2C7DEE8700D4D5B0 /* MapView.swift in Sources */,
 				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
 				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
 				4F4F37F12C79B1B300522ABC /* NetworkMonitor.swift in Sources */,
@@ -1404,7 +1393,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -1427,7 +1416,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.23;
+				MARKETING_VERSION = 17.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1448,7 +1437,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -1471,7 +1460,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.23;
+				MARKETING_VERSION = 17.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1491,7 +1480,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -1502,7 +1491,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.23;
+				MARKETING_VERSION = 17.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1523,7 +1512,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -1534,7 +1523,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.23;
+				MARKETING_VERSION = 17.0.25;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1579,29 +1568,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/SVGView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4F1E3C162C81E42A00418609 /* SVGView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F6EEFED2C7DCF8400D4D5B0 /* XCRemoteSwiftPackageReference "SVGView" */;
-			productName = SVGView;
-		};
-		4F6EEFF52C7DDDE100D4D5B0 /* SVGView */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SVGView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4F4F37CB2C79AFF000522ABC /* Project object */;
 }

@@ -175,9 +175,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 jsonTxt += "\(date.timeIntervalSince1970),"
                             }
                             jsonTxt += "]}]"
-                            DispatchQueue.global().async {
-                                Helper.saveJson(json: jsonTxt)
-                            }
+                            Helper.saveJson(json: jsonTxt)
                             Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                             Helper.visitsThisYearToUserDefaults(jsonTxt: jsonTxt)
                         }
@@ -204,11 +202,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             if needsToBeSaved {
                                 // Only save json file if needed
                                 let jsonTxt : String = Helper.visitsToJson(allVisits: allVisits)
-                                DispatchQueue.global().async {
-                                    Helper.saveJson(json: jsonTxt)
-                                    debugPrint("Json file exists -> updated visits and saved json file in LocationManager")
-                                    Helper.updateCurrencies(forceUpdate: false)
-                                }
+                                Helper.saveJson(json: jsonTxt)
+                                debugPrint("Json file exists -> updated visits and saved json file in LocationManager")
+                                Helper.updateCurrencies(forceUpdate: false)
                             } else {
                                 debugPrint("No changes -> saving json file not needed")
                             }
@@ -227,11 +223,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                             jsonTxt += "\(date.timeIntervalSince1970),"
                         }
                         jsonTxt += "]}]"
-                        DispatchQueue.global().async {
-                            Helper.saveJson(json: jsonTxt)
-                            debugPrint("Json file did not exists -> saved new json file in LocationManager")
-                            Helper.updateCurrencies(forceUpdate: false)
-                        }
+                        
+                        Helper.saveJson(json: jsonTxt)
+                        debugPrint("Json file did not exists -> saved new json file in LocationManager")
+                        Helper.updateCurrencies(forceUpdate: false)
+                        
                         Helper.visitsThisMonthToUserDefaults(jsonTxt: jsonTxt)
                         Helper.visitsThisYearToUserDefaults(jsonTxt: jsonTxt)
                     }

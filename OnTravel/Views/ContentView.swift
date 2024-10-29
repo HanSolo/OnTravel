@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import CoreLocation
-import SVGView
 import WidgetKit
 
 
@@ -246,10 +245,11 @@ struct ContentView: View {
             }
             .onChange(of: self.locationManager.storedProperties) {
                 self.updateCountryFromProperties()
-            }
+            }            
             .onChange(of: self.model.allVisits) {
                 refreshCalendarView.toggle()
                 self.updateSortedCountries()
+                self.updateSortedCountriesForSelection()
             }
             .onChange(of: self.model.selectedMonth) {
                 self.updateSortedCountriesForSelection()
@@ -266,6 +266,7 @@ struct ContentView: View {
                     if Helper.jsonExists(year: self.year) {
                         let json : String = Helper.readJson(year: self.year)
                         if json.isEmpty {
+                            debugPrint("json is empty")
                             let isoCode : String = Properties.instance.country!
                             if !isoCode.isEmpty {
                                 let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: isoCode)!
@@ -277,14 +278,29 @@ struct ContentView: View {
                                 self.name = isoInfo.name
                             }
                         } else {
+                            debugPrint("json is not empty")
                             let countries : [Country] = Helper.countriesFromJson(jsonTxt: json)
                             for country in countries { self.model.allVisits.insert(country) }
                         }
                     } else {
                         //Swift.debugPrint("json file does not exists when try to read in ContentView")
                     }
+                } else {                                        
+                    let countriesThisMonth : [Country] = Helper.visitsThisMonthFromUserDefaults()
+                    if countriesThisMonth.isEmpty { return }
+                    debugPrint("Refresh with visits from this month")
+                    for country in countriesThisMonth {
+                        if self.model.allVisits.contains(where: { $0.isoInfo.alpha2.lowercased() == country.isoInfo.alpha2.lowercased() }) {
+                            for visit in country.visits {
+                                if let countryFound = self.model.allVisits.filter({ $0.isoInfo.alpha2.lowercased() == country.isoInfo.alpha2.lowercased() }).first {
+                                    countryFound.addVisit(date: visit)
+                                } else {
+                                    self.model.allVisits.insert(country)
+                                }
+                            }
+                        }
+                    }
                 }
-                
                 WidgetCenter.shared.reloadAllTimelines()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { (_) in                
@@ -320,20 +336,38 @@ struct ContentView: View {
     
     private func updateSortedCountries() -> Void {
         if self.model.ignoreHomeCountry {
+            self.sortedCountries = self.model.allVisits.filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: self.model.allVisits).filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            
+            /*
             self.sortedCountries = Helper.visitsThisYearFromUserDefaults().filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
                 return rhs.visits.count < lhs.visits.count
             })
             self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: Set<Country>(self.sortedCountries)).filter({ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }).sorted(by: { lhs, rhs in
                 return rhs.visits.count < lhs.visits.count
             })
+            */
             Helper.visitsThisMonthToUserDefaults(jsonTxt: Helper.visitsToJson(allVisits: Set<Country>(self.sortedCountriesThisMonth)))
         } else {
+            self.sortedCountries = self.model.allVisits.sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: self.model.allVisits).sorted(by: { lhs, rhs in
+                return rhs.visits.count < lhs.visits.count
+            })
+            
+            /*
             self.sortedCountries = Helper.visitsThisYearFromUserDefaults().sorted(by: { lhs, rhs in
                 return rhs.visits.count < lhs.visits.count
             })
             self.sortedCountriesThisMonth = Helper.visitsThisMonth(allVisits: Set<Country>(self.sortedCountries)).sorted(by: { lhs, rhs in
                 return rhs.visits.count < lhs.visits.count
             })
+            */
             Helper.visitsThisMonthToUserDefaults(jsonTxt: Helper.visitsToJson(allVisits: Set<Country>(self.sortedCountriesThisMonth)))
         }
         
