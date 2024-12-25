@@ -33,8 +33,19 @@ public class OnTravelModel : ObservableObject {
     @Published var ignoreHomeCountry    : Bool           = Properties.instance.ignoreHomeCountry!
     @Published var metric               : Bool           = Properties.instance.metric!
     @Published var selectedMonth        : Int            = Calendar.current.component(.month, from: Date.now)
+    @Published var holidays             : [Date]         = Properties.instance.holidays! {
+        didSet {
+            debugPrint("Holidays changed: \(self.holidays)")
+        }
+    }
     
     
+    public func dayIsPublicHoliday(_ day: Date) -> Bool {
+        for holiday in self.holidays {
+            if day.isSameDDMMYYYY(as: holiday) { return true }
+        }
+        return false
+    }
     
     public func totalDaysOnTravel() -> Int {
         return self.allVisits.map( {$0.visits.count }).reduce(0, +)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */; };
+		4F25D9532D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F25D9522D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift */; };
+		4F25D9542D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F25D9522D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift */; };
 		4F34E0DC2C8AED5600C1F45E /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */; };
 		4F34E2FF2C8B106A00C1F45E /* MRT.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F34E24D2C8B106200C1F45E /* MRT.geo.json */; };
 		4F34E3002C8B106A00C1F45E /* UZB.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F34E24E2C8B106200C1F45E /* UZB.geo.json */; };
@@ -225,6 +227,8 @@
 		4F7438322C7C899B006DDB8B /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438312C7C899B006DDB8B /* Sender.swift */; };
 		4F7438342C7C8A12006DDB8B /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438332C7C8A12006DDB8B /* Receiver.swift */; };
 		4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7438352C7C8B46006DDB8B /* TestEvents.swift */; };
+		4F75391E2CFDC0EE00753830 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75391D2CFDC0EE00753830 /* Color+Hex.swift */; };
+		4F75391F2CFDC0EE00753830 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75391D2CFDC0EE00753830 /* Color+Hex.swift */; };
 		4F7858A12C7CE87900462952 /* AppIconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7858A02C7CE87900462952 /* AppIconProvider.swift */; };
 		4F7DCFC42CABE80E00B4676F /* ImportJsonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7DCFC32CABE80E00B4676F /* ImportJsonView.swift */; };
 		4FA749832C87739E000A2344 /* PiechartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA749822C87739E000A2344 /* PiechartView.swift */; };
@@ -265,6 +269,8 @@
 		4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */; };
 		4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */; };
 		4FD755A92C7F2974001AB93C /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD755A82C7F2974001AB93C /* View+onRotate.swift */; };
+		4FFC5AD12D14863C009541B9 /* HolidayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC5AD02D14863C009541B9 /* HolidayData.swift */; };
+		4FFC5AD22D14863C009541B9 /* HolidayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC5AD02D14863C009541B9 /* HolidayData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +299,7 @@
 
 /* Begin PBXFileReference section */
 		4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+documentsDirectory.swift"; sourceTree = "<group>"; };
+		4F25D9522D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+isSameDDMMYYYY.swift"; sourceTree = "<group>"; };
 		4F34E0DB2C8AED5600C1F45E /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
 		4F34E24D2C8B106200C1F45E /* MRT.geo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MRT.geo.json; sourceTree = "<group>"; };
 		4F34E24E2C8B106200C1F45E /* UZB.geo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = UZB.geo.json; sourceTree = "<group>"; };
@@ -511,6 +518,7 @@
 		4F7438312C7C899B006DDB8B /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		4F7438332C7C8A12006DDB8B /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		4F7438352C7C8B46006DDB8B /* TestEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEvents.swift; sourceTree = "<group>"; };
+		4F75391D2CFDC0EE00753830 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		4F7858A02C7CE87900462952 /* AppIconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconProvider.swift; sourceTree = "<group>"; };
 		4F7DCFC32CABE80E00B4676F /* ImportJsonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportJsonView.swift; sourceTree = "<group>"; };
 		4FA749822C87739E000A2344 /* PiechartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiechartView.swift; sourceTree = "<group>"; };
@@ -528,6 +536,7 @@
 		4FD0B0BC2C8725DA00C38BD7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4FD755A62C7F2952001AB93C /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 		4FD755A82C7F2974001AB93C /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
+		4FFC5AD02D14863C009541B9 /* HolidayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -813,6 +822,8 @@
 				4F1E3C142C81D83500418609 /* FileManager+documentsDirectory.swift */,
 				4F34E3B12C8B160500C1F45E /* MKMultiPoint+coordinates.swift */,
 				4F34E3B32C8B247400C1F45E /* CLLocationCoordinate2D+Hashable.swift */,
+				4F75391D2CFDC0EE00753830 /* Color+Hex.swift */,
+				4F25D9522D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -844,6 +855,7 @@
 				4F3D75A82C9026910010EE0A /* Rates.swift */,
 				4F3D75AC2C902CDA0010EE0A /* ExchangeRateData.swift */,
 				4FAF7FC82CB7AE78004D766A /* MagicHours.swift */,
+				4FFC5AD02D14863C009541B9 /* HolidayData.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1181,11 +1193,13 @@
 				4F74382E2C7C83EE006DDB8B /* EventManager.swift in Sources */,
 				4F4F38052C79B2F100522ABC /* Properties.swift in Sources */,
 				4F34E0DC2C8AED5600C1F45E /* GlobeView.swift in Sources */,
+				4F75391F2CFDC0EE00753830 /* Color+Hex.swift in Sources */,
 				4F34E3B22C8B160500C1F45E /* MKMultiPoint+coordinates.swift in Sources */,
 				4F4F37FB2C79B1B300522ABC /* IsoCountryInfo.swift in Sources */,
 				4F4F37FD2C79B20D00522ABC /* AppDelegate.swift in Sources */,
 				4FD755A72C7F2952001AB93C /* DeviceRotationViewModifier.swift in Sources */,
 				4FAF7FCA2CB7AE78004D766A /* MagicHours.swift in Sources */,
+				4F25D9542D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift in Sources */,
 				4F4F380A2C79B2F100522ABC /* ObjectSaveableError.swift in Sources */,
 				4F4F37F62C79B1B300522ABC /* CalendarView.swift in Sources */,
 				4F4F37F12C79B1B300522ABC /* NetworkMonitor.swift in Sources */,
@@ -1199,6 +1213,7 @@
 				4F7438362C7C8B46006DDB8B /* TestEvents.swift in Sources */,
 				4F4F37F32C79B1B300522ABC /* OnTravelModel.swift in Sources */,
 				4FD0B0BD2C8725DA00C38BD7 /* SettingsView.swift in Sources */,
+				4FFC5AD22D14863C009541B9 /* HolidayData.swift in Sources */,
 				4F3D75A92C9026910010EE0A /* Rates.swift in Sources */,
 				4F1E3C152C81D83500418609 /* FileManager+documentsDirectory.swift in Sources */,
 				4F4F38072C79B2F100522ABC /* Observable.swift in Sources */,
@@ -1235,9 +1250,11 @@
 				4FA9B0B32C85EBBA007F3B1B /* Properties.swift in Sources */,
 				4FA9B0942C85EA82007F3B1B /* OnTravelWidget.swift in Sources */,
 				4FA9B09F2C85EBA9007F3B1B /* OnTravelModel.swift in Sources */,
+				4F25D9532D1BDC6600E5C17F /* Date+isSameDDMMYYYY.swift in Sources */,
 				4FA9B0A02C85EBA9007F3B1B /* IsoCountryInfo.swift in Sources */,
 				4F3D75AF2C9032B60010EE0A /* Rates.swift in Sources */,
 				4FA9B0A12C85EBA9007F3B1B /* IsoCountryCodes.swift in Sources */,
+				4FFC5AD12D14863C009541B9 /* HolidayData.swift in Sources */,
 				4FA9B0A22C85EBA9007F3B1B /* Constants.swift in Sources */,
 				4FA9B0A62C85EBB5007F3B1B /* LocationManager.swift in Sources */,
 				4FA9B0A72C85EBB5007F3B1B /* RestController.swift in Sources */,
@@ -1252,6 +1269,7 @@
 				4FA9B0A42C85EBA9007F3B1B /* ProcessingOperation.swift in Sources */,
 				4FA9B0922C85EA82007F3B1B /* OnTravelWidgetBundle.swift in Sources */,
 				4FA9B0A52C85EBAF007F3B1B /* Visit.swift in Sources */,
+				4F75391E2CFDC0EE00753830 /* Color+Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,7 +1411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -1416,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.25;
+				MARKETING_VERSION = 17.0.29;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1437,7 +1455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OnTravel/OnTravel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"OnTravel/Preview Content\"";
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				ENABLE_PREVIEWS = YES;
@@ -1460,7 +1478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 17.0.25;
+				MARKETING_VERSION = 17.0.29;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1480,7 +1498,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -1491,7 +1509,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.25;
+				MARKETING_VERSION = 17.0.29;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1512,7 +1530,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = OnTravelWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = L4A7549EHC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OnTravelWidget/Info.plist;
@@ -1523,7 +1541,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 17.0.25;
+				MARKETING_VERSION = 17.0.29;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.hansolo.OnTravel.OnTravelWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

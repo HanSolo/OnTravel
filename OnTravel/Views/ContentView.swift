@@ -275,7 +275,7 @@ struct ContentView: View {
                                 _ = country.addVisit(date: now)
                                 self.model.allVisits.insert(country)
                                 self.flag = isoInfo.flag ?? ""
-                                self.name = isoInfo.name
+                                self.name = isoInfo.name                                
                             }
                         } else {
                             debugPrint("json is not empty")
@@ -391,6 +391,7 @@ struct ContentView: View {
         // Avoid update country when altitude > 6000m or speed > 300 kph (usually when on a plane)
         if self.locationManager.location?.altitude ?? 0 > Constants.ALTITUDE_LIMIT || self.locationManager.location?.speed ?? 0 > Constants.SPEED_LIMIT { return }
         DispatchQueue.main.async {
+            self.model.holidays = Properties.instance.holidays!
             let country : String = Properties.instance.country!
             let now     : Date   = Date.init(timeIntervalSince1970: Properties.instance.timestamp!)            
             if !country.isEmpty {

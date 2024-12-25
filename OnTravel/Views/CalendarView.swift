@@ -51,9 +51,13 @@ struct CalendarView: View {
                         }) {
                             Text(dayFormatter.string(from: date))
                                 .font(.system(size: 14))
+                                .fontWeight(calendar.isDateInToday(date) ? .bold : .regular)
+                                .underline(calendar.isDateInToday(date))
                                 .padding(EdgeInsets(top: 1, leading: 0, bottom: 6, trailing: 0))
                                 .frame(width: 24, height: 24)
-                                .foregroundStyle(calendar.isDateInToday(date) ? Color.accentColor : .primary )
+                                .foregroundStyle(self.model.dayIsPublicHoliday(date) ? Color.red : Color.primary)
+                                //.border(calendar.isDateInToday(date) ? Color.accentColor : Color.clear)
+                                //.overlay(RoundedRectangle(cornerRadius: 16).stroke(calendar.isDateInToday(date) ? Color.accentColor : Color.clear))
                                 .cornerRadius(5)
                         }
                         .alert(
@@ -242,7 +246,7 @@ public struct CalendarViewComponent<Day: View, Header: View, Title: View, Traili
     
     public var body: some View {
         let month = date.startOfMonth(using: calendar)
-        let days = makeDays()
+        let days  = makeDays()
         
         VStack {
             

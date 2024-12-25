@@ -352,7 +352,7 @@ public class Helper {
             if forceUpdate! {
                 let rates : [String:Double] = await RestController.getCurrencies()
                 storeCurrenciesToUserDefaults(currencies: rates)
-                debugPrint("Forced currencies updated and stored to properties")
+                debugPrint("Forced update of currencies and stored to properties")
             } else {
                 let lastUpdate : Double = Properties.instance.lastCurrencyUpdate!
                 let now        : Double = Date.init().timeIntervalSince1970
@@ -365,7 +365,7 @@ public class Helper {
             }
         }
     }
-    
+        
     public static func getCurrencyRateString(homeCountry: IsoCountryInfo, currentCountry: IsoCountryInfo) -> String {
         if homeCountry.currency == currentCountry.currency { return "" }
         let currency   : String          = currentCountry.currency

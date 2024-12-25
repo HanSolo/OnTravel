@@ -81,4 +81,54 @@ class RestController {
             return [:]
         }
     }
+    
+    public static func getPublicHolidays(countryInfo : IsoCountryInfo) async -> [Holidays]? {
+        let sessionConfig : URLSessionConfiguration = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest  = 2.0
+        sessionConfig.timeoutIntervalForResource = 2.0
+        
+        let country   : String = countryInfo.alpha2
+        let now       : Date   = Date()
+        let month     : Int    = Calendar.current.component(.month, from: now)
+        let year      : Int    = Calendar.current.component(.year, from: now)
+        
+        let urlString   : String         = "\(Constants.FESTIVO_PUBLIC_HOLIDAY_API_URL)?api_key=\(Constants.FESTIVO_API_KEY)&country=\(country)&year=\(year)&month=\(month)&public=true"
+        let session     : URLSession     = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: .main)
+        let finalUrl    : URL            = URL(string: urlString)!
+        var request     : URLRequest     = URLRequest(url: finalUrl)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        debugPrint(urlString)
+        do {
+            let resp: (Data,URLResponse) = try await session.data(for: request)
+            
+            if let httpResponse = resp.1 as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    let data        : Data        = resp.0
+                    let jsonDecoder : JSONDecoder = JSONDecoder()
+                    if let holidayData : HolidayData = try? jsonDecoder.decode(HolidayData.self, from: data) {
+                        if holidayData.holidays == nil {
+                            debugPrint("holidayData.holidays == nil")
+                            return []
+                        } else {
+                            return holidayData.holidays
+                        }
+                    } else {
+                        print("something went wrong when decoding the data")
+                    }
+                    return []
+                } else {
+                    debugPrint("http response status code != 200")
+                    return []
+                }
+            } else {
+                debugPrint("No valid http response")
+                return []
+            }
+        } catch {
+            debugPrint("Error calling FestivoAPI. Error: \(error.localizedDescription)")
+            return []
+        }
+    }
 }

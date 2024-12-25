@@ -151,15 +151,32 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if nil != placemark.isoCountryCode {
                 self.placemark = placemark
                 
-                let now            : Date     = Date.init()
-                let year           : Int      = Calendar.current.component(.year, from: now)
-                let isoCountryCode : String   = placemark.isoCountryCode ?? ""
-                let flag           : String   = IsoCountryCodes.find(key: isoCountryCode)?.flag ?? ""
+                let now            : Date           = Date.init()
+                let year           : Int            = Calendar.current.component(.year, from: now)
+                let isoCountryCode : String         = placemark.isoCountryCode ?? ""
+                let flag           : String         = IsoCountryCodes.find(key: isoCountryCode)?.flag ?? ""
+                let isoInfo        : IsoCountryInfo = IsoCountryCodes.find(key: isoCountryCode)!
+                
+                if Properties.instance.country != isoCountryCode {
+                    Task {
+                        let holidays : [Holidays]? = await RestController.getPublicHolidays(countryInfo: isoInfo)
+                        if nil != holidays {
+                            let dateFormatter : DateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = Constants.PUBLIC_HOLIDAY_DATE_FORMAT
+                            Properties.instance.holidays!.removeAll()
+                            for holiday in holidays! {
+                                let date : Date? = dateFormatter.date(from: holiday.start!)
+                                if nil != date {
+                                    Properties.instance.holidays!.append(date!)
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 Properties.instance.country   = isoCountryCode
                 Properties.instance.flag      = flag
                 Properties.instance.timestamp = now.timeIntervalSince1970
-                
-                let isoInfo : IsoCountryInfo = IsoCountryCodes.find(key: placemark.isoCountryCode ?? "")!
                 
                 // Create json file if not present
                 if Helper.jsonExists(year: year) {

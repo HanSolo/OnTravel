@@ -54,6 +54,7 @@ struct PiechartView: View {
                         angularInset: 2.0
                     )
                     .foregroundStyle(by: .value(Text(verbatim: d.country), d.country))
+                    .foregroundStyle(d.color)
                     .cornerRadius(10.0)
                     .annotation(position: .overlay, alignment: .center) {
                         Text("\(d.visits)")
@@ -69,9 +70,15 @@ struct PiechartView: View {
             Spacer()
         }
         .padding()
-        .task {            
-            for country in self.model.allVisits {
-                self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count))
+        .task {
+            var colorCounter : Int = 0
+            for country in self.model.allVisits.sorted(by: { $0.visits.count > $1.visits.count }) {
+                self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count, color: Constants.COUNTRY_COLORS[colorCounter]))
+                if colorCounter < Constants.COUNTRY_COLORS.count - 1 {
+                    colorCounter += 1
+                } else {
+                    colorCounter = 0
+                }
             }
         }
     }
@@ -81,4 +88,5 @@ struct VisitData: Identifiable {
     let id      : UUID = UUID()
     let country : String
     let visits  : Int
+    let color   : Color
 }

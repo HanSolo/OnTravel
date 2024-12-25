@@ -22,6 +22,7 @@ extension Key {
     static let ignoreHomeCountry  : Key = "ignoreHomeCountry"
     static let lastCurrencyUpdate : Key = "lastCurrencyUpdate"
     static let metric             : Key = "metric"
+    static let holidays           : Key = "holidays"
 }
 
 
@@ -41,7 +42,7 @@ public struct Properties {
     var timestamp: Double? // last location timestamp
     
     @UserDefault(key: .country, defaultValue: "")
-    var country: String? // country
+    var country: String? // country        
     
     @UserDefault(key: .flag, defaultValue: "")
     var flag: String? // flag
@@ -61,5 +62,8 @@ public struct Properties {
     @UserDefault(key: .metric, defaultValue: true)
     var metric: Bool?
         
+    @UserDefault(key: .holidays, defaultValue: [])
+    var holidays: [Date]?
+    
     private init() {}
 }
