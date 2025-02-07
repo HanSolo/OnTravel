@@ -62,9 +62,14 @@ struct PiechartView: View {
                             .foregroundStyle(.white)
                     }
                 }
-                Text("\(Calendar.current.component(.year, from: Date.init()), format: .number.grouping(.never))")
-                    .font(.system(size: 24))
-                    .foregroundStyle(.primary)
+                VStack {
+                    Text("\(Calendar.current.component(.year, from: Date.init()), format: .number.grouping(.never))")
+                        .font(.system(size: 24))
+                        .foregroundStyle(.primary)
+                    Text("\(String(format: "%.0f", self.model.percentageOutsideHomeCountry()))% on travel")
+                        .font(.system(size: 20))
+                        .foregroundStyle(.secondary)
+                }
             }
             
             Spacer()
@@ -81,7 +86,7 @@ struct PiechartView: View {
                 }
             }
         }
-    }
+    }        
 }
 
 struct VisitData: Identifiable {

@@ -238,6 +238,9 @@ struct ContentView: View {
                      */
                 }
             }
+            .onAppear {
+                self.refreshCalendarView.toggle()
+            }
             .task {
                 self.updateSortedCountries()
                 self.updateSortedCountriesForSelection()

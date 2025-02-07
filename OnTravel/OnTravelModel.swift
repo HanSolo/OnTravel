@@ -61,6 +61,12 @@ public class OnTravelModel : ObservableObject {
         return daysOutsideHomeCountry        
     }
     
+    public func percentageOutsideHomeCountry() -> Double {
+        let totalDays              : Double = Double(self.totalDaysOnTravel())
+        let daysOutsideHomeCountry : Double = Double(self.daysOnTravelOutsideHomeCountry())
+        return daysOutsideHomeCountry / totalDays * 100
+    }
+    
     public func toJson() -> String {
         var jsonTxt : String = "["
         for country in self.allVisits {

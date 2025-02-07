@@ -176,7 +176,7 @@ public class Helper {
                 
                 if resolvedUrl.startAccessingSecurityScopedResource() {
                     do {
-                        json = try String(contentsOf: resolvedUrl)
+                        json = try String(contentsOf: resolvedUrl, encoding: .utf8)
                         //Swift.debugPrint("Successfully read json from resolved file URL: \(resolvedUrl.path())")
                     } catch {
                         Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
@@ -198,7 +198,7 @@ public class Helper {
             }
             
             do {
-                json = try String(contentsOf: url)
+                json = try String(contentsOf: url, encoding: .utf8)
             } catch {
                 Swift.debugPrint("Error reading json file. Error: \(error.localizedDescription)")
                 json = ""
