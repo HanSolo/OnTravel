@@ -64,6 +64,15 @@ public class Country : Hashable, Identifiable {
         return self.getVisitsIn(month: month, year: year)
     }
     
+    public func getContinent() -> String {
+        let continentId : String = Locale.Region(stringLiteral: self.isoInfo.alpha2).continent?.identifier ?? "Unknown"
+        if "Unknown" == continentId {
+            return "Unknown"
+        } else {
+            return Locale.current.localizedString(forRegionCode: continentId) ?? "Unknown"
+        }
+    }
+    
     public func hash(into hasher: inout Hasher) {
         hasher.combine(isoInfo.alpha2)
     }

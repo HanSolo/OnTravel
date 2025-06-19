@@ -12,8 +12,10 @@ import Charts
 
 struct PiechartView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject      private var model : OnTravelModel
-    @State                  private var data  : [VisitData] = []
+    @EnvironmentObject      private var model      : OnTravelModel
+    @State                  private var data       : [VisitData] = []
+    @State                  private var countries  : Set<String> = []
+    @State                  private var continents : Set<String> = []
             
     
     var body: some View {        
@@ -69,6 +71,12 @@ struct PiechartView: View {
                     Text("\(String(format: "%.0f", self.model.percentageOutsideHomeCountry()))% on travel")
                         .font(.system(size: 20))
                         .foregroundStyle(.secondary)
+                    Text("\(self.countries.count) \(self.countries.count <= 1 ? "country" : "countries")")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.secondary)
+                    Text("\(self.continents.count) \(self.continents.count <= 1 ? "continent" : "continents")")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.secondary)
                 }
             }
             
@@ -84,6 +92,8 @@ struct PiechartView: View {
                 } else {
                     colorCounter = 0
                 }
+                self.countries.insert(country.isoInfo.name)
+                self.continents.insert(country.isoInfo.continent)
             }
         }
     }        
