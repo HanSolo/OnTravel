@@ -250,11 +250,15 @@ struct ContentView: View {
                 self.updateCountryFromProperties()
             }            
             .onChange(of: self.model.allVisits) {
-                refreshCalendarView.toggle()
+                self.refreshCalendarView.toggle()
                 self.updateSortedCountries()
                 self.updateSortedCountriesForSelection()
             }
             .onChange(of: self.model.selectedMonth) {
+                self.updateSortedCountriesForSelection()
+            }
+            .onChange(of: self.selectedTimeFrame) {
+                self.updateSortedCountries()
                 self.updateSortedCountriesForSelection()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { (_) in
@@ -296,7 +300,7 @@ struct ContentView: View {
                         if self.model.allVisits.contains(where: { $0.isoInfo.alpha2.lowercased() == country.isoInfo.alpha2.lowercased() }) {
                             for visit in country.visits {
                                 if let countryFound = self.model.allVisits.filter({ $0.isoInfo.alpha2.lowercased() == country.isoInfo.alpha2.lowercased() }).first {
-                                    countryFound.addVisit(date: visit)
+                                    _ = countryFound.addVisit(date: visit)
                                 } else {
                                     self.model.allVisits.insert(country)
                                 }

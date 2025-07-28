@@ -85,15 +85,29 @@ struct PiechartView: View {
         .padding()
         .task {
             var colorCounter : Int = 0
-            for country in self.model.allVisits.sorted(by: { $0.visits.count > $1.visits.count }) {
-                self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count, color: Constants.COUNTRY_COLORS[colorCounter]))
-                if colorCounter < Constants.COUNTRY_COLORS.count - 1 {
-                    colorCounter += 1
-                } else {
-                    colorCounter = 0
+            if Properties.instance.ignoreHomeCountry! {
+                let filteredVisits : Set<Country> = self.model.allVisits.filter{ $0.isoInfo.alpha2 != self.model.homeCountry.alpha2 }
+                for country in filteredVisits.sorted(by: { $0.visits.count > $1.visits.count }) {
+                    self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count, color: Constants.COUNTRY_COLORS[colorCounter]))
+                    if colorCounter < Constants.COUNTRY_COLORS.count - 1 {
+                        colorCounter += 1
+                    } else {
+                        colorCounter = 0
+                    }
+                    self.countries.insert(country.isoInfo.name)
+                    self.continents.insert(country.isoInfo.continent)
                 }
-                self.countries.insert(country.isoInfo.name)
-                self.continents.insert(country.isoInfo.continent)
+            } else {
+                for country in self.model.allVisits.sorted(by: { $0.visits.count > $1.visits.count }) {
+                    self.data.append(VisitData(country: country.isoInfo.name, visits: country.visits.count, color: Constants.COUNTRY_COLORS[colorCounter]))
+                    if colorCounter < Constants.COUNTRY_COLORS.count - 1 {
+                        colorCounter += 1
+                    } else {
+                        colorCounter = 0
+                    }
+                    self.countries.insert(country.isoInfo.name)
+                    self.continents.insert(country.isoInfo.continent)
+                }
             }
         }
     }        
